@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>No Mercy</title>
 
+
 <style>
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -14,22 +26,26 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 
+
 body {
-    overflow-x: hidden;
-    overflow-y: hidden;
+
+    overflow: hidden;
 
     background:
+
         radial-gradient(
-            circle at 50% 45%,
-            rgba(105, 20, 160, 0.18),
-            transparent 38%
+            circle at 50% 48%,
+            rgba(112, 24, 165, 0.18),
+            transparent 42%
         ),
+
         #020203;
 
     color: white;
@@ -42,28 +58,26 @@ body {
 
 
 /* =========================================================
-   HAUPTSEITE
+   PAGE
 ========================================================= */
 
 .page {
+
     position: relative;
 
     width: 100%;
-    min-height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh;
 
     overflow: hidden;
 }
 
 
 /* =========================================================
-   HINTERGRUND
+   BACKGROUND
 ========================================================= */
 
 .background-glow {
+
     position: absolute;
 
     width: 900px;
@@ -72,115 +86,156 @@ body {
     left: 50%;
     top: 50%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
-    background: rgba(113, 25, 170, 0.18);
+    background:
+        rgba(120, 30, 180, .18);
 
-    filter: blur(220px);
-
-    animation: backgroundPulse 6s ease-in-out infinite alternate;
+    filter:
+        blur(220px);
 
     pointer-events: none;
+
+    animation:
+        backgroundPulse
+        6s
+        ease-in-out
+        infinite
+        alternate;
 }
+
 
 @keyframes backgroundPulse {
 
     from {
-        opacity: 0.4;
+
+        opacity: .35;
+
         transform:
             translate(-50%, -50%)
-            scale(0.9);
+            scale(.92);
+
     }
 
     to {
-        opacity: 0.75;
+
+        opacity: .7;
+
         transform:
             translate(-50%, -50%)
-            scale(1.1);
+            scale(1.08);
+
     }
 
 }
 
 
 /* =========================================================
-   NO MERCY
+   LOGO
 ========================================================= */
 
 .logo {
+
     position: absolute;
 
     top: 38px;
     left: 52px;
 
+    z-index: 200;
+
     font-size: 21px;
+
     font-weight: 900;
 
     letter-spacing: 8px;
-
-    z-index: 100;
 }
 
+
 .logo span {
+
     color: #b94cff;
 
     text-shadow:
-        0 0 10px rgba(185, 76, 255, .8),
-        0 0 30px rgba(185, 76, 255, .35);
+
+        0 0 10px
+        rgba(185, 76, 255, .8),
+
+        0 0 30px
+        rgba(185, 76, 255, .35);
 }
 
 
 .established {
+
     position: absolute;
 
-    right: 52px;
     top: 44px;
+    right: 52px;
+
+    z-index: 200;
+
+    color: #77717d;
 
     font-size: 10px;
 
     letter-spacing: 7px;
-
-    color: #807987;
-
-    z-index: 100;
 }
 
 
 /* =========================================================
-   START AMETHYST
+   INTRO
 ========================================================= */
 
 .intro {
-    position: relative;
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
 
     display: flex;
+
     flex-direction: column;
 
-    justify-content: center;
     align-items: center;
 
-    z-index: 30;
+    z-index: 50;
 
     transition:
+
         opacity .6s ease,
+
         transform .6s ease;
 }
 
 
+/* =========================================================
+   MAIN AMETHYST
+========================================================= */
+
 .amethyst-wrapper {
+
     position: relative;
 
-    width: min(410px, 60vw);
+    width:
+        min(410px, 60vw);
 
     cursor: pointer;
 
     animation:
-        crystalFloat 4s ease-in-out infinite;
+        crystalFloat
+        4s
+        ease-in-out
+        infinite;
 
     transition:
-        filter .35s ease,
-        opacity .4s ease;
+        filter .35s ease;
 }
 
 
@@ -188,21 +243,26 @@ body {
 
     0%,
     100% {
+
         transform:
             translateY(0)
             rotate(-1deg);
+
     }
 
     50% {
+
         transform:
             translateY(-17px)
             rotate(1deg);
+
     }
 
 }
 
 
 .amethyst {
+
     display: block;
 
     width: 100%;
@@ -212,30 +272,41 @@ body {
     pointer-events: none;
 
     filter:
+
         drop-shadow(
             0 0 18px
             rgba(184, 72, 255, .5)
         )
+
         drop-shadow(
             0 0 65px
             rgba(112, 20, 190, .25)
         );
 
     transition:
+
         transform .35s ease,
-        filter .35s ease;
+
+        filter .35s ease,
+
+        opacity .3s ease;
 }
 
 
 .amethyst-wrapper:hover .amethyst {
-    transform: scale(1.035);
+
+    transform:
+        scale(1.035);
 
     filter:
+
         brightness(1.15)
+
         drop-shadow(
             0 0 28px
             rgba(210, 120, 255, .85)
         )
+
         drop-shadow(
             0 0 80px
             rgba(135, 30, 220, .45)
@@ -243,35 +314,47 @@ body {
 }
 
 
-/* LICHT UNTEN */
+/* =========================================================
+   GROUND LIGHT
+========================================================= */
 
 .ground-light {
-    position: relative;
 
     width: 260px;
+
     height: 8px;
 
     margin-top: -12px;
 
     border-radius: 50%;
 
-    background: #c54dff;
+    background:
+        #c54dff;
 
-    filter: blur(9px);
+    filter:
+        blur(9px);
 
     opacity: .7;
 
     box-shadow:
-        0 0 30px rgba(197, 77, 255, .8),
-        0 0 70px rgba(123, 20, 190, .45);
 
-    transition: opacity .4s ease;
+        0 0 30px
+        rgba(197, 77, 255, .8),
+
+        0 0 70px
+        rgba(123, 20, 190, .45);
+
+    transition:
+        opacity .4s ease;
 }
 
 
-/* CLICK TEXT */
+/* =========================================================
+   CLICK TEXT
+========================================================= */
 
 .click-text {
+
     margin-top: 38px;
 
     font-size: 11px;
@@ -282,9 +365,14 @@ body {
 
     text-transform: uppercase;
 
-    animation: clickPulse 2s ease-in-out infinite;
+    animation:
+        clickPulse
+        2s
+        ease-in-out
+        infinite;
 
-    transition: opacity .4s ease;
+    transition:
+        opacity .4s ease;
 }
 
 
@@ -303,77 +391,113 @@ body {
 
 
 /* =========================================================
-   KRISTALL ENERGIE AUFLADEN
+   CHARGING
 ========================================================= */
 
 .amethyst-wrapper.charging {
-    animation: charge .7s ease-in-out forwards;
+
+    animation:
+        charge
+        .7s
+        ease-in-out
+        forwards;
 }
 
 
 @keyframes charge {
 
     0% {
-        transform: scale(1);
+
+        transform:
+            scale(1);
+
     }
 
     30% {
-        transform: scale(.96);
+
+        transform:
+            scale(.96);
+
     }
 
     65% {
-        transform: scale(1.06);
+
+        transform:
+            scale(1.06);
 
         filter:
+
             brightness(1.7)
+
             drop-shadow(
                 0 0 55px
                 rgba(230, 150, 255, 1)
             );
+
     }
 
     100% {
-        transform: scale(1.1);
+
+        transform:
+            scale(1.12);
 
         filter:
-            brightness(2.3)
+
+            brightness(2.4)
+
             drop-shadow(
-                0 0 100px
+                0 0 110px
                 rgba(235, 180, 255, 1)
             );
+
     }
 
 }
 
 
 /* =========================================================
-   SCREEN FLASH
+   FLASH
 ========================================================= */
 
 .flash {
+
     position: fixed;
 
     inset: 0;
 
-    background:
-        radial-gradient(
-            circle at center,
-            #ffffff 0%,
-            #d68aff 20%,
-            rgba(155, 45, 230, .7) 45%,
-            transparent 75%
-        );
+    pointer-events: none;
+
+    z-index: 1000;
 
     opacity: 0;
 
-    pointer-events: none;
+    background:
 
-    z-index: 500;
+        radial-gradient(
+
+            circle at center,
+
+            #ffffff 0%,
+
+            #e8baff 12%,
+
+            #be62f5 32%,
+
+            rgba(130, 30, 190, .5) 50%,
+
+            transparent 75%
+
+        );
 }
 
 
 .flash.active {
-    animation: flashBang .45s ease-out forwards;
+
+    animation:
+        flashBang
+        .45s
+        ease-out
+        forwards;
 }
 
 
@@ -388,7 +512,7 @@ body {
     }
 
     45% {
-        opacity: .65;
+        opacity: .7;
     }
 
     100% {
@@ -399,10 +523,11 @@ body {
 
 
 /* =========================================================
-   SCHOCKWELLE
+   SHOCKWAVE
 ========================================================= */
 
 .shockwave {
+
     position: fixed;
 
     left: 50%;
@@ -411,92 +536,126 @@ body {
     width: 70px;
     height: 70px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
+
+    border:
+
+        3px solid
+        #d281ff;
 
     border-radius: 50%;
-
-    border: 4px solid #d281ff;
 
     opacity: 0;
 
     pointer-events: none;
 
-    z-index: 60;
+    z-index: 90;
 }
 
 
 .shockwave.active {
-    animation: shockwave 1s ease-out forwards;
+
+    animation:
+        shockwaveAnimation
+        1s
+        ease-out
+        forwards;
 }
 
 
-@keyframes shockwave {
+@keyframes shockwaveAnimation {
 
-    0% {
+    from {
+
         width: 70px;
         height: 70px;
 
         opacity: 1;
 
         box-shadow:
-            0 0 50px #b642ff;
+            0 0 50px
+            #b642ff;
+
     }
 
-    100% {
-        width: 1200px;
-        height: 1200px;
+    to {
+
+        width: 1100px;
+        height: 1100px;
 
         opacity: 0;
 
         border-width: 1px;
+
     }
 
 }
 
 
 /* =========================================================
-   KLEINE EXPLOSIONS-SPLITTER
+   EXPLOSION DEBRIS
 ========================================================= */
 
 .debris {
+
     position: fixed;
 
     left: 50%;
     top: 50%;
 
-    width: 13px;
-    height: 35px;
+    z-index: 100;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f0c6ff,
-            #b744f4,
-            #47105d
-        );
-
-    clip-path:
-        polygon(
-            50% 0,
-            100% 38%,
-            70% 100%,
-            10% 78%,
-            0 25%
-        );
+    width: 12px;
+    height: 30px;
 
     pointer-events: none;
 
-    z-index: 80;
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #f0c6ff,
+
+            #b744f4,
+
+            #47105d
+
+        );
+
+    clip-path:
+
+        polygon(
+
+            50% 0%,
+
+            100% 35%,
+
+            70% 100%,
+
+            10% 80%,
+
+            0% 30%
+
+        );
 
     filter:
+
         drop-shadow(
-            0 0 8px #bc55ff
+            0 0 8px
+            #bc55ff
         );
 
     animation:
+
         debrisExplosion
+
         var(--duration)
+
         cubic-bezier(.15,.7,.2,1)
+
         forwards;
 }
 
@@ -504,89 +663,231 @@ body {
 @keyframes debrisExplosion {
 
     from {
+
         opacity: 1;
 
         transform:
+
             translate(-50%, -50%)
+
             rotate(0)
+
             scale(1);
+
     }
 
     to {
+
         opacity: 0;
 
         transform:
+
             translate(
+
                 calc(-50% + var(--x)),
+
                 calc(-50% + var(--y))
+
             )
+
             rotate(var(--rotation))
+
             scale(.15);
+
     }
 
 }
 
 
 /* =========================================================
-   FRAGMENT MENÜ
+   FRAGMENT MENU
 ========================================================= */
 
 .fragment-menu {
+
     position: absolute;
 
     inset: 0;
 
-    z-index: 40;
+    z-index: 60;
 
     opacity: 0;
 
     visibility: hidden;
 
     transition:
-        opacity .5s ease;
+        opacity .45s ease;
 }
 
 
 .fragment-menu.visible {
+
     opacity: 1;
+
     visibility: visible;
 }
 
 
-/* JEDES FRAGMENT */
+/* =========================================================
+   FRAGMENT
+========================================================= */
 
 .fragment {
+
     position: absolute;
 
     left: 50%;
     top: 50%;
 
-    width: 190px;
+    width:
+        var(--size, 175px);
 
-    transform:
-        translate(-50%, -50%)
-        scale(.05);
+    border: 0;
 
-    opacity: 0;
-
-    cursor: pointer;
-
-    border: none;
-
-    background: none;
+    background: transparent;
 
     padding: 0;
 
-    z-index: 50;
+    cursor: pointer;
+
+    opacity: 0;
+
+    z-index: 70;
+
+    transform:
+
+        translate(-50%, -50%)
+
+        scale(.03);
 
     transition:
-        filter .35s ease;
 
-    will-change: transform;
+        filter .3s ease,
+
+        opacity .3s ease;
+
+    will-change:
+        left,
+        top,
+        transform;
+}
+
+
+/*
+
+Der Button bewegt sich zur Zielposition.
+
+Die innere Ebene bewegt sich danach dauerhaft.
+
+*/
+
+.fragment.show {
+
+    opacity: 1;
+
+    animation:
+
+        fragmentEnter
+
+        1.3s
+
+        cubic-bezier(.16,.9,.25,1.08)
+
+        forwards;
+}
+
+
+@keyframes fragmentEnter {
+
+    0% {
+
+        left: 50%;
+        top: 50%;
+
+        transform:
+
+            translate(-50%, -50%)
+
+            scale(.03)
+
+            rotate(0deg);
+
+    }
+
+    65% {
+
+        left:
+            var(--left);
+
+        top:
+            var(--top);
+
+        transform:
+
+            translate(-50%, -50%)
+
+            scale(1.06)
+
+            rotate(
+                var(--rotation)
+            );
+
+    }
+
+    100% {
+
+        left:
+            var(--left);
+
+        top:
+            var(--top);
+
+        transform:
+
+            translate(-50%, -50%)
+
+            scale(1)
+
+            rotate(
+                var(--rotation)
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   INNER FLOAT WRAPPER
+========================================================= */
+
+.fragment-float {
+
+    display: block;
+
+    width: 100%;
+
+    animation:
+
+        fragmentFloat
+
+        var(--float-speed, 8s)
+
+        ease-in-out
+
+        var(--float-delay, 0s)
+
+        infinite
+
+        alternate;
+
+    will-change:
+        transform;
 }
 
 
 .fragment img {
+
     display: block;
 
     width: 100%;
@@ -596,347 +897,344 @@ body {
     user-select: none;
 
     filter:
+
         drop-shadow(
-            0 0 13px
+            0 0 12px
             rgba(175, 65, 245, .35)
         );
+
+    transition:
+
+        transform .3s ease,
+
+        filter .3s ease;
 }
 
 
-/* ==========================================
-   ENDPOSITIONEN
-========================================== */
+/* =========================================================
+   PERMANENT MOVEMENT
+========================================================= */
 
-.fragment.show {
-    opacity: 1;
-}
+@keyframes fragmentFloat {
 
+    0% {
 
-/* OBEN LINKS */
-
-.fragment-story.show {
-    animation:
-        moveStory 1.15s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveStory {
-
-    from {
         transform:
-            translate(-50%, -50%)
-            scale(.05)
-            rotate(0);
+
+            translate(
+                calc(var(--move-x) * -1),
+                calc(var(--move-y) * -1)
+            )
+
+            rotate(-2deg);
+
     }
 
-    to {
+    35% {
+
         transform:
-            translate(-430px, -300px)
-            scale(1)
-            rotate(-9deg);
+
+            translate(
+                calc(var(--move-x) * .35),
+                var(--move-y)
+            )
+
+            rotate(1deg);
+
     }
 
-}
+    70% {
 
-
-/* OBEN MITTE LINKS */
-
-.fragment-members.show {
-    animation:
-        moveMembers 1.2s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveMembers {
-
-    from {
         transform:
-            translate(-50%, -50%)
-            scale(.05);
+
+            translate(
+                var(--move-x),
+                calc(var(--move-y) * -.25)
+            )
+
+            rotate(3deg);
+
     }
 
-    to {
+    100% {
+
         transform:
-            translate(-220px, -340px)
-            scale(.9)
-            rotate(6deg);
-    }
 
-}
+            translate(
+                calc(var(--move-x) * -.45),
+                calc(var(--move-y) * .45)
+            )
 
+            rotate(-1deg);
 
-/* OBEN RECHTS */
-
-.fragment-discord.show {
-    animation:
-        moveDiscord 1.25s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveDiscord {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(80px, -320px)
-            scale(.9)
-            rotate(-7deg);
-    }
-
-}
-
-
-/* RECHTS OBEN */
-
-.fragment-ranks.show {
-    animation:
-        moveRanks 1.2s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveRanks {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(290px, -220px)
-            scale(.9)
-            rotate(8deg);
-    }
-
-}
-
-
-/* LINKS MITTE */
-
-.fragment-color.show {
-    animation:
-        moveColor 1.15s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveColor {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(-480px, -20px)
-            scale(.88)
-            rotate(8deg);
-    }
-
-}
-
-
-/* MITTE LINKS */
-
-.fragment-outfit.show {
-    animation:
-        moveOutfit 1.25s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveOutfit {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(-220px, 5px)
-            scale(.9)
-            rotate(-5deg);
-    }
-
-}
-
-
-/* MITTE RECHTS */
-
-.fragment-hood.show {
-    animation:
-        moveHood 1.2s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveHood {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(80px, 15px)
-            scale(.88)
-            rotate(7deg);
-    }
-
-}
-
-
-/* RECHTS MITTE */
-
-.fragment-background.show {
-    animation:
-        moveBackground 1.3s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveBackground {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(310px, 80px)
-            scale(.88)
-            rotate(-7deg);
-    }
-
-}
-
-
-/* UNTEN LINKS */
-
-.fragment-values.show {
-    width: 220px;
-
-    animation:
-        moveValues 1.3s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveValues {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(-320px, 260px)
-            scale(.92)
-            rotate(-4deg);
-    }
-
-}
-
-
-/* UNTEN RECHTS */
-
-.fragment-gallery.show {
-    width: 210px;
-
-    animation:
-        moveGallery 1.35s
-        cubic-bezier(.16,.85,.24,1.12)
-        forwards;
-}
-
-@keyframes moveGallery {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(.05);
-    }
-
-    to {
-        transform:
-            translate(100px, 275px)
-            scale(.92)
-            rotate(5deg);
     }
 
 }
 
 
 /* =========================================================
-   FRAGMENT HOVER
+   INDIVIDUAL POSITIONS
+========================================================= */
+
+/*
+
+Alles bewusst relativ nah an der Mitte.
+
+So bleibt auf 16:9 alles sichtbar.
+
+*/
+
+.fragment-story {
+
+    --left: 27%;
+    --top: 28%;
+
+    --size: 175px;
+
+    --rotation: -8deg;
+
+    --move-x: 30px;
+    --move-y: 22px;
+
+    --float-speed: 7.4s;
+    --float-delay: -.8s;
+}
+
+
+.fragment-members {
+
+    --left: 43%;
+    --top: 25%;
+
+    --size: 170px;
+
+    --rotation: 5deg;
+
+    --move-x: 24px;
+    --move-y: 32px;
+
+    --float-speed: 8.1s;
+    --float-delay: -2.1s;
+}
+
+
+.fragment-discord {
+
+    --left: 60%;
+    --top: 27%;
+
+    --size: 170px;
+
+    --rotation: -5deg;
+
+    --move-x: 34px;
+    --move-y: 20px;
+
+    --float-speed: 7.7s;
+    --float-delay: -3.5s;
+}
+
+
+.fragment-ranks {
+
+    --left: 74%;
+    --top: 35%;
+
+    --size: 165px;
+
+    --rotation: 8deg;
+
+    --move-x: 23px;
+    --move-y: 30px;
+
+    --float-speed: 8.7s;
+    --float-delay: -1.4s;
+}
+
+
+.fragment-color {
+
+    --left: 26%;
+    --top: 50%;
+
+    --size: 165px;
+
+    --rotation: 7deg;
+
+    --move-x: 31px;
+    --move-y: 25px;
+
+    --float-speed: 8.4s;
+    --float-delay: -4.4s;
+}
+
+
+.fragment-outfit {
+
+    --left: 44%;
+    --top: 48%;
+
+    --size: 168px;
+
+    --rotation: -4deg;
+
+    --move-x: 25px;
+    --move-y: 35px;
+
+    --float-speed: 7.5s;
+    --float-delay: -2.9s;
+}
+
+
+.fragment-hood {
+
+    --left: 61%;
+    --top: 49%;
+
+    --size: 165px;
+
+    --rotation: 5deg;
+
+    --move-x: 29px;
+    --move-y: 23px;
+
+    --float-speed: 8.9s;
+    --float-delay: -5s;
+}
+
+
+.fragment-background {
+
+    --left: 75%;
+    --top: 58%;
+
+    --size: 165px;
+
+    --rotation: -6deg;
+
+    --move-x: 25px;
+    --move-y: 33px;
+
+    --float-speed: 7.9s;
+    --float-delay: -1.8s;
+}
+
+
+.fragment-values {
+
+    --left: 37%;
+    --top: 72%;
+
+    --size: 190px;
+
+    --rotation: -4deg;
+
+    --move-x: 34px;
+    --move-y: 22px;
+
+    --float-speed: 8.3s;
+    --float-delay: -3.8s;
+}
+
+
+.fragment-gallery {
+
+    --left: 60%;
+    --top: 72%;
+
+    --size: 185px;
+
+    --rotation: 4deg;
+
+    --move-x: 28px;
+    --move-y: 30px;
+
+    --float-speed: 7.2s;
+    --float-delay: -2.5s;
+}
+
+
+/* =========================================================
+   HOVER
 ========================================================= */
 
 @media (hover: hover) {
 
     .fragment:hover {
 
+        z-index: 150;
+
         filter:
-            brightness(1.22)
+
+            brightness(1.25)
+
             drop-shadow(
-                0 0 20px
-                rgba(200, 95, 255, .85)
+                0 0 18px
+                rgba(205, 100, 255, .9)
             )
+
             drop-shadow(
-                0 0 60px
+                0 0 50px
                 rgba(135, 25, 220, .45)
             );
+    }
 
-        z-index: 90;
+
+    .fragment:hover img {
+
+        transform:
+            scale(1.08);
+
+        filter:
+
+            brightness(1.18)
+
+            drop-shadow(
+                0 0 20px
+                rgba(210, 110, 255, .75)
+            );
+
     }
 
 }
 
 
 /* =========================================================
-   INFO PANEL
+   CONTENT SCREEN
 ========================================================= */
 
 .content-screen {
+
     position: fixed;
 
     inset: 0;
 
+    z-index: 500;
+
     display: flex;
 
-    justify-content: center;
     align-items: center;
+
+    justify-content: center;
 
     padding: 40px;
 
     background:
+
         radial-gradient(
-            circle at 50% 50%,
-            rgba(100, 20, 150, .14),
-            transparent 50%
+
+            circle at center,
+
+            rgba(100, 20, 150, .15),
+
+            transparent 55%
+
         ),
+
         rgba(2, 2, 3, .96);
 
-    backdrop-filter: blur(20px);
+    backdrop-filter:
+        blur(18px);
 
     opacity: 0;
 
@@ -944,15 +1242,16 @@ body {
 
     pointer-events: none;
 
-    z-index: 300;
-
     transition:
+
         opacity .45s ease,
+
         visibility .45s ease;
 }
 
 
 .content-screen.active {
+
     opacity: 1;
 
     visibility: visible;
@@ -961,48 +1260,67 @@ body {
 }
 
 
+/* =========================================================
+   CONTENT BOX
+========================================================= */
+
 .content-box {
-    position: relative;
 
-    width: min(900px, 92vw);
+    width:
+        min(900px, 92vw);
 
-    min-height: 480px;
+    min-height: 460px;
 
     padding: 65px;
 
     border:
+
         1px solid
         rgba(179, 75, 245, .28);
 
     background:
+
         linear-gradient(
+
             145deg,
+
             rgba(18, 10, 23, .97),
+
             rgba(5, 5, 7, .97)
+
         );
 
     box-shadow:
+
         0 0 80px
-        rgba(125, 30, 190, .1);
+        rgba(125, 30, 190, .12);
 
     transform:
+
         translateY(30px)
+
         scale(.97);
 
     transition:
+
         transform .5s
         cubic-bezier(.2,.8,.2,1);
 }
 
 
-.content-screen.active .content-box {
+.content-screen.active
+.content-box {
+
     transform:
+
         translateY(0)
+
         scale(1);
 }
 
 
 .content-label {
+
     color: #ab4be8;
 
     font-size: 11px;
@@ -1016,10 +1334,16 @@ body {
 
 
 .content-title {
+
     margin-top: 15px;
 
     font-size:
-        clamp(45px, 6vw, 85px);
+
+        clamp(
+            45px,
+            6vw,
+            85px
+        );
 
     letter-spacing: -4px;
 
@@ -1028,6 +1352,7 @@ body {
 
 
 .content-text {
+
     margin-top: 28px;
 
     max-width: 680px;
@@ -1040,16 +1365,24 @@ body {
 }
 
 
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
 .back-button {
+
     margin-top: 42px;
 
-    padding: 14px 28px;
+    padding:
+        14px
+        28px;
 
     color: white;
 
     background: transparent;
 
     border:
+
         1px solid
         rgba(177, 65, 235, .55);
 
@@ -1061,16 +1394,21 @@ body {
 
     cursor: pointer;
 
-    transition: .3s ease;
+    transition:
+        .3s ease;
 }
 
 
 .back-button:hover {
-    background: #9e39d9;
 
-    border-color: #9e39d9;
+    background:
+        #9e39d9;
+
+    border-color:
+        #9e39d9;
 
     box-shadow:
+
         0 0 25px
         rgba(158, 57, 217, .4);
 }
@@ -1081,16 +1419,20 @@ body {
 ========================================================= */
 
 .reset-button {
+
     position: absolute;
 
-    bottom: 30px;
-    right: 40px;
+    right: 35px;
+    bottom: 27px;
+
+    z-index: 200;
 
     border: 0;
 
     background: none;
 
-    color: #49434d;
+    color:
+        #454048;
 
     font-size: 9px;
 
@@ -1102,13 +1444,13 @@ body {
 
     pointer-events: none;
 
-    z-index: 100;
-
-    transition: .3s;
+    transition:
+        .3s;
 }
 
 
 .reset-button.visible {
+
     opacity: 1;
 
     pointer-events: auto;
@@ -1116,7 +1458,9 @@ body {
 
 
 .reset-button:hover {
-    color: #a549dc;
+
+    color:
+        #a549dc;
 }
 
 
@@ -1124,349 +1468,530 @@ body {
    MOBILE
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
 
     body {
+
         overflow-y: auto;
     }
 
+
     .page {
-        min-height: 1100px;
+
+        height: 1050px;
     }
 
-    .logo {
-        top: 25px;
-        left: 25px;
 
-        font-size: 16px;
+    .logo {
+
+        top: 24px;
+        left: 22px;
+
+        font-size: 15px;
 
         letter-spacing: 5px;
     }
 
+
     .established {
-        top: 29px;
-        right: 25px;
+
+        right: 22px;
+        top: 27px;
 
         font-size: 7px;
 
         letter-spacing: 4px;
     }
 
+
     .amethyst-wrapper {
-        width: min(360px, 75vw);
+
+        width:
+            min(
+                350px,
+                75vw
+            );
     }
+
 
     .fragment {
-        width: 135px;
+
+        --size: 120px;
     }
 
-    .fragment-values,
+
+    .fragment-story {
+
+        --left: 27%;
+        --top: 24%;
+    }
+
+
+    .fragment-members {
+
+        --left: 65%;
+        --top: 23%;
+    }
+
+
+    .fragment-discord {
+
+        --left: 28%;
+        --top: 39%;
+    }
+
+
+    .fragment-ranks {
+
+        --left: 67%;
+        --top: 39%;
+    }
+
+
+    .fragment-color {
+
+        --left: 27%;
+        --top: 54%;
+    }
+
+
+    .fragment-outfit {
+
+        --left: 67%;
+        --top: 54%;
+    }
+
+
+    .fragment-hood {
+
+        --left: 27%;
+        --top: 68%;
+    }
+
+
+    .fragment-background {
+
+        --left: 67%;
+        --top: 68%;
+    }
+
+
+    .fragment-values {
+
+        --left: 28%;
+        --top: 83%;
+
+        --size: 135px;
+    }
+
+
     .fragment-gallery {
-        width: 150px;
+
+        --left: 66%;
+        --top: 83%;
+
+        --size: 130px;
     }
 
-    @keyframes moveStory {
-        to {
-            transform:
-                translate(-170px, -340px)
-                scale(1)
-                rotate(-7deg);
-        }
-    }
-
-    @keyframes moveMembers {
-        to {
-            transform:
-                translate(25px, -350px)
-                scale(.9)
-                rotate(5deg);
-        }
-    }
-
-    @keyframes moveDiscord {
-        to {
-            transform:
-                translate(-180px, -160px)
-                scale(.9)
-                rotate(-5deg);
-        }
-    }
-
-    @keyframes moveRanks {
-        to {
-            transform:
-                translate(30px, -165px)
-                scale(.9)
-                rotate(7deg);
-        }
-    }
-
-    @keyframes moveColor {
-        to {
-            transform:
-                translate(-180px, 20px)
-                scale(.88)
-                rotate(6deg);
-        }
-    }
-
-    @keyframes moveOutfit {
-        to {
-            transform:
-                translate(25px, 20px)
-                scale(.9)
-                rotate(-5deg);
-        }
-    }
-
-    @keyframes moveHood {
-        to {
-            transform:
-                translate(-180px, 200px)
-                scale(.88)
-                rotate(6deg);
-        }
-    }
-
-    @keyframes moveBackground {
-        to {
-            transform:
-                translate(25px, 205px)
-                scale(.88)
-                rotate(-5deg);
-        }
-    }
-
-    @keyframes moveValues {
-        to {
-            transform:
-                translate(-175px, 390px)
-                scale(.9)
-                rotate(-4deg);
-        }
-    }
-
-    @keyframes moveGallery {
-        to {
-            transform:
-                translate(20px, 400px)
-                scale(.9)
-                rotate(5deg);
-        }
-    }
 
     .content-box {
-        padding: 35px;
 
         min-height: auto;
+
+        padding: 32px;
+    }
+
+
+    .content-title {
+
+        letter-spacing: -2px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media
+(prefers-reduced-motion: reduce) {
+
+    * {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
     }
 
 }
 
 
 </style>
+
 </head>
+
 
 
 <body>
 
 
-<div class="page" id="page">
+<div
+    class="page"
+    id="page"
+>
 
 
-    <div class="background-glow"></div>
+    <div
+        class="background-glow"
+    ></div>
 
 
     <div class="logo">
+
         NO <span>MERCY</span>
+
     </div>
 
 
     <div class="established">
+
         EST. 2026
+
     </div>
 
 
-    <!-- ================================
-         START AMETHYST
-    ================================= -->
 
-    <div class="intro" id="intro">
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <div
+        class="intro"
+        id="intro"
+    >
+
 
         <div
+
             class="amethyst-wrapper"
+
             id="amethystButton"
+
             role="button"
+
             tabindex="0"
+
             aria-label="Amethyst öffnen"
+
         >
 
+
             <img
+
                 src="amethyst.png"
-                class="amethyst"
+
                 id="amethyst"
+
+                class="amethyst"
+
                 alt="No Mercy Amethyst"
+
             >
+
 
         </div>
 
 
         <div
+
             class="ground-light"
+
             id="groundLight"
+
         ></div>
 
 
         <div
+
             class="click-text"
+
             id="clickText"
+
         >
+
             CLICK THE AMETHYST
+
         </div>
+
 
     </div>
 
 
 
-    <!-- ================================
-         10 FRAGMENTE
-    ================================= -->
+    <!-- =====================================================
+         FRAGMENT MENU
+    ====================================================== -->
 
     <div
+
         class="fragment-menu"
+
         id="fragmentMenu"
+
     >
 
 
         <button
+
             class="fragment fragment-story"
+
             data-section="story"
+
             type="button"
+
         >
-            <img
-                src="fragment-story.png"
-                alt="Story"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-story.png"
+                    alt="Story"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-members"
+
             data-section="members"
+
             type="button"
+
         >
-            <img
-                src="fragment-members.png"
-                alt="Mitglieder"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-members.png"
+                    alt="Mitglieder"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-discord"
+
             data-section="discord"
+
             type="button"
+
         >
-            <img
-                src="fragment-discord.png"
-                alt="Discord"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-discord.png"
+                    alt="Discord"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-ranks"
+
             data-section="ranks"
+
             type="button"
+
         >
-            <img
-                src="fragment-ranks.png"
-                alt="Ränge"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-ranks.png"
+                    alt="Ränge"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-color"
+
             data-section="color"
+
             type="button"
+
         >
-            <img
-                src="fragment-color.png"
-                alt="Fraktionsfarbe"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-color.png"
+                    alt="Fraktionsfarbe"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-outfit"
+
             data-section="outfit"
+
             type="button"
+
         >
-            <img
-                src="fragment-outfit.png"
-                alt="Outfit"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-outfit.png"
+                    alt="Outfit"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-hood"
+
             data-section="hood"
+
             type="button"
+
         >
-            <img
-                src="fragment-hood.png"
-                alt="Hood"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-hood.png"
+                    alt="Hood"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-background"
+
             data-section="background"
+
             type="button"
+
         >
-            <img
-                src="fragment-background.png"
-                alt="Hintergrund"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-background.png"
+                    alt="Hintergrund"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-values"
+
             data-section="values"
+
             type="button"
+
         >
-            <img
-                src="fragment-values.png"
-                alt="Werte und Ziele"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-values.png"
+                    alt="Werte und Ziele"
+                >
+
+            </span>
+
         </button>
 
 
+
         <button
+
             class="fragment fragment-gallery"
+
             data-section="gallery"
+
             type="button"
+
         >
-            <img
-                src="fragment-gallery.png"
-                alt="Galerie"
-            >
+
+            <span class="fragment-float">
+
+                <img
+                    src="fragment-gallery.png"
+                    alt="Galerie"
+                >
+
+            </span>
+
         </button>
 
 
     </div>
+
 
 
     <button
+
         class="reset-button"
+
         id="resetButton"
+
         type="button"
+
     >
+
         AMETHYST RESET
+
     </button>
 
 
@@ -1474,16 +1999,11 @@ body {
 
 
 
-<!-- FLASH -->
-
 <div
     class="flash"
     id="flash"
 ></div>
 
-
-
-<!-- SCHOCKWELLE -->
 
 <div
     class="shockwave"
@@ -1492,50 +2012,78 @@ body {
 
 
 
-<!-- ================================
+<!-- =========================================================
      CONTENT
-================================= -->
+========================================================= -->
 
 <div
+
     class="content-screen"
+
     id="contentScreen"
+
 >
+
 
     <div class="content-box">
 
+
         <div
+
             class="content-label"
+
             id="contentLabel"
+
         >
+
             NO MERCY
+
         </div>
 
 
         <h1
+
             class="content-title"
+
             id="contentTitle"
+
         >
+
             STORY
+
         </h1>
 
 
         <p
+
             class="content-text"
+
             id="contentText"
+
         >
+
             Inhalt folgt.
+
         </p>
 
 
         <button
+
             class="back-button"
+
             id="backButton"
+
             type="button"
+
         >
+
             ← ZURÜCK
+
         </button>
 
+
     </div>
+
 
 </div>
 
@@ -1545,193 +2093,331 @@ body {
 
 
 /* =========================================================
-   ELEMENTE
+   ELEMENTS
 ========================================================= */
 
 const page =
-    document.getElementById("page");
+    document.getElementById(
+        "page"
+    );
+
 
 const intro =
-    document.getElementById("intro");
+    document.getElementById(
+        "intro"
+    );
+
 
 const amethystButton =
-    document.getElementById("amethystButton");
+    document.getElementById(
+        "amethystButton"
+    );
+
 
 const amethyst =
-    document.getElementById("amethyst");
+    document.getElementById(
+        "amethyst"
+    );
+
 
 const clickText =
-    document.getElementById("clickText");
+    document.getElementById(
+        "clickText"
+    );
+
 
 const groundLight =
-    document.getElementById("groundLight");
+    document.getElementById(
+        "groundLight"
+    );
+
 
 const flash =
-    document.getElementById("flash");
+    document.getElementById(
+        "flash"
+    );
+
 
 const shockwave =
-    document.getElementById("shockwave");
+    document.getElementById(
+        "shockwave"
+    );
+
 
 const fragmentMenu =
-    document.getElementById("fragmentMenu");
+    document.getElementById(
+        "fragmentMenu"
+    );
+
 
 const fragments =
-    document.querySelectorAll(".fragment");
+    document.querySelectorAll(
+        ".fragment"
+    );
+
 
 const contentScreen =
-    document.getElementById("contentScreen");
+    document.getElementById(
+        "contentScreen"
+    );
+
 
 const contentTitle =
-    document.getElementById("contentTitle");
+    document.getElementById(
+        "contentTitle"
+    );
+
 
 const contentLabel =
-    document.getElementById("contentLabel");
+    document.getElementById(
+        "contentLabel"
+    );
+
 
 const contentText =
-    document.getElementById("contentText");
+    document.getElementById(
+        "contentText"
+    );
+
 
 const backButton =
-    document.getElementById("backButton");
+    document.getElementById(
+        "backButton"
+    );
+
 
 const resetButton =
-    document.getElementById("resetButton");
+    document.getElementById(
+        "resetButton"
+    );
 
 
-let hasBroken = false;
+let hasBroken =
+    false;
 
 
 /* =========================================================
-   INHALTE
+   CONTENT
 ========================================================= */
 
 const sections = {
 
+
     story: {
-        label: "THE BEGINNING",
-        title: "GESCHICHTE",
+
+        label:
+            "THE BEGINNING",
+
+        title:
+            "GESCHICHTE",
+
         text:
             "Hier kommt später die vollständige Geschichte von No Mercy hin."
+
     },
+
 
     members: {
-        label: "THE FAMILY",
-        title: "MITGLIEDER",
+
+        label:
+            "THE FAMILY",
+
+        title:
+            "MITGLIEDER",
+
         text:
             "Hier kommen mindestens 25 Mitglieder inklusive ihrer Discord-Namen hin."
+
     },
+
 
     discord: {
-        label: "COMMUNICATION",
-        title: "DISCORD",
+
+        label:
+            "COMMUNICATION",
+
+        title:
+            "DISCORD",
+
         text:
             "Hier kommt der Einladungslink zu eurem Fraktions-Discord hin."
+
     },
+
 
     ranks: {
-        label: "HIERARCHY",
-        title: "RÄNGE",
+
+        label:
+            "HIERARCHY",
+
+        title:
+            "RÄNGE",
+
         text:
             "Hier wird später die komplette Rangstruktur von No Mercy dargestellt."
+
     },
+
 
     color: {
-        label: "IDENTITY",
-        title: "FRAKTIONSFARBE",
+
+        label:
+            "IDENTITY",
+
+        title:
+            "FRAKTIONSFARBE",
+
         text:
             "Hier präsentieren wir eure Fraktionsfarbe und die dazugehörige Autofarbe."
+
     },
+
 
     outfit: {
-        label: "APPEARANCE",
-        title: "OUTFIT",
+
+        label:
+            "APPEARANCE",
+
+        title:
+            "OUTFIT",
+
         text:
             "Hier kommen eure Fraktions-Outfits inklusive Bildern hinein."
+
     },
+
 
     hood: {
-        label: "OUR TERRITORY",
-        title: "ANWESEN / HOOD",
+
+        label:
+            "OUR TERRITORY",
+
+        title:
+            "ANWESEN / HOOD",
+
         text:
             "Hier präsentieren wir das gewünschte Anwesen beziehungsweise eure Hood."
+
     },
+
 
     background: {
-        label: "THE FOUNDATION",
-        title: "HINTERGRUND",
+
+        label:
+            "THE FOUNDATION",
+
+        title:
+            "HINTERGRUND",
+
         text:
             "Hier erklären wir den Hintergrund, die Identität und die Idee hinter No Mercy."
+
     },
+
 
     values: {
-        label: "OUR CODE",
-        title: "WERTE & ZIELE",
+
+        label:
+            "OUR CODE",
+
+        title:
+            "WERTE & ZIELE",
+
         text:
             "Hier kommen eure Werte, Prinzipien und langfristigen Ziele hin."
+
     },
 
+
     gallery: {
-        label: "MOMENTS",
-        title: "GALERIE",
+
+        label:
+            "MOMENTS",
+
+        title:
+            "GALERIE",
+
         text:
             "Hier entsteht später eine Galerie mit euren wichtigsten Bildern und Momenten."
+
     }
+
 
 };
 
 
 /* =========================================================
-   HINTERGRUNDPARTIKEL
+   BACKGROUND PARTICLES
 ========================================================= */
 
 function createParticle() {
 
+
     const particle =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     const size =
-        1 + Math.random() * 3;
+        1 +
+        Math.random() * 3;
+
 
     particle.style.position =
         "absolute";
 
+
     particle.style.width =
         size + "px";
+
 
     particle.style.height =
         size + "px";
 
+
     particle.style.borderRadius =
         "50%";
+
 
     particle.style.background =
         "#b44cff";
 
+
     particle.style.boxShadow =
         "0 0 8px #b44cff";
 
+
     particle.style.opacity =
-        Math.random() * .5;
+        Math.random() * .45;
+
 
     particle.style.left =
         Math.random() * 100 + "%";
 
+
     particle.style.top =
         Math.random() * 100 + "%";
+
 
     particle.style.pointerEvents =
         "none";
 
+
     particle.style.zIndex =
         "2";
 
-    page.appendChild(particle);
+
+    page.appendChild(
+        particle
+    );
 
 }
 
 
 for (
     let i = 0;
-    i < 45;
+    i < 50;
     i++
 ) {
 
@@ -1741,130 +2427,166 @@ for (
 
 
 /* =========================================================
-   AMETHYST KLICK
+   BREAK AMETHYST
 ========================================================= */
 
 function breakAmethyst() {
 
+
     if (hasBroken) {
+
         return;
+
     }
 
-    hasBroken = true;
 
+    hasBroken =
+        true;
 
-    /*
-       SCHRITT 1
-       Energie aufladen
-    */
 
     amethystButton.style.animation =
         "none";
 
+
     amethystButton.classList.add(
         "charging"
     );
+
 
     clickText.style.opacity =
         "0";
 
 
     /*
-       SCHRITT 2
-       Flash + Shockwave
+        FLASH + SHOCKWAVE
     */
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        flash.classList.add(
-            "active"
-        );
 
-        shockwave.classList.add(
-            "active"
-        );
+            flash.classList.add(
+                "active"
+            );
 
-    }, 600);
+
+            shockwave.classList.add(
+                "active"
+            );
+
+
+        },
+        600
+    );
 
 
     /*
-       SCHRITT 3
-       Splitterexplosion
+        EXPLOSION
     */
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        createDebrisExplosion();
 
-        amethyst.style.opacity =
-            "0";
+            createDebrisExplosion();
 
-        amethyst.style.transform =
-            "scale(.15)";
 
-        groundLight.style.opacity =
-            ".15";
+            amethyst.style.opacity =
+                "0";
 
-    }, 670);
+
+            amethyst.style.transform =
+                "scale(.1)";
+
+
+            groundLight.style.opacity =
+                ".12";
+
+
+        },
+        670
+    );
 
 
     /*
-       SCHRITT 4
-       Intro verschwindet
+        INTRO AWAY
     */
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        intro.style.opacity =
-            "0";
 
-        intro.style.transform =
-            "scale(.85)";
+            intro.style.opacity =
+                "0";
 
-    }, 820);
+
+            intro.style.transform =
+                "translate(-50%, -50%) scale(.8)";
+
+
+        },
+        820
+    );
 
 
     /*
-       SCHRITT 5
-       Fragment-Menü
+        FRAGMENTS
     */
 
-    setTimeout(() => {
-
-        intro.style.display =
-            "none";
-
-        fragmentMenu.classList.add(
-            "visible"
-        );
+    setTimeout(
+        () => {
 
 
-        fragments.forEach(
-            (fragment, index) => {
+            intro.style.display =
+                "none";
 
-                setTimeout(() => {
 
-                    fragment.classList.add(
-                        "show"
+            fragmentMenu.classList.add(
+                "visible"
+            );
+
+
+            fragments.forEach(
+                (
+                    fragment,
+                    index
+                ) => {
+
+
+                    setTimeout(
+                        () => {
+
+
+                            fragment.classList.add(
+                                "show"
+                            );
+
+
+                        },
+                        index * 55
                     );
 
-                }, index * 65);
 
-            }
-        );
+                }
+            );
 
 
-        resetButton.classList.add(
-            "visible"
-        );
+            resetButton.classList.add(
+                "visible"
+            );
 
-    }, 1050);
+
+        },
+        1020
+    );
+
 
 }
 
 
-
-/* KLICK */
+/* =========================================================
+   MAIN CLICK
+========================================================= */
 
 amethystButton.addEventListener(
     "click",
@@ -1872,34 +2594,39 @@ amethystButton.addEventListener(
 );
 
 
-/* ENTER / SPACE */
-
 amethystButton.addEventListener(
     "keydown",
     event => {
+
 
         if (
             event.key === "Enter" ||
             event.key === " "
         ) {
 
+
             event.preventDefault();
+
 
             breakAmethyst();
 
+
         }
+
 
     }
 );
 
 
 /* =========================================================
-   EXPLOSIONS-SPLITTER
+   DEBRIS
 ========================================================= */
 
 function createDebrisExplosion() {
 
-    const amount = 70;
+
+    const amount =
+        75;
 
 
     for (
@@ -1907,6 +2634,7 @@ function createDebrisExplosion() {
         i < amount;
         i++
     ) {
+
 
         const debris =
             document.createElement(
@@ -1925,53 +2653,61 @@ function createDebrisExplosion() {
 
 
         const distance =
-            150
-            + Math.random()
-            * 600;
+            130
+            +
+            Math.random()
+            * 550;
 
 
         const x =
             Math.cos(angle)
-            * distance;
+            *
+            distance;
 
 
         const y =
             Math.sin(angle)
-            * distance;
+            *
+            distance;
 
 
         const rotation =
-            (
-                Math.random()
-                * 1600
-            )
-            - 800;
+            Math.random()
+            * 1600
+            -
+            800;
 
 
         const duration =
             .7
-            + Math.random()
-            * .7;
+            +
+            Math.random()
+            * .65;
 
 
         const size =
             5
-            + Math.random()
+            +
+            Math.random()
             * 17;
 
 
         debris.style.width =
             size + "px";
 
+
         debris.style.height =
             (
                 size
-                * (
+                *
+                (
                     1.4
-                    + Math.random()
+                    +
+                    Math.random()
                 )
             )
-            + "px";
+            +
+            "px";
 
 
         debris.style.setProperty(
@@ -1979,15 +2715,18 @@ function createDebrisExplosion() {
             x + "px"
         );
 
+
         debris.style.setProperty(
             "--y",
             y + "px"
         );
 
+
         debris.style.setProperty(
             "--rotation",
             rotation + "deg"
         );
+
 
         debris.style.setProperty(
             "--duration",
@@ -2000,11 +2739,15 @@ function createDebrisExplosion() {
         );
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            debris.remove();
+                debris.remove();
 
-        }, 1600);
+            },
+            1500
+        );
+
 
     }
 
@@ -2012,80 +2755,99 @@ function createDebrisExplosion() {
 
 
 /* =========================================================
-   FRAGMENT KLICK
+   FRAGMENT CLICK
 ========================================================= */
 
-fragments.forEach(fragment => {
-
-    fragment.addEventListener(
-        "click",
-        () => {
-
-            const sectionName =
-                fragment.dataset.section;
-
-            const section =
-                sections[sectionName];
+fragments.forEach(
+    fragment => {
 
 
-            if (!section) {
-                return;
+        fragment.addEventListener(
+            "click",
+            () => {
+
+
+                const sectionName =
+                    fragment.dataset.section;
+
+
+                const section =
+                    sections[
+                        sectionName
+                    ];
+
+
+                if (!section) {
+
+                    return;
+
+                }
+
+
+                contentLabel.textContent =
+                    section.label;
+
+
+                contentTitle.textContent =
+                    section.title;
+
+
+                contentText.textContent =
+                    section.text;
+
+
+                contentScreen.classList.add(
+                    "active"
+                );
+
+
             }
+        );
 
 
-            contentLabel.textContent =
-                section.label;
-
-            contentTitle.textContent =
-                section.title;
-
-            contentText.textContent =
-                section.text;
-
-
-            contentScreen.classList.add(
-                "active"
-            );
-
-        }
-    );
-
-});
+    }
+);
 
 
 /* =========================================================
-   ZURÜCK
+   BACK
 ========================================================= */
 
 backButton.addEventListener(
     "click",
     () => {
 
+
         contentScreen.classList.remove(
             "active"
         );
+
 
     }
 );
 
 
-/*
-   ESC funktioniert ebenfalls
-*/
+/* =========================================================
+   ESCAPE
+========================================================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
+
         if (
             event.key === "Escape"
         ) {
+
 
             contentScreen.classList.remove(
                 "active"
             );
 
+
         }
+
 
     }
 );
@@ -2099,7 +2861,9 @@ resetButton.addEventListener(
     "click",
     () => {
 
+
         location.reload();
+
 
     }
 );
@@ -2109,4 +2873,5 @@ resetButton.addEventListener(
 
 
 </body>
+
 </html>
