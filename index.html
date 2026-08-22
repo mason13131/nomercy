@@ -41,8 +41,6 @@
       overflow: hidden;
     }
 
-    /* Hintergrund-Glow */
-
     .background-glow {
       position: absolute;
 
@@ -56,23 +54,7 @@
       filter: blur(220px);
 
       pointer-events: none;
-
-      animation: backgroundPulse 5s ease-in-out infinite alternate;
     }
-
-    @keyframes backgroundPulse {
-      from {
-        opacity: 0.35;
-        transform: scale(0.9);
-      }
-
-      to {
-        opacity: 0.65;
-        transform: scale(1.08);
-      }
-    }
-
-    /* Logo */
 
     .logo {
       position: absolute;
@@ -81,12 +63,11 @@
       left: 55px;
 
       font-size: 22px;
-
       font-weight: 900;
 
       letter-spacing: 8px;
 
-      z-index: 10;
+      z-index: 20;
     }
 
     .logo span {
@@ -96,8 +77,6 @@
         0 0 12px rgba(185, 77, 255, 0.7),
         0 0 25px rgba(185, 77, 255, 0.3);
     }
-
-    /* EST */
 
     .established {
       position: absolute;
@@ -111,183 +90,117 @@
 
       letter-spacing: 7px;
 
-      z-index: 10;
+      z-index: 20;
     }
 
-    /* Hauptbereich */
-
-    .hero {
+    .fragment-area {
       position: relative;
 
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-
-      z-index: 5;
-    }
-
-    /* Amethyst */
-
-    .amethyst-wrapper {
-      position: relative;
-
-      width: min(420px, 65vw);
+      width: 380px;
 
       cursor: pointer;
 
-      animation: float 3.8s ease-in-out infinite;
-
-      transition: 0.35s ease;
+      animation: floatFragment 3.5s ease-in-out infinite;
     }
 
-    .amethyst-wrapper:hover {
-      filter:
-        drop-shadow(0 0 20px rgba(189, 80, 255, 0.5))
-        drop-shadow(0 0 50px rgba(135, 30, 210, 0.3));
+    @keyframes floatFragment {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-14px);
+      }
     }
 
-    .amethyst {
+    .fragment-img {
       width: 100%;
 
       display: block;
 
-      user-select: none;
+      filter:
+        drop-shadow(0 0 18px rgba(180, 80, 255, 0.45))
+        drop-shadow(0 0 45px rgba(120, 30, 180, 0.25));
+
+      transition: 0.35s ease;
+    }
+
+    .fragment-area:hover .fragment-img {
+      transform: scale(1.035);
 
       filter:
-        drop-shadow(0 0 15px rgba(190, 80, 255, 0.45))
-        drop-shadow(0 0 55px rgba(125, 25, 200, 0.3));
-
-      transition: transform 0.35s ease;
+        brightness(1.1)
+        drop-shadow(0 0 24px rgba(200, 110, 255, 0.7))
+        drop-shadow(0 0 60px rgba(140, 45, 220, 0.4));
     }
 
-    .amethyst-wrapper:hover .amethyst {
-      transform: scale(1.025);
-    }
+    .engraving {
+      position: absolute;
 
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
+      left: 50%;
+      top: 54%;
 
-      50% {
-        transform: translateY(-15px);
-      }
-    }
+      transform: translate(-50%, -50%);
 
-    /* Licht unter dem Stein */
+      font-size: 34px;
 
-    .ground-light {
-      width: 280px;
-      height: 12px;
+      font-weight: 900;
 
-      margin-top: -18px;
+      letter-spacing: 6px;
 
-      border-radius: 50%;
-
-      background: #c14fff;
-
-      filter: blur(12px);
-
-      opacity: 0.55;
-
-      box-shadow:
-        0 0 40px rgba(193, 79, 255, 0.65),
-        0 0 80px rgba(125, 20, 190, 0.35);
-    }
-
-    /* Spiegelung */
-
-    .reflection {
-      width: 170px;
-      height: 90px;
-
-      margin-top: 6px;
-
-      opacity: 0.16;
-
-      background: linear-gradient(
-        to bottom,
-        rgba(195, 90, 255, 0.45),
-        transparent
-      );
-
-      clip-path: polygon(
-        50% 0,
-        100% 100%,
-        0 100%
-      );
-
-      filter: blur(5px);
-    }
-
-    /* Text unter Amethyst */
-
-    .click-text {
-      margin-top: 18px;
-
-      font-size: 12px;
-
-      letter-spacing: 8px;
-
-      color: #9b94a0;
+      color: rgba(40, 8, 60, 0.92);
 
       text-transform: uppercase;
 
-      animation: textPulse 2s ease-in-out infinite;
+      text-shadow:
+        0 2px 1px rgba(255, 180, 255, 0.18),
+        0 -2px 2px rgba(0, 0, 0, 0.95),
+        1px 0 1px rgba(0, 0, 0, 0.6);
+
+      transition: 0.35s ease;
+
+      pointer-events: none;
     }
 
-    @keyframes textPulse {
-      0%,
-      100% {
-        opacity: 0.5;
-      }
+    .fragment-area:hover .engraving {
+      color: #b94dff;
 
-      50% {
-        opacity: 1;
-      }
+      text-shadow:
+        0 0 4px #f0c6ff,
+        0 0 10px #cf70ff,
+        0 0 22px #9d31e8,
+        0 2px 1px rgba(255,255,255,0.25);
+
+      transform:
+        translate(-50%, -50%)
+        scale(1.03);
     }
 
-    /* Kleine Partikel */
-
-    .particle {
+    .hint {
       position: absolute;
 
-      width: 3px;
-      height: 3px;
+      bottom: 45px;
 
-      border-radius: 50%;
+      font-size: 10px;
 
-      background: #bd5cff;
+      letter-spacing: 6px;
 
-      box-shadow: 0 0 8px #bd5cff;
+      color: #625b67;
 
-      opacity: 0.5;
-
-      animation: particleFloat linear infinite;
+      text-transform: uppercase;
     }
-
-    @keyframes particleFloat {
-      from {
-        transform: translateY(30px);
-        opacity: 0;
-      }
-
-      20% {
-        opacity: 0.6;
-      }
-
-      to {
-        transform: translateY(-130px);
-        opacity: 0;
-      }
-    }
-
-    /* Responsive */
 
     @media (max-width: 700px) {
+      .fragment-area {
+        width: 75vw;
+      }
+
+      .engraving {
+        font-size: 25px;
+        letter-spacing: 4px;
+      }
+
       .logo {
         top: 25px;
         left: 25px;
@@ -302,15 +215,6 @@
 
         font-size: 8px;
         letter-spacing: 4px;
-      }
-
-      .amethyst-wrapper {
-        width: 75vw;
-      }
-
-      .click-text {
-        font-size: 9px;
-        letter-spacing: 5px;
       }
     }
   </style>
@@ -330,68 +234,25 @@
       EST. 2026
     </div>
 
-    <div class="hero">
+    <div class="fragment-area">
 
-      <div class="amethyst-wrapper" id="amethystButton">
+      <img
+        src="fragment-story.png"
+        alt="Story Fragment"
+        class="fragment-img"
+      >
 
-        <img
-          src="amethyst.png"
-          alt="No Mercy Amethyst"
-          class="amethyst"
-        >
-
-      </div>
-
-      <div class="ground-light"></div>
-
-      <div class="reflection"></div>
-
-      <div class="click-text">
-        Click the Amethyst
+      <div class="engraving">
+        STORY
       </div>
 
     </div>
 
+    <div class="hint">
+      Hover the fragment
+    </div>
+
   </div>
-
-  <script>
-
-    /* Partikel erzeugen */
-
-    for (let i = 0; i < 30; i++) {
-
-      const particle = document.createElement("div");
-
-      particle.className = "particle";
-
-      particle.style.left =
-        Math.random() * 100 + "%";
-
-      particle.style.top =
-        Math.random() * 100 + "%";
-
-      particle.style.animationDuration =
-        4 + Math.random() * 6 + "s";
-
-      particle.style.animationDelay =
-        Math.random() * 5 + "s";
-
-      document.querySelector(".page").appendChild(particle);
-
-    }
-
-
-    /* Klick auf den Amethysten */
-
-    document
-      .getElementById("amethystButton")
-      .addEventListener("click", function () {
-
-        console.log("Amethyst clicked!");
-
-      });
-
-  </script>
 
 </body>
 </html>
