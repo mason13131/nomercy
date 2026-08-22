@@ -1,1 +1,600 @@
+<!DOCTYPE html>
+<html lang="de">
 
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>No Mercy</title>
+
+    <style>
+
+        /* =========================
+           GRUNDLAGEN
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050506;
+            color: #ffffff;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 80px;
+
+            padding: 0 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5, 5, 6, 0.75);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(169, 70, 255, 0.12);
+
+            z-index: 1000;
+        }
+
+
+        .logo {
+
+            font-size: 22px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+        }
+
+
+        .logo span {
+
+            color: #a946ff;
+
+            text-shadow:
+                0 0 15px rgba(169, 70, 255, 0.5);
+        }
+
+
+        nav {
+
+            display: flex;
+
+            gap: 35px;
+        }
+
+
+        nav a {
+
+            color: #888;
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            transition: 0.3s;
+        }
+
+
+        nav a:hover {
+
+            color: #b95cff;
+
+            text-shadow:
+                0 0 10px rgba(169, 70, 255, 0.6);
+        }
+
+
+
+        /* =========================
+           STARTSEITE
+        ========================= */
+
+        .hero {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            overflow: hidden;
+
+
+            background:
+
+                radial-gradient(
+                    circle at center,
+                    rgba(105, 25, 155, 0.18),
+                    transparent 40%
+                ),
+
+                #050506;
+        }
+
+
+
+        /* LILA HINTERGRUND GLOW */
+
+        .hero-glow {
+
+            position: absolute;
+
+            width: 700px;
+            height: 700px;
+
+            background: #7b22b5;
+
+            border-radius: 50%;
+
+            filter: blur(200px);
+
+            opacity: 0.17;
+
+            animation: glow 5s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes glow {
+
+            from {
+                transform: scale(0.9);
+                opacity: 0.12;
+            }
+
+            to {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+
+        }
+
+
+
+        /* INHALT */
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 5;
+
+            animation: startAnimation 1.4s ease forwards;
+        }
+
+
+        @keyframes startAnimation {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(30px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+
+        }
+
+
+
+        .small-title {
+
+            color: #a946ff;
+
+            font-size: 11px;
+
+            letter-spacing: 7px;
+
+            margin-bottom: 25px;
+        }
+
+
+
+        .hero h1 {
+
+            font-size: clamp(70px, 11vw, 160px);
+
+            font-weight: 900;
+
+            letter-spacing: -6px;
+
+            line-height: 0.9;
+        }
+
+
+        .hero h1 span {
+
+            color: #a946ff;
+
+            text-shadow:
+
+                0 0 15px rgba(169, 70, 255, 0.5),
+
+                0 0 40px rgba(169, 70, 255, 0.25),
+
+                0 0 80px rgba(169, 70, 255, 0.15);
+        }
+
+
+
+        .hero-subtitle {
+
+            margin-top: 30px;
+
+            color: #9a9a9a;
+
+            font-size: 14px;
+
+            letter-spacing: 8px;
+
+            font-weight: 400;
+        }
+
+
+
+        .hero-description {
+
+            margin-top: 20px;
+
+            color: #555;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+        }
+
+
+
+        /* BUTTON */
+
+        .main-button {
+
+            display: inline-block;
+
+            margin-top: 45px;
+
+            padding: 15px 35px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 4px;
+
+            border: 1px solid #6d278f;
+
+            background: rgba(169, 70, 255, 0.03);
+
+            transition: all 0.35s ease;
+        }
+
+
+        .main-button:hover {
+
+            background: #a946ff;
+
+            border-color: #a946ff;
+
+            box-shadow:
+
+                0 0 20px rgba(169, 70, 255, 0.5),
+
+                0 0 50px rgba(169, 70, 255, 0.2);
+
+            transform: translateY(-3px);
+        }
+
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+
+            min-height: 100vh;
+
+            padding: 150px 10%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            background: #080709;
+
+            border-top: 1px solid #121013;
+        }
+
+
+        .section-label {
+
+            color: #a946ff;
+
+            font-size: 11px;
+
+            letter-spacing: 6px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .about h2 {
+
+            font-size: clamp(50px, 7vw, 100px);
+
+            letter-spacing: -4px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .about-text {
+
+            max-width: 650px;
+
+            color: #777;
+
+            font-size: 16px;
+
+            line-height: 1.9;
+        }
+
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                display: none;
+            }
+
+
+            .navbar {
+                height: 70px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 65px;
+
+                letter-spacing: -3px;
+            }
+
+
+            .hero-subtitle {
+
+                font-size: 10px;
+
+                letter-spacing: 4px;
+            }
+
+
+            .hero-description {
+
+                font-size: 9px;
+
+                letter-spacing: 2px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            NO <span>MERCY</span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#home">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#family">Family</a>
+
+            <a href="#codex">Codex</a>
+
+            <a href="#gallery">Gallery</a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         STARTSEITE
+    ========================== -->
+
+    <section class="hero" id="home">
+
+
+        <div class="hero-glow"></div>
+
+
+        <div class="hero-content">
+
+
+            <p class="small-title">
+
+                EST. 2026
+
+            </p>
+
+
+            <h1>
+
+                NO <span>MERCY</span>
+
+            </h1>
+
+
+            <p class="hero-subtitle">
+
+                FORGED UNDER PRESSURE
+
+            </p>
+
+
+            <p class="hero-description">
+
+                LOYALTY • STRENGTH • FAMILY
+
+            </p>
+
+
+            <a href="#about" class="main-button">
+
+                DISCOVER
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="about" id="about">
+
+
+        <p class="section-label">
+
+            THE FAMILY
+
+        </p>
+
+
+        <h2>
+
+            NO MERCY
+
+        </h2>
+
+
+        <p class="about-text">
+
+            Hier kommt später unsere richtige No Mercy Story hin.
+            Diesen Bereich bauen wir gemeinsam als nächsten Schritt aus.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        console.log("No Mercy loaded.");
+
+
+        /* Navbar wird beim Scrollen dunkler */
+
+        window.addEventListener("scroll", function () {
+
+            const navbar = document.querySelector(".navbar");
+
+
+            if (window.scrollY > 50) {
+
+                navbar.style.background =
+                    "rgba(5, 5, 6, 0.95)";
+
+            }
+
+            else {
+
+                navbar.style.background =
+                    "rgba(5, 5, 6, 0.75)";
+
+            }
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
