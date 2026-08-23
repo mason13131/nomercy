@@ -12,13 +12,7 @@
 
 <title>No Mercy</title>
 
-
 <style>
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
     margin: 0;
@@ -26,26 +20,21 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-
 body {
-
     overflow: hidden;
 
     background:
-
         radial-gradient(
             circle at 50% 48%,
-            rgba(112, 24, 165, 0.18),
+            rgba(0, 110, 255, 0.18),
             transparent 42%
         ),
-
         #020203;
 
     color: white;
@@ -62,12 +51,9 @@ body {
 ========================================================= */
 
 .page {
-
     position: relative;
-
     width: 100%;
     height: 100vh;
-
     overflow: hidden;
 }
 
@@ -77,7 +63,6 @@ body {
 ========================================================= */
 
 .background-glow {
-
     position: absolute;
 
     width: 900px;
@@ -86,13 +71,12 @@ body {
     left: 50%;
     top: 50%;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     border-radius: 50%;
 
     background:
-        rgba(120, 30, 180, .18);
+        rgba(0, 120, 255, .18);
 
     filter:
         blur(220px);
@@ -107,27 +91,22 @@ body {
         alternate;
 }
 
-
 @keyframes backgroundPulse {
 
     from {
-
         opacity: .35;
 
         transform:
             translate(-50%, -50%)
             scale(.92);
-
     }
 
     to {
-
         opacity: .7;
 
         transform:
             translate(-50%, -50%)
             scale(1.08);
-
     }
 
 }
@@ -138,7 +117,6 @@ body {
 ========================================================= */
 
 .logo {
-
     position: absolute;
 
     top: 38px;
@@ -147,29 +125,20 @@ body {
     z-index: 200;
 
     font-size: 21px;
-
     font-weight: 900;
 
     letter-spacing: 8px;
 }
 
-
 .logo span {
-
-    color: #b94cff;
+    color: #1597ff;
 
     text-shadow:
-
-        0 0 10px
-        rgba(185, 76, 255, .8),
-
-        0 0 30px
-        rgba(185, 76, 255, .35);
+        0 0 10px rgba(21, 151, 255, .8),
+        0 0 30px rgba(21, 151, 255, .35);
 }
 
-
 .established {
-
     position: absolute;
 
     top: 44px;
@@ -177,7 +146,7 @@ body {
 
     z-index: 200;
 
-    color: #77717d;
+    color: #69788d;
 
     font-size: 10px;
 
@@ -186,47 +155,165 @@ body {
 
 
 /* =========================================================
+   CINEMATIC START
+========================================================= */
+
+.boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+
+    background: #000;
+
+    opacity: 1;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1s ease;
+}
+
+.boot-screen.fade-out {
+    opacity: 0;
+}
+
+
+/* =========================================================
    INTRO
 ========================================================= */
 
 .intro {
-
     position: absolute;
 
     left: 50%;
     top: 50%;
 
     transform:
-        translate(-50%, -50%);
+        translate(-50%, -50%)
+        scale(.82);
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
 
     z-index: 50;
 
-    transition:
+    opacity: 0;
 
-        opacity .6s ease,
+    filter: blur(8px);
+}
 
-        transform .6s ease;
+.intro.intro-visible {
+    animation:
+        introReveal
+        1.15s
+        cubic-bezier(.16,.9,.25,1)
+        forwards;
+}
+
+@keyframes introReveal {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82);
+
+        filter:
+            blur(8px);
+    }
+
+    60% {
+        opacity: 1;
+
+        filter:
+            blur(0);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        filter:
+            blur(0);
+    }
+
 }
 
 
 /* =========================================================
-   MAIN AMETHYST
+   INTRO TITLE
+========================================================= */
+
+.intro-title {
+    margin-bottom: 14px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 10px;
+
+    color: #8ed6ff;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    text-shadow:
+        0 0 12px rgba(65, 180, 255, .65),
+        0 0 30px rgba(0, 115, 255, .35);
+}
+
+.intro-title.visible {
+    animation:
+        introTextIn
+        .8s
+        ease
+        forwards;
+}
+
+@keyframes introTextIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+
+        letter-spacing: 16px;
+    }
+
+    to {
+        opacity: .95;
+
+        transform:
+            translateY(0);
+
+        letter-spacing: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   AMETHYST
 ========================================================= */
 
 .amethyst-wrapper {
-
     position: relative;
 
     width:
         min(410px, 60vw);
 
     cursor: pointer;
+
+    pointer-events: none;
 
     animation:
         crystalFloat
@@ -238,31 +325,67 @@ body {
         filter .35s ease;
 }
 
+.amethyst-wrapper.ready {
+    pointer-events: auto;
+}
+
+.amethyst-wrapper.ready::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 8% 12%;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0, 145, 255, .12);
+
+    filter:
+        blur(42px);
+
+    z-index: -1;
+
+    animation:
+        introCorePulse
+        2.8s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes introCorePulse {
+
+    from {
+        opacity: .25;
+        transform: scale(.88);
+    }
+
+    to {
+        opacity: .8;
+        transform: scale(1.08);
+    }
+
+}
 
 @keyframes crystalFloat {
 
     0%,
     100% {
-
         transform:
             translateY(0)
             rotate(-1deg);
-
     }
 
     50% {
-
         transform:
             translateY(-17px)
             rotate(1deg);
-
     }
 
 }
 
-
 .amethyst {
-
     display: block;
 
     width: 100%;
@@ -272,44 +395,35 @@ body {
     pointer-events: none;
 
     filter:
-
         drop-shadow(
             0 0 18px
-            rgba(184, 72, 255, .5)
+            rgba(20, 145, 255, .55)
         )
-
         drop-shadow(
             0 0 65px
-            rgba(112, 20, 190, .25)
+            rgba(0, 85, 220, .30)
         );
 
     transition:
-
         transform .35s ease,
-
         filter .35s ease,
-
         opacity .3s ease;
 }
 
-
-.amethyst-wrapper:hover .amethyst {
-
+.amethyst-wrapper.ready:hover .amethyst {
     transform:
-        scale(1.035);
+        scale(1.055)
+        rotate(.5deg);
 
     filter:
-
-        brightness(1.15)
-
+        brightness(1.22)
         drop-shadow(
-            0 0 28px
-            rgba(210, 120, 255, .85)
+            0 0 34px
+            rgba(95, 205, 255, .95)
         )
-
         drop-shadow(
-            0 0 80px
-            rgba(135, 30, 220, .45)
+            0 0 95px
+            rgba(0, 105, 255, .55)
         );
 }
 
@@ -319,9 +433,7 @@ body {
 ========================================================= */
 
 .ground-light {
-
     width: 260px;
-
     height: 8px;
 
     margin-top: -12px;
@@ -329,7 +441,7 @@ body {
     border-radius: 50%;
 
     background:
-        #c54dff;
+        #18a8ff;
 
     filter:
         blur(9px);
@@ -337,12 +449,11 @@ body {
     opacity: .7;
 
     box-shadow:
-
         0 0 30px
-        rgba(197, 77, 255, .8),
+        rgba(24, 168, 255, .82),
 
         0 0 70px
-        rgba(123, 20, 190, .45);
+        rgba(0, 100, 230, .48);
 
     transition:
         opacity .4s ease;
@@ -354,27 +465,46 @@ body {
 ========================================================= */
 
 .click-text {
-
     margin-top: 38px;
 
     font-size: 11px;
 
-    color: #9b94a0;
+    color: #8e9bad;
 
     letter-spacing: 8px;
 
     text-transform: uppercase;
 
+    opacity: 0;
+}
+
+.click-text.ready {
     animation:
+        clickTextReveal
+        .6s
+        ease
+        forwards,
+
         clickPulse
         2s
         ease-in-out
+        .6s
         infinite;
-
-    transition:
-        opacity .4s ease;
 }
 
+@keyframes clickTextReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: .9;
+        transform: translateY(0);
+    }
+
+}
 
 @keyframes clickPulse {
 
@@ -391,11 +521,10 @@ body {
 
 
 /* =========================================================
-   CHARGING
+   CHARGE
 ========================================================= */
 
 .amethyst-wrapper.charging {
-
     animation:
         charge
         .7s
@@ -403,53 +532,40 @@ body {
         forwards;
 }
 
-
 @keyframes charge {
 
     0% {
-
         transform:
             scale(1);
-
     }
 
     30% {
-
         transform:
             scale(.96);
-
     }
 
     65% {
-
         transform:
             scale(1.06);
 
         filter:
-
             brightness(1.7)
-
             drop-shadow(
                 0 0 55px
-                rgba(230, 150, 255, 1)
+                rgba(125, 215, 255, 1)
             );
-
     }
 
     100% {
-
         transform:
             scale(1.12);
 
         filter:
-
             brightness(2.4)
-
             drop-shadow(
                 0 0 110px
-                rgba(235, 180, 255, 1)
+                rgba(170, 230, 255, 1)
             );
-
     }
 
 }
@@ -460,7 +576,6 @@ body {
 ========================================================= */
 
 .flash {
-
     position: fixed;
 
     inset: 0;
@@ -472,34 +587,24 @@ body {
     opacity: 0;
 
     background:
-
         radial-gradient(
-
             circle at center,
 
             #ffffff 0%,
-
-            #e8baff 12%,
-
-            #be62f5 32%,
-
-            rgba(130, 30, 190, .5) 50%,
-
+            #c5ecff 12%,
+            #36aaff 32%,
+            rgba(0, 105, 235, .5) 50%,
             transparent 75%
-
         );
 }
 
-
 .flash.active {
-
     animation:
         flashBang
         .45s
         ease-out
         forwards;
 }
-
 
 @keyframes flashBang {
 
@@ -527,7 +632,6 @@ body {
 ========================================================= */
 
 .shockwave {
-
     position: fixed;
 
     left: 50%;
@@ -540,9 +644,8 @@ body {
         translate(-50%, -50%);
 
     border:
-
         3px solid
-        #d281ff;
+        #63c8ff;
 
     border-radius: 50%;
 
@@ -553,9 +656,7 @@ body {
     z-index: 90;
 }
 
-
 .shockwave.active {
-
     animation:
         shockwaveAnimation
         1s
@@ -563,11 +664,9 @@ body {
         forwards;
 }
 
-
 @keyframes shockwaveAnimation {
 
     from {
-
         width: 70px;
         height: 70px;
 
@@ -575,30 +674,70 @@ body {
 
         box-shadow:
             0 0 50px
-            #b642ff;
-
+            #168fff;
     }
 
     to {
-
         width: 1100px;
         height: 1100px;
 
         opacity: 0;
 
         border-width: 1px;
-
     }
 
 }
 
 
 /* =========================================================
-   EXPLOSION DEBRIS
+   SCREEN SHAKE
+========================================================= */
+
+body.screen-shake {
+    animation:
+        screenShake
+        .38s
+        linear;
+}
+
+@keyframes screenShake {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    15% {
+        transform: translate(-7px, 3px);
+    }
+
+    30% {
+        transform: translate(6px, -4px);
+    }
+
+    45% {
+        transform: translate(-4px, -2px);
+    }
+
+    60% {
+        transform: translate(4px, 3px);
+    }
+
+    75% {
+        transform: translate(-2px, 1px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+
+}
+
+
+/* =========================================================
+   DEBRIS
 ========================================================= */
 
 .debris {
-
     position: fixed;
 
     left: 50%;
@@ -612,88 +751,56 @@ body {
     pointer-events: none;
 
     background:
-
         linear-gradient(
-
             135deg,
-
-            #f0c6ff,
-
-            #b744f4,
-
-            #47105d
-
+            #d4f2ff,
+            #168fff,
+            #062a62
         );
 
     clip-path:
-
         polygon(
-
             50% 0%,
-
             100% 35%,
-
             70% 100%,
-
             10% 80%,
-
             0% 30%
-
         );
 
     filter:
-
         drop-shadow(
             0 0 8px
-            #bc55ff
+            #21a4ff
         );
 
     animation:
-
         debrisExplosion
-
         var(--duration)
-
         cubic-bezier(.15,.7,.2,1)
-
         forwards;
 }
-
 
 @keyframes debrisExplosion {
 
     from {
-
         opacity: 1;
 
         transform:
-
             translate(-50%, -50%)
-
             rotate(0)
-
             scale(1);
-
     }
 
     to {
-
         opacity: 0;
 
         transform:
-
             translate(
-
                 calc(-50% + var(--x)),
-
                 calc(-50% + var(--y))
-
             )
-
             rotate(var(--rotation))
-
             scale(.15);
-
     }
 
 }
@@ -704,7 +811,6 @@ body {
 ========================================================= */
 
 .fragment-menu {
-
     position: absolute;
 
     inset: 0;
@@ -719,11 +825,8 @@ body {
         opacity .45s ease;
 }
 
-
 .fragment-menu.visible {
-
     opacity: 1;
-
     visibility: visible;
 }
 
@@ -733,7 +836,6 @@ body {
 ========================================================= */
 
 .fragment {
-
     position: absolute;
 
     left: 50%;
@@ -744,7 +846,8 @@ body {
 
     border: 0;
 
-    background: transparent;
+    background:
+        transparent;
 
     padding: 0;
 
@@ -755,15 +858,11 @@ body {
     z-index: 70;
 
     transform:
-
         translate(-50%, -50%)
-
         scale(.03);
 
     transition:
-
         filter .3s ease,
-
         opacity .3s ease;
 
     will-change:
@@ -772,50 +871,29 @@ body {
         transform;
 }
 
-
-/*
-
-Der Button bewegt sich zur Zielposition.
-
-Die innere Ebene bewegt sich danach dauerhaft.
-
-*/
-
 .fragment.show {
-
     opacity: 1;
 
     animation:
-
         fragmentEnter
-
         1.3s
-
         cubic-bezier(.16,.9,.25,1.08)
-
         forwards;
 }
-
 
 @keyframes fragmentEnter {
 
     0% {
-
         left: 50%;
         top: 50%;
 
         transform:
-
             translate(-50%, -50%)
-
             scale(.03)
-
             rotate(0deg);
-
     }
 
     65% {
-
         left:
             var(--left);
 
@@ -823,19 +901,14 @@ Die innere Ebene bewegt sich danach dauerhaft.
             var(--top);
 
         transform:
-
             translate(-50%, -50%)
-
             scale(1.06)
-
             rotate(
                 var(--rotation)
             );
-
     }
 
     100% {
-
         left:
             var(--left);
 
@@ -843,138 +916,102 @@ Die innere Ebene bewegt sich danach dauerhaft.
             var(--top);
 
         transform:
-
             translate(-50%, -50%)
-
             scale(1)
-
             rotate(
                 var(--rotation)
             );
-
     }
 
 }
 
 
 /* =========================================================
-   INNER FLOAT WRAPPER
+   FLOAT
 ========================================================= */
 
 .fragment-float {
-
     display: block;
 
     width: 100%;
 
     animation:
-
         fragmentFloat
-
         var(--float-speed, 8s)
-
         ease-in-out
-
         var(--float-delay, 0s)
-
         infinite
-
         alternate;
 
     will-change:
         transform;
 }
 
-
 .fragment img {
-
     display: block;
 
     width: 100%;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    user-select: none;
+    user-select:
+        none;
 
     filter:
-
         drop-shadow(
             0 0 12px
-            rgba(175, 65, 245, .35)
+            rgba(20, 145, 255, .40)
         );
 
     transition:
-
         transform .3s ease,
-
         filter .3s ease;
 }
-
-
-/* =========================================================
-   PERMANENT MOVEMENT
-========================================================= */
 
 @keyframes fragmentFloat {
 
     0% {
-
         transform:
-
             translate(
                 calc(var(--move-x) * -1),
                 calc(var(--move-y) * -1)
             )
-
             rotate(-2deg);
-
     }
 
     35% {
-
         transform:
-
             translate(
                 calc(var(--move-x) * .35),
                 var(--move-y)
             )
-
             rotate(1deg);
-
     }
 
     70% {
-
         transform:
-
             translate(
                 var(--move-x),
                 calc(var(--move-y) * -.25)
             )
-
             rotate(3deg);
-
     }
 
     100% {
-
         transform:
-
             translate(
                 calc(var(--move-x) * -.45),
                 calc(var(--move-y) * .45)
             )
-
             rotate(-1deg);
-
     }
 
 }
 
 
 /* =========================================================
-   INDIVIDUAL POSITIONS
-   mehr Abstand + größere Fragmente
+   FRAGMENT POSITIONS
 ========================================================= */
 
 .fragment-story {
@@ -992,7 +1029,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-delay: -.8s;
 }
 
-
 .fragment-members {
     --left: 40%;
     --top: 18%;
@@ -1007,7 +1043,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-speed: 8.1s;
     --float-delay: -2.1s;
 }
-
 
 .fragment-discord {
     --left: 59%;
@@ -1024,7 +1059,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-delay: -3.5s;
 }
 
-
 .fragment-ranks {
     --left: 78%;
     --top: 27%;
@@ -1039,7 +1073,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-speed: 8.7s;
     --float-delay: -1.4s;
 }
-
 
 .fragment-color {
     --left: 19%;
@@ -1056,7 +1089,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-delay: -4.4s;
 }
 
-
 .fragment-outfit {
     --left: 39%;
     --top: 47%;
@@ -1071,7 +1103,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-speed: 7.5s;
     --float-delay: -2.9s;
 }
-
 
 .fragment-hood {
     --left: 61%;
@@ -1088,7 +1119,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-delay: -5s;
 }
 
-
 .fragment-background {
     --left: 81%;
     --top: 53%;
@@ -1103,7 +1133,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-speed: 7.9s;
     --float-delay: -1.8s;
 }
-
 
 .fragment-values {
     --left: 32%;
@@ -1120,7 +1149,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-delay: -3.8s;
 }
 
-
 .fragment-gallery {
     --left: 67%;
     --top: 78%;
@@ -1135,6 +1163,8 @@ Die innere Ebene bewegt sich danach dauerhaft.
     --float-speed: 7.2s;
     --float-delay: -2.5s;
 }
+
+
 /* =========================================================
    HOVER
 ========================================================= */
@@ -1142,39 +1172,30 @@ Die innere Ebene bewegt sich danach dauerhaft.
 @media (hover: hover) {
 
     .fragment:hover {
-
         z-index: 150;
 
         filter:
-
             brightness(1.25)
-
             drop-shadow(
                 0 0 18px
-                rgba(205, 100, 255, .9)
+                rgba(70, 185, 255, .92)
             )
-
             drop-shadow(
                 0 0 50px
-                rgba(135, 25, 220, .45)
+                rgba(0, 105, 255, .48)
             );
     }
 
-
     .fragment:hover img {
-
         transform:
             scale(1.08);
 
         filter:
-
             brightness(1.18)
-
             drop-shadow(
                 0 0 20px
-                rgba(210, 110, 255, .75)
+                rgba(85, 195, 255, .80)
             );
-
     }
 
 }
@@ -1185,7 +1206,6 @@ Die innere Ebene bewegt sich danach dauerhaft.
 ========================================================= */
 
 .content-screen {
-
     position: fixed;
 
     inset: 0;
@@ -1195,23 +1215,16 @@ Die innere Ebene bewegt sich danach dauerhaft.
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 40px;
 
     background:
-
         radial-gradient(
-
             circle at center,
-
-            rgba(100, 20, 150, .15),
-
+            rgba(0, 90, 210, .17),
             transparent 55%
-
         ),
-
         rgba(2, 2, 3, .96);
 
     backdrop-filter:
@@ -1224,15 +1237,11 @@ Die innere Ebene bewegt sich danach dauerhaft.
     pointer-events: none;
 
     transition:
-
         opacity .45s ease,
-
         visibility .45s ease;
 }
 
-
 .content-screen.active {
-
     opacity: 1;
 
     visibility: visible;
@@ -1246,103 +1255,96 @@ Die innere Ebene bewegt sich danach dauerhaft.
 ========================================================= */
 
 .content-box {
-
     width:
         min(900px, 92vw);
 
-    min-height: 460px;
+    min-height:
+        460px;
 
-    padding: 65px;
+    padding:
+        65px;
 
     border:
-
         1px solid
-        rgba(179, 75, 245, .28);
+        rgba(35, 150, 255, .30);
 
     background:
-
         linear-gradient(
-
             145deg,
-
-            rgba(18, 10, 23, .97),
-
+            rgba(7, 15, 28, .97),
             rgba(5, 5, 7, .97)
-
         );
 
     box-shadow:
-
         0 0 80px
-        rgba(125, 30, 190, .12);
+        rgba(0, 105, 230, .15);
 
     transform:
-
         translateY(30px)
-
         scale(.97);
 
     transition:
-
         transform .5s
         cubic-bezier(.2,.8,.2,1);
 }
 
-
 .content-screen.active
 .content-box {
-
     transform:
-
         translateY(0)
-
         scale(1);
 }
 
-
 .content-label {
-
-    color: #ab4be8;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 6px;
-
-    text-transform: uppercase;
-}
-
-
-.content-title {
-
-    margin-top: 15px;
+    color:
+        #299fff;
 
     font-size:
+        11px;
 
+    font-weight:
+        bold;
+
+    letter-spacing:
+        6px;
+
+    text-transform:
+        uppercase;
+}
+
+.content-title {
+    margin-top:
+        15px;
+
+    font-size:
         clamp(
             45px,
             6vw,
             85px
         );
 
-    letter-spacing: -4px;
+    letter-spacing:
+        -4px;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 }
 
-
 .content-text {
+    margin-top:
+        28px;
 
-    margin-top: 28px;
+    max-width:
+        680px;
 
-    max-width: 680px;
+    color:
+        #8f9bad;
 
-    color: #918a97;
+    font-size:
+        16px;
 
-    font-size: 16px;
-
-    line-height: 1.9;
+    line-height:
+        1.9;
 }
 
 
@@ -1351,47 +1353,49 @@ Die innere Ebene bewegt sich danach dauerhaft.
 ========================================================= */
 
 .back-button {
-
-    margin-top: 42px;
+    margin-top:
+        42px;
 
     padding:
         14px
         28px;
 
-    color: white;
+    color:
+        white;
 
-    background: transparent;
+    background:
+        transparent;
 
     border:
-
         1px solid
-        rgba(177, 65, 235, .55);
+        rgba(30, 155, 255, .60);
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    letter-spacing: 4px;
+    letter-spacing:
+        4px;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
         .3s ease;
 }
 
-
 .back-button:hover {
-
     background:
-        #9e39d9;
+        #087eea;
 
     border-color:
-        #9e39d9;
+        #087eea;
 
     box-shadow:
-
         0 0 25px
-        rgba(158, 57, 217, .4);
+        rgba(8, 126, 234, .45);
 }
 
 
@@ -1400,48 +1404,57 @@ Die innere Ebene bewegt sich danach dauerhaft.
 ========================================================= */
 
 .reset-button {
+    position:
+        absolute;
 
-    position: absolute;
+    right:
+        35px;
 
-    right: 35px;
-    bottom: 27px;
+    bottom:
+        27px;
 
-    z-index: 200;
+    z-index:
+        200;
 
-    border: 0;
+    border:
+        0;
 
-    background: none;
+    background:
+        none;
 
     color:
-        #454048;
+        #3e4b5e;
 
-    font-size: 9px;
+    font-size:
+        9px;
 
-    letter-spacing: 4px;
+    letter-spacing:
+        4px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    opacity: 0;
+    opacity:
+        0;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
     transition:
         .3s;
 }
 
-
 .reset-button.visible {
+    opacity:
+        1;
 
-    opacity: 1;
-
-    pointer-events: auto;
+    pointer-events:
+        auto;
 }
 
-
 .reset-button:hover {
-
     color:
-        #a549dc;
+        #219cff;
 }
 
 
@@ -1452,41 +1465,44 @@ Die innere Ebene bewegt sich danach dauerhaft.
 @media (max-width: 800px) {
 
     body {
-
-        overflow-y: auto;
+        overflow-y:
+            auto;
     }
-
 
     .page {
-
-        height: 1050px;
+        height:
+            1050px;
     }
-
 
     .logo {
+        top:
+            24px;
 
-        top: 24px;
-        left: 22px;
+        left:
+            22px;
 
-        font-size: 15px;
+        font-size:
+            15px;
 
-        letter-spacing: 5px;
+        letter-spacing:
+            5px;
     }
-
 
     .established {
+        right:
+            22px;
 
-        right: 22px;
-        top: 27px;
+        top:
+            27px;
 
-        font-size: 7px;
+        font-size:
+            7px;
 
-        letter-spacing: 4px;
+        letter-spacing:
+            4px;
     }
 
-
     .amethyst-wrapper {
-
         width:
             min(
                 350px,
@@ -1494,98 +1510,71 @@ Die innere Ebene bewegt sich danach dauerhaft.
             );
     }
 
-
     .fragment {
-
-        --size: 120px;
+        --size:
+            120px;
     }
 
-
     .fragment-story {
-
         --left: 27%;
         --top: 24%;
     }
 
-
     .fragment-members {
-
         --left: 65%;
         --top: 23%;
     }
 
-
     .fragment-discord {
-
         --left: 28%;
         --top: 39%;
     }
 
-
     .fragment-ranks {
-
         --left: 67%;
         --top: 39%;
     }
 
-
     .fragment-color {
-
         --left: 27%;
         --top: 54%;
     }
-
 
     .fragment-outfit {
-
         --left: 67%;
         --top: 54%;
     }
 
-
     .fragment-hood {
-
         --left: 27%;
         --top: 68%;
     }
 
-
     .fragment-background {
-
         --left: 67%;
         --top: 68%;
     }
 
-
     .fragment-values {
-
         --left: 28%;
         --top: 83%;
 
         --size: 135px;
     }
 
-
     .fragment-gallery {
-
         --left: 66%;
         --top: 83%;
 
         --size: 130px;
     }
 
-
     .content-box {
+        min-height:
+            auto;
 
-        min-height: auto;
-
-        padding: 32px;
-    }
-
-
-    .content-title {
-
-        letter-spacing: -2px;
+        padding:
+            32px;
     }
 
 }
@@ -1599,27 +1588,27 @@ Die innere Ebene bewegt sich danach dauerhaft.
 (prefers-reduced-motion: reduce) {
 
     * {
-
         animation-duration:
             .01ms !important;
 
         animation-iteration-count:
             1 !important;
-
-        scroll-behavior:
-            auto !important;
     }
 
 }
-
 
 </style>
 
 </head>
 
 
-
 <body>
+
+
+<div
+    class="boot-screen"
+    id="bootScreen"
+></div>
 
 
 <div
@@ -1633,24 +1622,25 @@ Die innere Ebene bewegt sich danach dauerhaft.
     ></div>
 
 
-    <div class="logo">
+    <div
+        class="logo"
+    >
 
         NO <span>MERCY</span>
 
     </div>
 
 
-    <div class="established">
+    <div
+        class="established"
+    >
 
         EST. 2026
 
     </div>
 
 
-
-    <!-- =====================================================
-         INTRO
-    ====================================================== -->
+    <!-- INTRO -->
 
     <div
         class="intro"
@@ -1659,30 +1649,29 @@ Die innere Ebene bewegt sich danach dauerhaft.
 
 
         <div
+            class="intro-title"
+            id="introTitle"
+        >
 
+            NO MERCY
+
+        </div>
+
+
+        <div
             class="amethyst-wrapper"
-
             id="amethystButton"
-
             role="button"
-
             tabindex="0"
-
             aria-label="Amethyst öffnen"
-
         >
 
 
             <img
-
                 src="amethyst.png"
-
                 id="amethyst"
-
                 class="amethyst"
-
-                alt="No Mercy Amethyst"
-
+                alt="No Mercy Crystal"
             >
 
 
@@ -1690,23 +1679,17 @@ Die innere Ebene bewegt sich danach dauerhaft.
 
 
         <div
-
             class="ground-light"
-
             id="groundLight"
-
         ></div>
 
 
         <div
-
             class="click-text"
-
             id="clickText"
-
         >
 
-            CLICK THE AMETHYST
+            CLICK TO SHATTER
 
         </div>
 
@@ -1714,28 +1697,18 @@ Die innere Ebene bewegt sich danach dauerhaft.
     </div>
 
 
-
-    <!-- =====================================================
-         FRAGMENT MENU
-    ====================================================== -->
+    <!-- FRAGMENT MENU -->
 
     <div
-
         class="fragment-menu"
-
         id="fragmentMenu"
-
     >
 
 
         <button
-
             class="fragment fragment-story"
-
             data-section="story"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1750,15 +1723,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-members"
-
             data-section="members"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1773,15 +1741,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-discord"
-
             data-section="discord"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1796,15 +1759,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-ranks"
-
             data-section="ranks"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1819,22 +1777,17 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-color"
-
             data-section="color"
-
             type="button"
-
         >
 
             <span class="fragment-float">
 
                 <img
                     src="fragment-color.png"
-                    alt="Fraktionsfarbe"
+                    alt="Farbe"
                 >
 
             </span>
@@ -1842,15 +1795,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-outfit"
-
             data-section="outfit"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1865,15 +1813,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-hood"
-
             data-section="hood"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1888,15 +1831,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-background"
-
             data-section="background"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1911,15 +1849,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-values"
-
             data-section="values"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1934,15 +1867,10 @@ Die innere Ebene bewegt sich danach dauerhaft.
         </button>
 
 
-
         <button
-
             class="fragment fragment-gallery"
-
             data-section="gallery"
-
             type="button"
-
         >
 
             <span class="fragment-float">
@@ -1960,24 +1888,18 @@ Die innere Ebene bewegt sich danach dauerhaft.
     </div>
 
 
-
     <button
-
         class="reset-button"
-
         id="resetButton"
-
         type="button"
-
     >
 
-        AMETHYST RESET
+        CRYSTAL RESET
 
     </button>
 
 
 </div>
-
 
 
 <div
@@ -1992,29 +1914,22 @@ Die innere Ebene bewegt sich danach dauerhaft.
 ></div>
 
 
-
-<!-- =========================================================
-     CONTENT
-========================================================= -->
+<!-- CONTENT -->
 
 <div
-
     class="content-screen"
-
     id="contentScreen"
-
 >
 
 
-    <div class="content-box">
+    <div
+        class="content-box"
+    >
 
 
         <div
-
             class="content-label"
-
             id="contentLabel"
-
         >
 
             NO MERCY
@@ -2023,11 +1938,8 @@ Die innere Ebene bewegt sich danach dauerhaft.
 
 
         <h1
-
             class="content-title"
-
             id="contentTitle"
-
         >
 
             STORY
@@ -2036,11 +1948,8 @@ Die innere Ebene bewegt sich danach dauerhaft.
 
 
         <p
-
             class="content-text"
-
             id="contentText"
-
         >
 
             Inhalt folgt.
@@ -2049,13 +1958,9 @@ Die innere Ebene bewegt sich danach dauerhaft.
 
 
         <button
-
             class="back-button"
-
             id="backButton"
-
             type="button"
-
         >
 
             ← ZURÜCK
@@ -2069,13 +1974,8 @@ Die innere Ebene bewegt sich danach dauerhaft.
 </div>
 
 
-
 <script>
 
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
 
 const page =
     document.getElementById(
@@ -2083,9 +1983,21 @@ const page =
     );
 
 
+const bootScreen =
+    document.getElementById(
+        "bootScreen"
+    );
+
+
 const intro =
     document.getElementById(
         "intro"
+    );
+
+
+const introTitle =
+    document.getElementById(
+        "introTitle"
     );
 
 
@@ -2177,15 +2089,17 @@ let hasBroken =
     false;
 
 
+let introReady =
+    false;
+
+
 /* =========================================================
    CONTENT
 ========================================================= */
 
 const sections = {
 
-
     story: {
-
         label:
             "THE BEGINNING",
 
@@ -2194,12 +2108,9 @@ const sections = {
 
         text:
             "Hier kommt später die vollständige Geschichte von No Mercy hin."
-
     },
 
-
     members: {
-
         label:
             "THE FAMILY",
 
@@ -2208,12 +2119,9 @@ const sections = {
 
         text:
             "Hier kommen mindestens 25 Mitglieder inklusive ihrer Discord-Namen hin."
-
     },
 
-
     discord: {
-
         label:
             "COMMUNICATION",
 
@@ -2222,12 +2130,9 @@ const sections = {
 
         text:
             "Hier kommt der Einladungslink zu eurem Fraktions-Discord hin."
-
     },
 
-
     ranks: {
-
         label:
             "HIERARCHY",
 
@@ -2236,12 +2141,9 @@ const sections = {
 
         text:
             "Hier wird später die komplette Rangstruktur von No Mercy dargestellt."
-
     },
 
-
     color: {
-
         label:
             "IDENTITY",
 
@@ -2250,12 +2152,9 @@ const sections = {
 
         text:
             "Hier präsentieren wir eure Fraktionsfarbe und die dazugehörige Autofarbe."
-
     },
 
-
     outfit: {
-
         label:
             "APPEARANCE",
 
@@ -2264,12 +2163,9 @@ const sections = {
 
         text:
             "Hier kommen eure Fraktions-Outfits inklusive Bildern hinein."
-
     },
 
-
     hood: {
-
         label:
             "OUR TERRITORY",
 
@@ -2278,12 +2174,9 @@ const sections = {
 
         text:
             "Hier präsentieren wir das gewünschte Anwesen beziehungsweise eure Hood."
-
     },
 
-
     background: {
-
         label:
             "THE FOUNDATION",
 
@@ -2292,12 +2185,9 @@ const sections = {
 
         text:
             "Hier erklären wir den Hintergrund, die Identität und die Idee hinter No Mercy."
-
     },
 
-
     values: {
-
         label:
             "OUR CODE",
 
@@ -2306,12 +2196,9 @@ const sections = {
 
         text:
             "Hier kommen eure Werte, Prinzipien und langfristigen Ziele hin."
-
     },
 
-
     gallery: {
-
         label:
             "MOMENTS",
 
@@ -2320,15 +2207,91 @@ const sections = {
 
         text:
             "Hier entsteht später eine Galerie mit euren wichtigsten Bildern und Momenten."
-
     }
-
 
 };
 
 
 /* =========================================================
-   BACKGROUND PARTICLES
+   BOOT SEQUENCE
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+
+        setTimeout(
+            () => {
+
+                bootScreen.classList.add(
+                    "fade-out"
+                );
+
+            },
+            650
+        );
+
+
+        setTimeout(
+            () => {
+
+                intro.classList.add(
+                    "intro-visible"
+                );
+
+            },
+            1100
+        );
+
+
+        setTimeout(
+            () => {
+
+                introTitle.classList.add(
+                    "visible"
+                );
+
+            },
+            1500
+        );
+
+
+        setTimeout(
+            () => {
+
+                amethystButton.classList.add(
+                    "ready"
+                );
+
+                clickText.classList.add(
+                    "ready"
+                );
+
+                introReady =
+                    true;
+
+            },
+            2050
+        );
+
+
+        setTimeout(
+            () => {
+
+                bootScreen.remove();
+
+            },
+            2300
+        );
+
+
+    }
+);
+
+
+/* =========================================================
+   PARTICLES
 ========================================================= */
 
 function createParticle() {
@@ -2362,11 +2325,11 @@ function createParticle() {
 
 
     particle.style.background =
-        "#b44cff";
+        "#159cff";
 
 
     particle.style.boxShadow =
-        "0 0 8px #b44cff";
+        "0 0 8px #159cff";
 
 
     particle.style.opacity =
@@ -2408,13 +2371,16 @@ for (
 
 
 /* =========================================================
-   BREAK AMETHYST
+   BREAK CRYSTAL
 ========================================================= */
 
 function breakAmethyst() {
 
 
-    if (hasBroken) {
+    if (
+        hasBroken ||
+        !introReady
+    ) {
 
         return;
 
@@ -2438,9 +2404,7 @@ function breakAmethyst() {
         "0";
 
 
-    /*
-        FLASH + SHOCKWAVE
-    */
+    /* FLASH + SHOCK */
 
     setTimeout(
         () => {
@@ -2456,14 +2420,29 @@ function breakAmethyst() {
             );
 
 
+            document.body.classList.add(
+                "screen-shake"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    document.body.classList.remove(
+                        "screen-shake"
+                    );
+
+                },
+                420
+            );
+
+
         },
         600
     );
 
 
-    /*
-        EXPLOSION
-    */
+    /* EXPLOSION */
 
     setTimeout(
         () => {
@@ -2489,9 +2468,7 @@ function breakAmethyst() {
     );
 
 
-    /*
-        INTRO AWAY
-    */
+    /* INTRO AWAY */
 
     setTimeout(
         () => {
@@ -2510,9 +2487,7 @@ function breakAmethyst() {
     );
 
 
-    /*
-        FRAGMENTS
-    */
+    /* FRAGMENTS */
 
     setTimeout(
         () => {
@@ -2566,7 +2541,7 @@ function breakAmethyst() {
 
 
 /* =========================================================
-   MAIN CLICK
+   CLICK
 ========================================================= */
 
 amethystButton.addEventListener(
@@ -2809,7 +2784,7 @@ backButton.addEventListener(
 
 
 /* =========================================================
-   ESCAPE
+   ESC
 ========================================================= */
 
 document.addEventListener(
