@@ -3571,6 +3571,348 @@ body.screen-shake {
     }
 }
 
+
+/* =========================================================
+   DISCORD PAGE
+========================================================= */
+
+.content-screen.discord-mode {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+}
+
+.content-screen.discord-mode .content-box,
+.content-screen.discord-mode .story-page,
+.content-screen.discord-mode .ranks-page,
+.content-screen.discord-mode .values-page,
+.content-screen.discord-mode .background-page {
+    display: none;
+}
+
+.discord-page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 22%,
+            rgba(0, 126, 255, .19),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #02050a 0%,
+            #030914 48%,
+            #010307 100%
+        );
+}
+
+.content-screen.discord-mode .discord-page {
+    display: block;
+}
+
+.discord-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #159cff #030812;
+}
+
+.discord-scroll::-webkit-scrollbar {
+    width: 7px;
+}
+
+.discord-scroll::-webkit-scrollbar-track {
+    background: #030812;
+}
+
+.discord-scroll::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #62caff,
+            #087eea
+        );
+    border-radius: 10px;
+}
+
+.discord-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 42px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(1, 4, 10, .95),
+            rgba(1, 4, 10, .72),
+            transparent
+        );
+    backdrop-filter: blur(8px);
+}
+
+.discord-brand {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 7px;
+    color: #7fd1ff;
+}
+
+.discord-back {
+    border: 1px solid rgba(42, 160, 255, .42);
+    background: rgba(4, 14, 28, .58);
+    color: #cdeeff;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.discord-back:hover {
+    transform: translateY(-2px);
+    background: rgba(12, 112, 220, .25);
+    border-color: #42b7ff;
+    box-shadow: 0 0 28px rgba(20, 150, 255, .18);
+}
+
+.discord-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 110px 24px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.discord-orbit {
+    position: absolute;
+    width: min(780px, 72vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(75, 185, 255, .08);
+    box-shadow:
+        0 0 80px rgba(0, 115, 255, .06),
+        inset 0 0 80px rgba(0, 115, 255, .04);
+    animation: discordOrbit 16s linear infinite;
+}
+
+.discord-orbit::before,
+.discord-orbit::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(75, 185, 255, .06);
+}
+
+.discord-orbit::before {
+    inset: 12%;
+}
+
+.discord-orbit::after {
+    inset: 27%;
+}
+
+@keyframes discordOrbit {
+    from {
+        transform: rotate(0deg) scale(.98);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1.02);
+    }
+}
+
+.discord-card {
+    width: min(760px, 92vw);
+    position: relative;
+    z-index: 3;
+    padding: 72px 54px 58px;
+    text-align: center;
+    border: 1px solid rgba(60, 178, 255, .26);
+    background:
+        radial-gradient(
+            circle at 50% 8%,
+            rgba(0, 135, 255, .12),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(8, 18, 34, .96),
+            rgba(3, 8, 17, .97)
+        );
+    box-shadow:
+        0 0 90px rgba(0, 105, 230, .12);
+    opacity: 0;
+    transform: translateY(32px) scale(.97);
+    filter: blur(6px);
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.16,.85,.25,1),
+        filter .8s ease;
+}
+
+.discord-card.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.discord-gem {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 32px;
+    transform: rotate(45deg);
+    border: 1px solid rgba(120, 216, 255, .62);
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(164, 232, 255, .75),
+            rgba(27, 155, 255, .55) 32%,
+            rgba(2, 46, 110, .85) 72%
+        );
+    box-shadow:
+        0 0 28px rgba(20, 155, 255, .35),
+        inset 0 0 30px rgba(210, 245, 255, .12);
+    animation: discordGemFloat 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes discordGemFloat {
+    from {
+        transform: translateY(5px) rotate(45deg) scale(.98);
+    }
+
+    to {
+        transform: translateY(-7px) rotate(45deg) scale(1.04);
+    }
+}
+
+.discord-kicker {
+    color: #279fff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+}
+
+.discord-title {
+    margin-top: 16px;
+    color: #f5fbff;
+    font-size: clamp(52px, 9vw, 112px);
+    line-height: .86;
+    letter-spacing: -5px;
+    text-transform: uppercase;
+}
+
+.discord-copy {
+    max-width: 620px;
+    margin: 26px auto 0;
+    color: #8da2b5;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.discord-invite {
+    margin-top: 34px;
+    color: #73caff;
+    font-size: 11px;
+    letter-spacing: 2px;
+    word-break: break-all;
+}
+
+.discord-join {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 34px;
+    min-width: 250px;
+    padding: 17px 28px;
+    border: 1px solid rgba(75, 188, 255, .65);
+    color: #f4fbff;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 105, 235, .22),
+            rgba(20, 150, 255, .34)
+        );
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    box-shadow: 0 0 30px rgba(0, 120, 255, .12);
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.discord-join:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: #8edbff;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 115, 255, .42),
+            rgba(25, 165, 255, .46)
+        );
+    box-shadow:
+        0 0 42px rgba(0, 130, 255, .24);
+}
+
+.discord-note {
+    margin-top: 24px;
+    color: #536a7e;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+
+    .discord-topbar {
+        padding: 18px;
+    }
+
+    .discord-brand {
+        letter-spacing: 4px;
+        font-size: 9px;
+    }
+
+    .discord-card {
+        padding: 58px 24px 44px;
+    }
+
+    .discord-title {
+        letter-spacing: -3px;
+    }
+
+    .discord-gem {
+        width: 74px;
+        height: 74px;
+    }
+
+    .discord-join {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 </style>
 
 </head>
@@ -4751,6 +5093,87 @@ body.screen-shake {
     </section>
 
 
+
+    <!-- DISCORD PAGE -->
+
+    <section
+        class="discord-page"
+        id="discordPage"
+    >
+
+        <div
+            class="discord-scroll"
+            id="discordScroll"
+        >
+
+            <div class="discord-topbar">
+
+                <div class="discord-brand">
+                    NO MERCY // DISCORD
+                </div>
+
+                <button
+                    class="discord-back"
+                    id="discordBackButton"
+                    type="button"
+                >
+                    ← ZURÜCK
+                </button>
+
+            </div>
+
+
+            <section class="discord-hero">
+
+                <div class="discord-orbit"></div>
+
+                <div
+                    class="discord-card"
+                    id="discordCard"
+                >
+
+                    <div class="discord-gem"></div>
+
+                    <div class="discord-kicker">
+                        COMMUNICATION
+                    </div>
+
+                    <h1 class="discord-title">
+                        DISCORD
+                    </h1>
+
+                    <p class="discord-copy">
+                        Unser Discord ist der zentrale Treffpunkt von No Mercy.
+                        Hier laufen Kommunikation, Organisation und alles
+                        zusammen, was innerhalb der Familie wichtig ist.
+                    </p>
+
+                    <div class="discord-invite">
+                        discord.gg/FN9CPz26nx
+                    </div>
+
+                    <a
+                        class="discord-join"
+                        href="https://discord.gg/FN9CPz26nx"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        DISCORD ÖFFNEN
+                    </a>
+
+                    <div class="discord-note">
+                        NO MERCY // FAMILY ACCESS
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </section>
+
+
     <div
         class="content-box"
     >
@@ -4941,6 +5364,26 @@ const backgroundScroll =
 const backgroundBackButton =
     document.getElementById(
         "backgroundBackButton"
+    );
+
+const discordPage =
+    document.getElementById(
+        "discordPage"
+    );
+
+const discordScroll =
+    document.getElementById(
+        "discordScroll"
+    );
+
+const discordBackButton =
+    document.getElementById(
+        "discordBackButton"
+    );
+
+const discordCard =
+    document.getElementById(
+        "discordCard"
     );
 
 
@@ -5948,6 +6391,31 @@ function prepareBackgroundAnimations() {
 }
 
 
+
+/* =========================================================
+   DISCORD REVEAL
+========================================================= */
+
+function prepareDiscordAnimation() {
+
+    discordCard.classList.remove(
+        "revealed"
+    );
+
+    setTimeout(
+        () => {
+
+            discordCard.classList.add(
+                "revealed"
+            );
+
+        },
+        120
+    );
+
+}
+
+
 /* =========================================================
    FRAGMENT CLICK - CINEMATIC TRANSITION
 ========================================================= */
@@ -5993,7 +6461,8 @@ fragments.forEach(
                     "story-mode",
                     "ranks-mode",
                     "values-mode",
-                    "background-mode"
+                    "background-mode",
+                    "discord-mode"
                 );
 
 
@@ -6060,6 +6529,19 @@ fragments.forEach(
                         prepareBackgroundAnimations,
                         50
                     );
+
+                } else if (
+                    sectionName === "discord"
+                ) {
+
+                    contentScreen.classList.add(
+                        "discord-mode"
+                    );
+
+                    discordScroll.scrollTop =
+                        0;
+
+                    prepareDiscordAnimation();
 
                 }
 
@@ -6141,7 +6623,8 @@ function closeContent() {
                 "story-mode",
                 "ranks-mode",
                 "values-mode",
-                "background-mode"
+                "background-mode",
+                "discord-mode"
             );
 
         },
@@ -6247,6 +6730,12 @@ valuesBackButton.addEventListener(
 
 
 backgroundBackButton.addEventListener(
+    "click",
+    closeContent
+);
+
+
+discordBackButton.addEventListener(
     "click",
     closeContent
 );
