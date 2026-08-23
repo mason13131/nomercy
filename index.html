@@ -2996,6 +2996,14 @@ fragments.forEach(
                     }
                 );
 
+                /*
+                    settled muss beim Öffnen kurz weg,
+                    damit selectedFragmentFly nicht blockiert wird.
+                */
+                fragment.classList.remove(
+                    "settled"
+                );
+
                 fragment.classList.add(
                     "fragment-selected"
                 );
