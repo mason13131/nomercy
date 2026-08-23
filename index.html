@@ -1783,6 +1783,25 @@ body.screen-shake {
     }
 }
 
+
+/* =========================================================
+   FIX - FRAGMENT ENTER NUR EINMAL
+========================================================= */
+
+.fragment.show.settled {
+    animation: none !important;
+
+    left: var(--left);
+    top: var(--top);
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1)
+        rotate(var(--rotation));
+}
+
 </style>
 
 </head>
@@ -2709,6 +2728,17 @@ function breakAmethyst() {
                                 "show"
                             );
 
+                            setTimeout(
+                                () => {
+
+                                    fragment.classList.add(
+                                        "settled"
+                                    );
+
+                                },
+                                1400
+                            );
+
 
                         },
                         index * 55
@@ -2998,6 +3028,8 @@ function closeContent() {
         return;
     }
 
+    contentIsOpen = false;
+
     contentScreen.classList.remove(
         "active"
     );
@@ -3012,6 +3044,10 @@ function closeContent() {
                         "fragment-away"
                     );
 
+                    fragment.classList.add(
+                        "settled"
+                    );
+
                 }
             );
 
@@ -3024,12 +3060,20 @@ function closeContent() {
                     "fragment-selected"
                 );
 
+                returningFragment.classList.remove(
+                    "settled"
+                );
+
                 returningFragment.classList.add(
                     "fragment-return"
                 );
 
                 setTimeout(
                     () => {
+
+                        returningFragment.classList.add(
+                            "settled"
+                        );
 
                         returningFragment.classList.remove(
                             "fragment-return"
@@ -3056,9 +3100,6 @@ function closeContent() {
                 );
 
             }
-
-            contentIsOpen =
-                false;
 
         },
         450
