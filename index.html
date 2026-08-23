@@ -4268,13 +4268,22 @@ body.screen-shake {
         );
 }
 
-.color-flag-card img {
-    max-width: 88%;
+.color-flag-card img,
+.no-mercy-bandana {
+    display: block;
+    width: min(88%, 420px);
+    height: auto;
+    max-width: 420px;
     max-height: 360px;
     object-fit: contain;
+    margin: 0 auto;
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    z-index: 3;
     image-rendering: auto;
     filter:
-        drop-shadow(0 0 22px rgba(45, 54, 196, .26))
+        drop-shadow(0 0 22px rgba(45, 54, 196, .30))
         saturate(1.08);
 }
 
@@ -5832,7 +5841,7 @@ body.screen-shake {
                 <div class="color-identity-grid">
 
                     <article class="color-flag-card">
-                        <img src="bandana.png" alt="No Mercy blaues Bandana">
+                        <img class="no-mercy-bandana" src="./bandana.png" alt="No Mercy blaues Bandana">
                         <div class="color-flag-label">
                             NO MERCY // FLAG REFERENCE
                         </div>
