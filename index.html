@@ -4497,6 +4497,85 @@ body.screen-shake {
     }
 }
 
+
+/* =========================================================
+   FRAKTIONSFARBE - VEHICLE IDENTITY
+========================================================= */
+
+.vehicle-intro {
+    max-width: 760px;
+    margin: -18px auto 46px;
+    text-align: center;
+    color: #8f96bb;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.vehicle-showcase {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.vehicle-family {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(83, 104, 255, .18);
+    background:
+        radial-gradient(circle at 50% 10%, rgba(45, 54, 196, .12), transparent 36%),
+        linear-gradient(145deg, rgba(9, 12, 46, .92), rgba(3, 5, 18, .96));
+    opacity: 0;
+    transform: translateY(38px) scale(.985);
+    filter: blur(6px);
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.16,.85,.25,1),
+        filter .8s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.vehicle-family.revealed { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+.vehicle-family:hover {
+    border-color: rgba(108, 124, 255, .50);
+    box-shadow: 0 0 54px rgba(45, 54, 196, .15), inset 0 0 42px rgba(45, 54, 196, .025);
+}
+
+.vehicle-family-head {
+    padding: 28px 30px 22px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 1px solid rgba(83, 104, 255, .12);
+}
+
+.vehicle-family-label { color: #5368FF; font-size: 9px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; }
+.vehicle-family h3 { margin-top: 8px; color: #f5f6ff; font-size: clamp(28px, 4vw, 44px); line-height: .95; letter-spacing: -2px; text-transform: uppercase; }
+.vehicle-family-number { color: rgba(157, 167, 255, .22); font-size: 48px; line-height: 1; font-weight: 900; }
+
+.vehicle-gallery { padding: 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.vehicle-shot { position: relative; overflow: hidden; min-height: 175px; border: 1px solid rgba(83, 104, 255, .12); background: #02030a; }
+.vehicle-shot.main { grid-column: 1 / -1; min-height: 315px; }
+.vehicle-shot img { display: block; width: 100%; height: 100%; min-height: inherit; object-fit: cover; transition: transform .55s cubic-bezier(.16,.85,.25,1), filter .55s ease; }
+.vehicle-shot::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 52%, rgba(2,3,12,.38) 100%); }
+.vehicle-shot:hover img { transform: scale(1.045); filter: brightness(1.08) saturate(1.08) drop-shadow(0 0 22px rgba(45,54,196,.20)); }
+.vehicle-shot-tag { position: absolute; left: 16px; bottom: 13px; z-index: 2; color: #d7dcff; font-size: 8px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,0,0,.9); }
+.vehicle-family-copy { padding: 0 30px 32px; color: #8f96bb; font-size: 14px; line-height: 1.8; }
+.vehicle-family-copy strong { color: #d7dcff; }
+.vehicle-signature { width: min(900px, 90vw); margin: 10px auto 110px; padding: 56px 30px; text-align: center; border-top: 1px solid rgba(83,104,255,.14); border-bottom: 1px solid rgba(83,104,255,.14); background: radial-gradient(circle at center, rgba(45,54,196,.08), transparent 68%); }
+.vehicle-signature-small { color: #5368FF; font-size: 9px; font-weight: 900; letter-spacing: 7px; text-transform: uppercase; }
+.vehicle-signature p { margin-top: 18px; color: #dce1ff; font-size: clamp(18px,2.8vw,30px); line-height: 1.45; font-weight: 800; }
+
+@media (max-width: 900px) { .vehicle-showcase { grid-template-columns: 1fr; } .vehicle-shot.main { min-height: 250px; } }
+@media (max-width: 600px) {
+    .vehicle-gallery { grid-template-columns: 1fr; }
+    .vehicle-shot, .vehicle-shot.main { grid-column: auto; min-height: 210px; }
+    .vehicle-family-head { padding: 24px 22px 18px; }
+    .vehicle-family-copy { padding: 0 22px 26px; }
+    .vehicle-family-number { font-size: 38px; }
+}
+
 </style>
 
 </head>
@@ -5930,6 +6009,94 @@ body.screen-shake {
             </section>
 
 
+            <section class="color-section">
+
+                <div class="color-section-head">
+                    <span>03 // VEHICLE IDENTITY</span>
+                    <h2>Unser Fuhrpark.</h2>
+                </div>
+
+                <p class="vehicle-intro">
+                    Unsere Fahrzeuge tragen dieselbe visuelle Identität wie der Rest von No Mercy.
+                    Dunkles Blau, markante Details und blaues Unterbodenlicht sorgen dafür,
+                    dass unser Fuhrpark sofort als Teil der Familie erkennbar ist.
+                </p>
+
+                <div class="vehicle-showcase">
+
+                    <article class="vehicle-family">
+                        <div class="vehicle-family-head">
+                            <div>
+                                <div class="vehicle-family-label">STREET // SEDAN</div>
+                                <h3>No Mercy Sedan</h3>
+                            </div>
+                            <div class="vehicle-family-number">01</div>
+                        </div>
+
+                        <div class="vehicle-gallery">
+                            <figure class="vehicle-shot main">
+                                <img src="./car-sedan-1.png" alt="No Mercy Sedan Front-Seitenansicht">
+                                <figcaption class="vehicle-shot-tag">FRONT // SIDE</figcaption>
+                            </figure>
+                            <figure class="vehicle-shot">
+                                <img src="./car-sedan-2.png" alt="No Mercy Sedan Frontansicht">
+                                <figcaption class="vehicle-shot-tag">FRONT</figcaption>
+                            </figure>
+                            <figure class="vehicle-shot">
+                                <img src="./car-sedan-3.png" alt="No Mercy Sedan Heck-Seitenansicht">
+                                <figcaption class="vehicle-shot-tag">REAR // SIDE</figcaption>
+                            </figure>
+                        </div>
+
+                        <p class="vehicle-family-copy">
+                            Der Sedan bildet den modernen Teil unseres Fuhrparks. Das
+                            <strong>dunkle No-Mercy-Blau</strong> wirkt zurückhaltend, während das
+                            blaue Unterbodenlicht den Wagen im Straßenbild sofort wiedererkennbar macht.
+                        </p>
+                    </article>
+
+                    <article class="vehicle-family">
+                        <div class="vehicle-family-head">
+                            <div>
+                                <div class="vehicle-family-label">CLASSIC // LOWRIDER</div>
+                                <h3>No Mercy Lowrider</h3>
+                            </div>
+                            <div class="vehicle-family-number">02</div>
+                        </div>
+
+                        <div class="vehicle-gallery">
+                            <figure class="vehicle-shot main">
+                                <img src="./car-lowrider-1.png" alt="No Mercy Lowrider Frontansicht">
+                                <figcaption class="vehicle-shot-tag">FRONT</figcaption>
+                            </figure>
+                            <figure class="vehicle-shot">
+                                <img src="./car-lowrider-2.png" alt="No Mercy Lowrider Seitenansicht">
+                                <figcaption class="vehicle-shot-tag">SIDE</figcaption>
+                            </figure>
+                            <figure class="vehicle-shot">
+                                <img src="./car-lowrider-3.png" alt="No Mercy Lowrider Heckansicht">
+                                <figcaption class="vehicle-shot-tag">REAR</figcaption>
+                            </figure>
+                        </div>
+
+                        <p class="vehicle-family-copy">
+                            Der Lowrider verbindet unseren amerikanischen Hintergrund mit der heutigen Identität
+                            der Familie. Klassische Linien treffen auf unser <strong>No-Mercy-Blau</strong> und
+                            das gleiche blaue Licht, das den gesamten Fuhrpark verbindet.
+                        </p>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <div class="vehicle-signature">
+                <div class="vehicle-signature-small">NO MERCY // VEHICLE COLORS</div>
+                <p>Verschiedene Fahrzeuge.<br> Derselbe Look. Derselbe Name.</p>
+            </div>
+
+
             <div class="color-statement">
 
                 <div class="color-statement-small">
@@ -7219,7 +7386,7 @@ function prepareColorAnimations() {
 
     const elements =
         document.querySelectorAll(
-            ".color-flag-card, .color-copy-card, .color-tone"
+            ".color-flag-card, .color-copy-card, .color-tone, .vehicle-family"
         );
 
 
