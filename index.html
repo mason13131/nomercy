@@ -1802,6 +1802,419 @@ body.screen-shake {
         rotate(var(--rotation));
 }
 
+
+/* =========================================================
+   STORY PAGE
+========================================================= */
+
+.content-screen.story-mode {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+}
+
+.content-screen.story-mode .content-box {
+    display: none;
+}
+
+.story-page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 12%,
+            rgba(0, 126, 255, .16),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #02050a 0%,
+            #030914 48%,
+            #010307 100%
+        );
+}
+
+.content-screen.story-mode .story-page {
+    display: block;
+}
+
+.story-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #159cff #030812;
+}
+
+.story-scroll::-webkit-scrollbar {
+    width: 7px;
+}
+
+.story-scroll::-webkit-scrollbar-track {
+    background: #030812;
+}
+
+.story-scroll::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #62caff,
+            #087eea
+        );
+    border-radius: 10px;
+}
+
+.story-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 42px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(1, 4, 10, .95),
+            rgba(1, 4, 10, .72),
+            transparent
+        );
+    backdrop-filter: blur(8px);
+}
+
+.story-brand {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 7px;
+    color: #7fd1ff;
+}
+
+.story-back {
+    border: 1px solid rgba(42, 160, 255, .42);
+    background: rgba(4, 14, 28, .58);
+    color: #cdeeff;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.story-back:hover {
+    transform: translateY(-2px);
+    background: rgba(12, 112, 220, .25);
+    border-color: #42b7ff;
+    box-shadow: 0 0 28px rgba(20, 150, 255, .18);
+}
+
+.story-hero {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 24px 110px;
+    position: relative;
+}
+
+.story-hero::before {
+    content: "";
+    position: absolute;
+    width: min(720px, 72vw);
+    height: min(720px, 72vw);
+    border-radius: 50%;
+    background: rgba(0, 120, 255, .08);
+    filter: blur(120px);
+    pointer-events: none;
+}
+
+.story-kicker {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 18px;
+    color: #279fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.story-heading {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-size: clamp(68px, 11vw, 160px);
+    line-height: .84;
+    letter-spacing: -7px;
+    text-transform: uppercase;
+    color: #f5fbff;
+    text-shadow:
+        0 0 28px rgba(75, 185, 255, .16),
+        0 0 90px rgba(0, 105, 255, .10);
+}
+
+.story-intro {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin-top: 34px;
+    color: #8fa5b8;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.story-founders {
+    position: relative;
+    z-index: 2;
+    margin-top: 28px;
+    color: #c8eaff;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.story-scroll-hint {
+    position: absolute;
+    bottom: 38px;
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: #4f7390;
+    text-transform: uppercase;
+    animation: storyHint 2s ease-in-out infinite;
+}
+
+@keyframes storyHint {
+    0%, 100% {
+        opacity: .35;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: .9;
+        transform: translateY(7px);
+    }
+}
+
+.story-timeline {
+    width: min(1120px, 92vw);
+    margin: 0 auto;
+    padding: 60px 0 130px;
+    position: relative;
+}
+
+.story-line {
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    bottom: 120px;
+    width: 2px;
+    transform: translateX(-50%);
+    background:
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(30, 159, 255, .22) 4%,
+            #168fff 50%,
+            rgba(30, 159, 255, .22) 96%,
+            transparent 100%
+        );
+    box-shadow:
+        0 0 16px rgba(20, 150, 255, .28);
+}
+
+.story-step {
+    width: 50%;
+    min-height: 300px;
+    padding: 42px 70px;
+    position: relative;
+    opacity: 0;
+    filter: blur(7px);
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.16,.85,.25,1),
+        filter .8s ease;
+}
+
+.story-step.left {
+    margin-right: auto;
+    text-align: right;
+    transform: translateX(-55px);
+}
+
+.story-step.right {
+    margin-left: auto;
+    text-align: left;
+    transform: translateX(55px);
+}
+
+.story-step.revealed {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.story-dot {
+    position: absolute;
+    top: 62px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #78d4ff;
+    border-radius: 50%;
+    background: #071427;
+    box-shadow:
+        0 0 0 7px rgba(15, 135, 255, .07),
+        0 0 25px rgba(35, 170, 255, .75);
+}
+
+.story-step.left .story-dot {
+    right: -8px;
+}
+
+.story-step.right .story-dot {
+    left: -8px;
+}
+
+.story-number {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #168fff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.story-step h2 {
+    margin: 0;
+    color: #f4f9fd;
+    font-size: clamp(28px, 4vw, 47px);
+    line-height: 1;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.story-step p {
+    margin-top: 22px;
+    color: #8397aa;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.story-step strong {
+    color: #c4e8ff;
+    font-weight: 700;
+}
+
+.story-quote {
+    width: min(880px, 88vw);
+    margin: 20px auto 140px;
+    padding: 70px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(47, 168, 255, .16);
+    border-bottom: 1px solid rgba(47, 168, 255, .16);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 120, 255, .07),
+            transparent 65%
+        );
+}
+
+.story-quote-small {
+    color: #258fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+}
+
+.story-quote p {
+    margin-top: 24px;
+    color: #f2f8fc;
+    font-size: clamp(24px, 4vw, 44px);
+    line-height: 1.35;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.story-quote span {
+    color: #46baff;
+}
+
+@media (max-width: 800px) {
+
+    .story-topbar {
+        padding: 18px 18px;
+    }
+
+    .story-brand {
+        letter-spacing: 4px;
+        font-size: 9px;
+    }
+
+    .story-heading {
+        letter-spacing: -4px;
+    }
+
+    .story-hero {
+        min-height: 690px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .story-line {
+        left: 28px;
+        transform: none;
+    }
+
+    .story-timeline {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .story-step,
+    .story-step.left,
+    .story-step.right {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 40px 28px 60px 66px;
+        text-align: left;
+        transform: translateX(30px);
+    }
+
+    .story-step.revealed {
+        transform: translateX(0);
+    }
+
+    .story-step.left .story-dot,
+    .story-step.right .story-dot {
+        left: 20px;
+        right: auto;
+        top: 47px;
+    }
+
+    .story-step h2 {
+        font-size: 32px;
+    }
+
+    .story-quote {
+        margin-bottom: 80px;
+        padding: 52px 24px;
+    }
+}
+
 </style>
 
 </head>
@@ -2127,6 +2540,247 @@ body.screen-shake {
 >
 
 
+
+    <!-- STORY PAGE -->
+
+    <section
+        class="story-page"
+        id="storyPage"
+    >
+
+        <div
+            class="story-scroll"
+            id="storyScroll"
+        >
+
+            <div class="story-topbar">
+
+                <div class="story-brand">
+                    NO MERCY // STORY
+                </div>
+
+                <button
+                    class="story-back"
+                    id="storyBackButton"
+                    type="button"
+                >
+                    ← ZURÜCK
+                </button>
+
+            </div>
+
+
+            <header class="story-hero">
+
+                <div class="story-kicker">
+                    THE BEGINNING
+                </div>
+
+                <h1 class="story-heading">
+                    STORY
+                </h1>
+
+                <p class="story-intro">
+                    No Mercy begann nicht mit einem großen Plan.
+                    Es begann mit drei Menschen in Davis, die verstanden,
+                    dass niemand perfekt sein muss, um Teil von etwas
+                    Echtem zu werden.
+                </p>
+
+                <div class="story-founders">
+                    RAPHII CEM · MASON VARELA · BELLA ROSE TIZMAN
+                </div>
+
+                <div class="story-scroll-hint">
+                    SCROLL TO DISCOVER ↓
+                </div>
+
+            </header>
+
+
+            <div class="story-timeline">
+
+                <div class="story-line"></div>
+
+
+                <article class="story-step left">
+                    <span class="story-dot"></span>
+                    <span class="story-number">01 // URSPRUNG</span>
+
+                    <h2>Drei Namen.<br>Ein Anfang.</h2>
+
+                    <p>
+                        No Mercy entstand in <strong>Davis</strong>.
+                        Raphii Cem, Mason Varela und Bella Rose Tizman
+                        kamen aus unterschiedlichen Richtungen, mit
+                        unterschiedlichen Geschichten und Fehlern.
+                        Gerade das verband sie. Aus Bekanntschaft wurde
+                        Vertrauen, aus Vertrauen Loyalität und aus drei
+                        Menschen langsam eine Familie.
+                    </p>
+                </article>
+
+
+                <article class="story-step right">
+                    <span class="story-dot"></span>
+                    <span class="story-number">02 // DAS SYMBOL</span>
+
+                    <h2>Der blaue<br>Edelstein.</h2>
+
+                    <p>
+                        Früh brauchte No Mercy etwas, das mehr bedeutete
+                        als nur eine Farbe. Der <strong>blaue Edelstein</strong>
+                        wurde zum Zeichen der Familie. Kein Stein ist
+                        vollkommen. Jeder besitzt eigene Kanten,
+                        Einschlüsse und Risse – und genau darin erkannte
+                        sich No Mercy selbst wieder.
+                    </p>
+
+                    <p>
+                        Jedes Mitglied trägt seinen eigenen Stein.
+                        Nicht als Schmuckstück, sondern als Erinnerung:
+                        Niemand steht über seiner Herkunft und niemand
+                        steht über der Familie.
+                    </p>
+                </article>
+
+
+                <article class="story-step left">
+                    <span class="story-dot"></span>
+                    <span class="story-number">03 // WACHSTUM</span>
+
+                    <h2>Aus drei<br>wurden mehr.</h2>
+
+                    <p>
+                        Mit der Zeit wurden aus drei Stimmen viele.
+                        Menschen kamen hinzu, die dieselbe Vorstellung
+                        von Zusammenhalt teilten. Manche kamen von ganz
+                        unten, manche hatten bereits einen Namen und
+                        andere suchten einfach wieder etwas, das sie
+                        Familie nennen konnten.
+                    </p>
+
+                    <p>
+                        Wer blieb, verstand den Stein. Jeder neue Stein
+                        machte No Mercy größer, ohne den Ursprung der
+                        Familie zu verändern.
+                    </p>
+                </article>
+
+
+                <article class="story-step right">
+                    <span class="story-dot"></span>
+                    <span class="story-number">04 // DER NAME</span>
+
+                    <h2>No<br>Mercy.</h2>
+
+                    <p>
+                        Der Name bedeutet für uns nicht, grundlos
+                        gnadenlos zu sein. <strong>No Mercy</strong>
+                        bedeutet, dass es keine Gnade für Dinge gibt,
+                        die die Familie von innen zerstören:
+                        Verrat, fehlender Respekt und das Vergessen
+                        der eigenen Herkunft.
+                    </p>
+
+                    <p>
+                        Nach außen stehen wir gemeinsam. Nach innen
+                        sagen wir uns die Wahrheit. Wenn einer fällt,
+                        ziehen wir ihn hoch. Wenn einer abhebt,
+                        holen wir ihn zurück auf den Boden.
+                    </p>
+                </article>
+
+
+                <article class="story-step left">
+                    <span class="story-dot"></span>
+                    <span class="story-number">05 // DIE RISSE</span>
+
+                    <h2>Nicht jeder<br>Weg ist glatt.</h2>
+
+                    <p>
+                        Je größer die Familie wurde, desto schwieriger
+                        wurde es, ihren Ursprung zu bewahren. Es gab
+                        Streit, Fehlentscheidungen und Vertrauen, das
+                        an die falschen Menschen gegeben wurde.
+                    </p>
+
+                    <p>
+                        Doch ein Riss macht einen Edelstein nicht
+                        wertlos. Oft erzählt er erst seine Geschichte.
+                        Genau so wurden auch unsere Fehler ein Teil
+                        von No Mercy.
+                    </p>
+                </article>
+
+
+                <article class="story-step right">
+                    <span class="story-dot"></span>
+                    <span class="story-number">06 // HOME</span>
+
+                    <h2>Davis bleibt<br>unser Ursprung.</h2>
+
+                    <p>
+                        Egal wie weit der Name No Mercy wächst:
+                        <strong>Davis</strong> bleibt der Ort, an dem
+                        alles begann. Dort entstanden die ersten
+                        Verbindungen, dort wurden die ersten Steine
+                        weitergegeben und dort wurde aus drei Menschen
+                        eine Familie.
+                    </p>
+
+                    <p>
+                        Wer vergisst, wo er angefangen hat, vergisst
+                        irgendwann auch, wofür er überhaupt kämpft.
+                    </p>
+                </article>
+
+
+                <article class="story-step left">
+                    <span class="story-dot"></span>
+                    <span class="story-number">07 // HEUTE</span>
+
+                    <h2>Der Name<br>wächst weiter.</h2>
+
+                    <p>
+                        Heute steht No Mercy nicht mehr nur für
+                        Raphii, Mason und Bella. Der Name steht für
+                        jeden einzelnen Stein, der Teil dieser Familie
+                        geworden ist.
+                    </p>
+
+                    <p>
+                        Wir wollen uns unseren Platz nicht schenken
+                        lassen. Wir wollen ihn uns aufbauen – und dafür
+                        sorgen, dass No Mercy eines Tages nicht nur
+                        wegen seiner Farbe bekannt ist, sondern wegen
+                        der Menschen, die den Namen tragen.
+                    </p>
+                </article>
+
+            </div>
+
+
+            <div class="story-quote">
+
+                <div class="story-quote-small">
+                    NO MERCY // DAVIS
+                </div>
+
+                <p>
+                    Mit drei Menschen in Davis.<br>
+                    Mit einem <span>blauen Edelstein.</span><br>
+                    Und mit dem Versprechen, niemals zu vergessen,
+                    woher wir kommen.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
     <div
         class="content-box"
     >
@@ -2257,6 +2911,21 @@ const fragments =
 const contentScreen =
     document.getElementById(
         "contentScreen"
+    );
+
+const storyPage =
+    document.getElementById(
+        "storyPage"
+    );
+
+const storyScroll =
+    document.getElementById(
+        "storyScroll"
+    );
+
+const storyBackButton =
+    document.getElementById(
+        "storyBackButton"
     );
 
 
@@ -2932,6 +3601,89 @@ function createDebrisExplosion() {
 }
 
 
+
+/* =========================================================
+   STORY SCROLL REVEALS
+========================================================= */
+
+let storyObserver =
+    null;
+
+
+function prepareStoryAnimations() {
+
+    const steps =
+        document.querySelectorAll(
+            ".story-step"
+        );
+
+
+    steps.forEach(
+        step => {
+
+            step.classList.remove(
+                "revealed"
+            );
+
+        }
+    );
+
+
+    if (storyObserver) {
+
+        storyObserver.disconnect();
+
+    }
+
+
+    storyObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "revealed"
+                            );
+
+                            storyObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                root:
+                    storyScroll,
+
+                threshold:
+                    .18
+            }
+        );
+
+
+    steps.forEach(
+        step => {
+
+            storyObserver.observe(
+                step
+            );
+
+        }
+    );
+
+}
+
+
 /* =========================================================
    FRAGMENT CLICK - CINEMATIC TRANSITION
 ========================================================= */
@@ -2971,6 +3723,32 @@ fragments.forEach(
 
                 contentText.textContent =
                     section.text;
+
+
+                if (
+                    sectionName === "story"
+                ) {
+
+                    contentScreen.classList.add(
+                        "story-mode"
+                    );
+
+                    storyScroll.scrollTop =
+                        0;
+
+                    setTimeout(
+                        prepareStoryAnimations,
+                        50
+                    );
+
+                } else {
+
+                    contentScreen.classList.remove(
+                        "story-mode"
+                    );
+
+                }
+
 
                 const selectedFloat =
                     fragment.querySelector(
@@ -3040,6 +3818,17 @@ function closeContent() {
 
     contentScreen.classList.remove(
         "active"
+    );
+
+    setTimeout(
+        () => {
+
+            contentScreen.classList.remove(
+                "story-mode"
+            );
+
+        },
+        420
     );
 
     setTimeout(
@@ -3117,6 +3906,12 @@ function closeContent() {
 
 
 backButton.addEventListener(
+    "click",
+    closeContent
+);
+
+
+storyBackButton.addEventListener(
     "click",
     closeContent
 );
