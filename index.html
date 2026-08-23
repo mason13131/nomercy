@@ -1597,6 +1597,192 @@ body.screen-shake {
 
 }
 
+
+/* =========================================================
+   FRAGMENT -> CONTENT CINEMATIC TRANSITION
+========================================================= */
+
+.fragment {
+    transition:
+        opacity .55s ease,
+        filter .55s ease;
+}
+
+.fragment.fragment-away {
+    opacity: 0 !important;
+    pointer-events: none;
+    filter: blur(8px) brightness(.4);
+}
+
+.fragment.fragment-away:nth-child(odd) {
+    transform:
+        translate(-50%, -50%)
+        scale(.65)
+        translate(-120px, -80px) !important;
+}
+
+.fragment.fragment-away:nth-child(even) {
+    transform:
+        translate(-50%, -50%)
+        scale(.65)
+        translate(120px, 80px) !important;
+}
+
+.fragment.fragment-selected {
+    z-index: 450 !important;
+    pointer-events: none;
+    animation:
+        selectedFragmentFly
+        .85s
+        cubic-bezier(.16,.85,.25,1)
+        forwards !important;
+}
+
+.fragment.fragment-selected .fragment-float {
+    animation: none !important;
+}
+
+.fragment.fragment-selected img {
+    transform: scale(1) !important;
+    filter:
+        brightness(1.35)
+        drop-shadow(0 0 25px rgba(80, 190, 255, .95))
+        drop-shadow(0 0 70px rgba(0, 110, 255, .65)) !important;
+}
+
+@keyframes selectedFragmentFly {
+    0% {
+        left: var(--left);
+        top: var(--top);
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--rotation))
+            scale(1);
+    }
+
+    45% {
+        left: 50%;
+        top: 50%;
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg)
+            scale(1.35);
+    }
+
+    72% {
+        left: 50%;
+        top: 50%;
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg)
+            scale(1.65);
+        filter: brightness(1.4);
+    }
+
+    100% {
+        left: 50%;
+        top: 50%;
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg)
+            scale(2.35);
+        filter:
+            brightness(2)
+            blur(5px);
+    }
+}
+
+.content-screen {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 105, 255, .16),
+            transparent 55%
+        ),
+        rgba(1, 4, 10, .97);
+
+    transition:
+        opacity .6s ease,
+        visibility .6s ease;
+}
+
+.content-box {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform:
+        translateY(35px)
+        scale(.94);
+    filter: blur(6px);
+    transition:
+        opacity .65s ease,
+        transform .65s cubic-bezier(.16,.85,.25,1),
+        filter .65s ease;
+}
+
+.content-screen.active .content-box {
+    opacity: 1;
+    transform:
+        translateY(0)
+        scale(1);
+    filter: blur(0);
+}
+
+.content-box::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -1px;
+    width: 45%;
+    height: 1px;
+    transform: translateX(-50%);
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #4cc3ff,
+            transparent
+        );
+    box-shadow:
+        0 0 22px
+        rgba(45, 175, 255, .8);
+}
+
+.fragment.fragment-return {
+    opacity: 1 !important;
+    animation:
+        fragmentReturn
+        .75s
+        cubic-bezier(.16,.85,.25,1)
+        forwards !important;
+}
+
+@keyframes fragmentReturn {
+    from {
+        left: 50%;
+        top: 50%;
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(1.8)
+            rotate(0deg);
+    }
+
+    to {
+        left: var(--left);
+        top: var(--top);
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1)
+            rotate(var(--rotation));
+    }
+}
+
 </style>
 
 </head>
@@ -2090,6 +2276,12 @@ let hasBroken =
 
 
 let introReady =
+    false;
+
+let selectedFragment =
+    null;
+
+let contentIsOpen =
     false;
 
 
@@ -2711,75 +2903,173 @@ function createDebrisExplosion() {
 
 
 /* =========================================================
-   FRAGMENT CLICK
+   FRAGMENT CLICK - CINEMATIC TRANSITION
 ========================================================= */
 
 fragments.forEach(
     fragment => {
 
-
         fragment.addEventListener(
             "click",
             () => {
 
+                if (contentIsOpen) {
+                    return;
+                }
 
                 const sectionName =
                     fragment.dataset.section;
 
-
                 const section =
-                    sections[
-                        sectionName
-                    ];
-
+                    sections[sectionName];
 
                 if (!section) {
-
                     return;
-
                 }
 
+                contentIsOpen =
+                    true;
+
+                selectedFragment =
+                    fragment;
 
                 contentLabel.textContent =
                     section.label;
 
-
                 contentTitle.textContent =
                     section.title;
-
 
                 contentText.textContent =
                     section.text;
 
+                const selectedFloat =
+                    fragment.querySelector(
+                        ".fragment-float"
+                    );
 
-                contentScreen.classList.add(
-                    "active"
+                if (selectedFloat) {
+                    selectedFloat.style.animationPlayState =
+                        "paused";
+                }
+
+                fragments.forEach(
+                    otherFragment => {
+
+                        if (
+                            otherFragment !== fragment
+                        ) {
+                            otherFragment.classList.add(
+                                "fragment-away"
+                            );
+                        }
+
+                    }
                 );
 
+                fragment.classList.add(
+                    "fragment-selected"
+                );
+
+                setTimeout(
+                    () => {
+
+                        contentScreen.classList.add(
+                            "active"
+                        );
+
+                    },
+                    650
+                );
 
             }
         );
-
 
     }
 );
 
 
 /* =========================================================
-   BACK
+   BACK - RETURN TO FRAGMENTS
 ========================================================= */
+
+function closeContent() {
+
+    if (!contentIsOpen) {
+        return;
+    }
+
+    contentScreen.classList.remove(
+        "active"
+    );
+
+    setTimeout(
+        () => {
+
+            fragments.forEach(
+                fragment => {
+
+                    fragment.classList.remove(
+                        "fragment-away"
+                    );
+
+                }
+            );
+
+            if (selectedFragment) {
+
+                const returningFragment =
+                    selectedFragment;
+
+                returningFragment.classList.remove(
+                    "fragment-selected"
+                );
+
+                returningFragment.classList.add(
+                    "fragment-return"
+                );
+
+                setTimeout(
+                    () => {
+
+                        returningFragment.classList.remove(
+                            "fragment-return"
+                        );
+
+                        const floatElement =
+                            returningFragment.querySelector(
+                                ".fragment-float"
+                            );
+
+                        if (floatElement) {
+                            floatElement.style.animationPlayState =
+                                "running";
+                        }
+
+                        if (
+                            selectedFragment === returningFragment
+                        ) {
+                            selectedFragment = null;
+                        }
+
+                    },
+                    800
+                );
+
+            }
+
+            contentIsOpen =
+                false;
+
+        },
+        450
+    );
+
+}
+
 
 backButton.addEventListener(
     "click",
-    () => {
-
-
-        contentScreen.classList.remove(
-            "active"
-        );
-
-
-    }
+    closeContent
 );
 
 
@@ -2791,19 +3081,12 @@ document.addEventListener(
     "keydown",
     event => {
 
-
         if (
-            event.key === "Escape"
+            event.key === "Escape" &&
+            contentIsOpen
         ) {
-
-
-            contentScreen.classList.remove(
-                "active"
-            );
-
-
+            closeContent();
         }
-
 
     }
 );
