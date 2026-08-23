@@ -2215,6 +2215,456 @@ body.screen-shake {
     }
 }
 
+
+/* =========================================================
+   RANKS PAGE
+========================================================= */
+
+.content-screen.ranks-mode {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+}
+
+.content-screen.ranks-mode .content-box,
+.content-screen.ranks-mode .story-page {
+    display: none;
+}
+
+.ranks-page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 12%,
+            rgba(0, 126, 255, .16),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #02050a 0%,
+            #030914 48%,
+            #010307 100%
+        );
+}
+
+.content-screen.ranks-mode .ranks-page {
+    display: block;
+}
+
+.ranks-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #159cff #030812;
+}
+
+.ranks-scroll::-webkit-scrollbar {
+    width: 7px;
+}
+
+.ranks-scroll::-webkit-scrollbar-track {
+    background: #030812;
+}
+
+.ranks-scroll::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #62caff,
+            #087eea
+        );
+    border-radius: 10px;
+}
+
+.ranks-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 42px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(1, 4, 10, .95),
+            rgba(1, 4, 10, .72),
+            transparent
+        );
+    backdrop-filter: blur(8px);
+}
+
+.ranks-brand {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 7px;
+    color: #7fd1ff;
+}
+
+.ranks-back {
+    border: 1px solid rgba(42, 160, 255, .42);
+    background: rgba(4, 14, 28, .58);
+    color: #cdeeff;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.ranks-back:hover {
+    transform: translateY(-2px);
+    background: rgba(12, 112, 220, .25);
+    border-color: #42b7ff;
+    box-shadow: 0 0 28px rgba(20, 150, 255, .18);
+}
+
+.ranks-hero {
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 24px 70px;
+    position: relative;
+}
+
+.ranks-hero::before {
+    content: "";
+    position: absolute;
+    width: min(680px, 70vw);
+    height: min(680px, 70vw);
+    border-radius: 50%;
+    background: rgba(0, 120, 255, .08);
+    filter: blur(120px);
+    pointer-events: none;
+}
+
+.ranks-kicker {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 18px;
+    color: #279fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.ranks-heading {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-size: clamp(68px, 11vw, 150px);
+    line-height: .84;
+    letter-spacing: -7px;
+    text-transform: uppercase;
+    color: #f5fbff;
+    text-shadow:
+        0 0 28px rgba(75, 185, 255, .16),
+        0 0 90px rgba(0, 105, 255, .10);
+}
+
+.ranks-intro {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin-top: 30px;
+    color: #8fa5b8;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.ranks-hierarchy {
+    width: min(920px, 92vw);
+    margin: 0 auto;
+    padding: 30px 0 140px;
+    position: relative;
+}
+
+.ranks-spine {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    bottom: 110px;
+    width: 2px;
+    transform: translateX(-50%);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(98, 202, 255, .95) 0%,
+            #168fff 22%,
+            rgba(22, 143, 255, .68) 70%,
+            rgba(22, 143, 255, .12) 100%
+        );
+    box-shadow:
+        0 0 18px rgba(20, 150, 255, .30);
+}
+
+.rank-card {
+    width: min(620px, 76vw);
+    min-height: 118px;
+    margin: 0 auto 28px;
+    padding: 24px 30px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    align-items: center;
+    gap: 18px;
+    border: 1px solid rgba(48, 160, 255, .18);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 15, 28, .88),
+            rgba(3, 8, 17, .88)
+        );
+    box-shadow:
+        0 0 40px rgba(0, 105, 230, .06);
+    opacity: 0;
+    transform: translateY(36px) scale(.97);
+    filter: blur(6px);
+    transition:
+        opacity .7s ease,
+        transform .7s cubic-bezier(.16,.85,.25,1),
+        filter .7s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.rank-card::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -29px;
+    width: 1px;
+    height: 29px;
+    background: rgba(48, 160, 255, .45);
+    transform: translateX(-50%);
+}
+
+.rank-card:first-of-type::before {
+    display: none;
+}
+
+.rank-card.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.rank-card:hover {
+    border-color: rgba(78, 188, 255, .62);
+    box-shadow:
+        0 0 44px rgba(0, 105, 230, .16),
+        inset 0 0 40px rgba(0, 110, 255, .035);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9, 22, 42, .96),
+            rgba(3, 9, 20, .96)
+        );
+}
+
+.rank-number {
+    width: 70px;
+    height: 70px;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+    border: 1px solid rgba(78, 188, 255, .34);
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(100, 208, 255, .26),
+            rgba(0, 80, 180, .14) 45%,
+            rgba(2, 8, 18, .9) 75%
+        );
+    transform: rotate(45deg);
+    box-shadow:
+        0 0 18px rgba(20, 150, 255, .15);
+}
+
+.rank-number span {
+    transform: rotate(-45deg);
+    color: #87d8ff;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.rank-meta {
+    min-width: 0;
+}
+
+.rank-tier {
+    color: #168fff;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.rank-name {
+    color: #f4f9fd;
+    font-size: clamp(26px, 4vw, 42px);
+    line-height: 1;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.rank-card.top-rank {
+    width: min(700px, 82vw);
+    min-height: 150px;
+    border-color: rgba(96, 205, 255, .55);
+    background:
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(0, 130, 255, .14),
+            transparent 34%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(10, 24, 45, .98),
+            rgba(3, 8, 17, .95)
+        );
+    box-shadow:
+        0 0 60px rgba(0, 120, 255, .16);
+}
+
+.rank-card.top-rank .rank-number {
+    width: 86px;
+    height: 86px;
+    border-color: rgba(120, 218, 255, .75);
+    box-shadow:
+        0 0 30px rgba(30, 170, 255, .28);
+}
+
+.rank-card.top-rank .rank-number span {
+    font-size: 24px;
+    color: #c9efff;
+}
+
+.rank-card.top-rank .rank-name {
+    font-size: clamp(34px, 5vw, 54px);
+    color: #ffffff;
+    text-shadow: 0 0 24px rgba(90, 200, 255, .18);
+}
+
+.rank-card.command-rank {
+    border-color: rgba(63, 178, 255, .32);
+}
+
+.ranks-footer {
+    width: min(820px, 88vw);
+    margin: 10px auto 100px;
+    padding: 56px 30px;
+    text-align: center;
+    border-top: 1px solid rgba(47, 168, 255, .16);
+    border-bottom: 1px solid rgba(47, 168, 255, .16);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 120, 255, .06),
+            transparent 70%
+        );
+}
+
+.ranks-footer-small {
+    color: #258fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+}
+
+.ranks-footer p {
+    margin-top: 20px;
+    color: #cfeeff;
+    font-size: clamp(20px, 3vw, 34px);
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+@media (max-width: 800px) {
+
+    .ranks-topbar {
+        padding: 18px 18px;
+    }
+
+    .ranks-brand {
+        letter-spacing: 4px;
+        font-size: 9px;
+    }
+
+    .ranks-heading {
+        letter-spacing: -4px;
+    }
+
+    .ranks-hero {
+        min-height: 560px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .ranks-hierarchy {
+        width: 100%;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .ranks-spine {
+        left: 42px;
+        transform: none;
+    }
+
+    .rank-card,
+    .rank-card.top-rank {
+        width: 100%;
+        grid-template-columns: 58px 1fr;
+        gap: 14px;
+        padding: 20px 18px;
+        margin-bottom: 22px;
+    }
+
+    .rank-card::before {
+        left: 23px;
+        transform: none;
+    }
+
+    .rank-number {
+        width: 50px;
+        height: 50px;
+    }
+
+    .rank-number span {
+        font-size: 16px;
+    }
+
+    .rank-card.top-rank .rank-number {
+        width: 58px;
+        height: 58px;
+    }
+
+    .rank-name,
+    .rank-card.top-rank .rank-name {
+        font-size: 27px;
+    }
+}
+
 </style>
 
 </head>
@@ -2781,6 +3231,184 @@ body.screen-shake {
     </section>
 
 
+
+    <!-- RANKS PAGE -->
+
+    <section
+        class="ranks-page"
+        id="ranksPage"
+    >
+
+        <div
+            class="ranks-scroll"
+            id="ranksScroll"
+        >
+
+            <div class="ranks-topbar">
+
+                <div class="ranks-brand">
+                    NO MERCY // RÄNGE
+                </div>
+
+                <button
+                    class="ranks-back"
+                    id="ranksBackButton"
+                    type="button"
+                >
+                    ← ZURÜCK
+                </button>
+
+            </div>
+
+
+            <header class="ranks-hero">
+
+                <div class="ranks-kicker">
+                    HIERARCHY
+                </div>
+
+                <h1 class="ranks-heading">
+                    RÄNGE
+                </h1>
+
+                <p class="ranks-intro">
+                    Dreizehn Stufen. Eine Familie. Jeder Rang steht für
+                    mehr Verantwortung, mehr Vertrauen und einen festen
+                    Platz innerhalb von No Mercy.
+                </p>
+
+            </header>
+
+
+            <div class="ranks-hierarchy">
+
+                <div class="ranks-spine"></div>
+
+                <article class="rank-card top-rank">
+                    <div class="rank-number"><span>12</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">TOP LEADERSHIP</div>
+                        <div class="rank-name">OG</div>
+                    </div>
+                </article>
+
+                <article class="rank-card command-rank">
+                    <div class="rank-number"><span>11</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">LEADERSHIP</div>
+                        <div class="rank-name">Lil OG</div>
+                    </div>
+                </article>
+
+                <article class="rank-card command-rank">
+                    <div class="rank-number"><span>10</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">COMMAND</div>
+                        <div class="rank-name">Consigliere</div>
+                    </div>
+                </article>
+
+                <article class="rank-card command-rank">
+                    <div class="rank-number"><span>9</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">COMMAND</div>
+                        <div class="rank-name">Captain</div>
+                    </div>
+                </article>
+
+                <article class="rank-card command-rank">
+                    <div class="rank-number"><span>8</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">COMMAND</div>
+                        <div class="rank-name">Lieutenant</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>7</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">CORE</div>
+                        <div class="rank-name">Hitman</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>6</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">CORE</div>
+                        <div class="rank-name">Enforcer</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>5</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">CORE</div>
+                        <div class="rank-name">Soldier</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>4</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">CORE</div>
+                        <div class="rank-name">Muscle</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>3</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">STREET</div>
+                        <div class="rank-name">Shot Caller</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>2</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">STREET</div>
+                        <div class="rank-name">Runner</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>1</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">STREET</div>
+                        <div class="rank-name">Homie</div>
+                    </div>
+                </article>
+
+                <article class="rank-card ">
+                    <div class="rank-number"><span>0</span></div>
+                    <div class="rank-meta">
+                        <div class="rank-tier">ENTRY</div>
+                        <div class="rank-name">Hangaround</div>
+                    </div>
+                </article>
+
+            </div>
+
+
+            <div class="ranks-footer">
+
+                <div class="ranks-footer-small">
+                    NO MERCY // HIERARCHY
+                </div>
+
+                <p>
+                    Rang bedeutet Verantwortung.<br>
+                    Familie bedeutet Zusammenhalt.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
     <div
         class="content-box"
     >
@@ -2926,6 +3554,21 @@ const storyScroll =
 const storyBackButton =
     document.getElementById(
         "storyBackButton"
+    );
+
+const ranksPage =
+    document.getElementById(
+        "ranksPage"
+    );
+
+const ranksScroll =
+    document.getElementById(
+        "ranksScroll"
+    );
+
+const ranksBackButton =
+    document.getElementById(
+        "ranksBackButton"
     );
 
 
@@ -3684,6 +4327,89 @@ function prepareStoryAnimations() {
 }
 
 
+
+/* =========================================================
+   RANKS SCROLL REVEALS
+========================================================= */
+
+let ranksObserver =
+    null;
+
+
+function prepareRanksAnimations() {
+
+    const cards =
+        document.querySelectorAll(
+            ".rank-card"
+        );
+
+
+    cards.forEach(
+        card => {
+
+            card.classList.remove(
+                "revealed"
+            );
+
+        }
+    );
+
+
+    if (ranksObserver) {
+
+        ranksObserver.disconnect();
+
+    }
+
+
+    ranksObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "revealed"
+                            );
+
+                            ranksObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                root:
+                    ranksScroll,
+
+                threshold:
+                    .14
+            }
+        );
+
+
+    cards.forEach(
+        card => {
+
+            ranksObserver.observe(
+                card
+            );
+
+        }
+    );
+
+}
+
+
 /* =========================================================
    FRAGMENT CLICK - CINEMATIC TRANSITION
 ========================================================= */
@@ -3725,6 +4451,12 @@ fragments.forEach(
                     section.text;
 
 
+                contentScreen.classList.remove(
+                    "story-mode",
+                    "ranks-mode"
+                );
+
+
                 if (
                     sectionName === "story"
                 ) {
@@ -3741,10 +4473,20 @@ fragments.forEach(
                         50
                     );
 
-                } else {
+                } else if (
+                    sectionName === "ranks"
+                ) {
 
-                    contentScreen.classList.remove(
-                        "story-mode"
+                    contentScreen.classList.add(
+                        "ranks-mode"
+                    );
+
+                    ranksScroll.scrollTop =
+                        0;
+
+                    setTimeout(
+                        prepareRanksAnimations,
+                        50
                     );
 
                 }
@@ -3824,7 +4566,8 @@ function closeContent() {
         () => {
 
             contentScreen.classList.remove(
-                "story-mode"
+                "story-mode",
+                "ranks-mode"
             );
 
         },
@@ -3912,6 +4655,12 @@ backButton.addEventListener(
 
 
 storyBackButton.addEventListener(
+    "click",
+    closeContent
+);
+
+
+ranksBackButton.addEventListener(
     "click",
     closeContent
 );
