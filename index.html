@@ -7240,6 +7240,189 @@ let contentIsOpen =
 
 
 /* =========================================================
+   SOUND SYSTEM
+========================================================= */
+
+const soundFiles = {
+    amethystHover:
+        "./amethyst-hover.mp3",
+
+    amethystBreak:
+        "./amethyst-break.mp3",
+
+    fragmentHover:
+        "./fragment-hover.mp3",
+
+    fragmentClick:
+        "./fragment-click.mp3"
+};
+
+
+const sounds = {};
+
+
+Object.entries(
+    soundFiles
+).forEach(
+    ([name, src]) => {
+
+        const audio =
+            new Audio(src);
+
+        audio.preload =
+            "auto";
+
+        sounds[name] =
+            audio;
+
+    }
+);
+
+
+/*
+   Individuelle Lautstärken.
+   Kannst du später einfach hier anpassen.
+*/
+
+sounds.amethystHover.volume =
+    0.18;
+
+sounds.amethystBreak.volume =
+    0.48;
+
+sounds.fragmentHover.volume =
+    0.14;
+
+sounds.fragmentClick.volume =
+    0.34;
+
+
+let lastAmethystHover =
+    0;
+
+let lastFragmentHover =
+    0;
+
+
+function playSound(
+    name,
+    {
+        restart = true,
+        cooldown = 0
+    } = {}
+) {
+
+    const audio =
+        sounds[name];
+
+    if (!audio) {
+        return;
+    }
+
+
+    const now =
+        performance.now();
+
+
+    if (
+        name === "amethystHover"
+    ) {
+
+        if (
+            now - lastAmethystHover <
+            cooldown
+        ) {
+            return;
+        }
+
+        lastAmethystHover =
+            now;
+
+    }
+
+
+    if (
+        name === "fragmentHover"
+    ) {
+
+        if (
+            now - lastFragmentHover <
+            cooldown
+        ) {
+            return;
+        }
+
+        lastFragmentHover =
+            now;
+
+    }
+
+
+    if (restart) {
+
+        audio.pause();
+
+        audio.currentTime =
+            0;
+
+    }
+
+
+    const playPromise =
+        audio.play();
+
+
+    if (
+        playPromise &&
+        typeof playPromise.catch ===
+        "function"
+    ) {
+
+        playPromise.catch(
+            () => {}
+        );
+
+    }
+
+}
+
+
+/*
+   Browser dürfen Audio teilweise erst nach
+   der ersten Nutzerinteraktion vollständig laden.
+*/
+
+function unlockSounds() {
+
+    Object.values(
+        sounds
+    ).forEach(
+        audio => {
+
+            audio.load();
+
+        }
+    );
+
+
+    window.removeEventListener(
+        "pointerdown",
+        unlockSounds
+    );
+
+}
+
+
+window.addEventListener(
+    "pointerdown",
+    unlockSounds,
+    {
+        once: true
+    }
+);
+
+
+/* =========================================================
    CONTENT
 ========================================================= */
 
@@ -7698,12 +7881,53 @@ function breakAmethyst() {
 
 
 /* =========================================================
+   AMETHYST SOUND
+========================================================= */
+
+amethystButton.addEventListener(
+    "mouseenter",
+    () => {
+
+        if (
+            !introReady ||
+            hasBroken
+        ) {
+            return;
+        }
+
+        playSound(
+            "amethystHover",
+            {
+                cooldown: 320
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
    CLICK
 ========================================================= */
 
 amethystButton.addEventListener(
     "click",
-    breakAmethyst
+    () => {
+
+        if (
+            !introReady ||
+            hasBroken
+        ) {
+            return;
+        }
+
+        playSound(
+            "amethystBreak"
+        );
+
+        breakAmethyst();
+
+    }
 );
 
 
@@ -7719,6 +7943,19 @@ amethystButton.addEventListener(
 
 
             event.preventDefault();
+
+
+            if (
+                !introReady ||
+                hasBroken
+            ) {
+                return;
+            }
+
+
+            playSound(
+                "amethystBreak"
+            );
 
 
             breakAmethyst();
@@ -8315,6 +8552,30 @@ fragments.forEach(
     fragment => {
 
         fragment.addEventListener(
+            "mouseenter",
+            () => {
+
+                if (
+                    contentIsOpen ||
+                    !fragment.classList.contains(
+                        "settled"
+                    )
+                ) {
+                    return;
+                }
+
+                playSound(
+                    "fragmentHover",
+                    {
+                        cooldown: 110
+                    }
+                );
+
+            }
+        );
+
+
+        fragment.addEventListener(
             "click",
             () => {
 
@@ -8331,6 +8592,12 @@ fragments.forEach(
                 if (!section) {
                     return;
                 }
+
+
+                playSound(
+                    "fragmentClick"
+                );
+
 
                 contentIsOpen =
                     true;
