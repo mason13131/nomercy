@@ -5427,12 +5427,287 @@ body.screen-shake {
     }
 }
 
+
+/* =========================================================
+   NO MERCY MUSIC PLAYER
+========================================================= */
+
+.music-player {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1600;
+    width: min(360px, calc(100vw - 32px));
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid rgba(82, 104, 255, .28);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5, 8, 26, .94),
+            rgba(2, 4, 12, .96)
+        );
+    box-shadow:
+        0 0 36px rgba(45, 54, 196, .16);
+    backdrop-filter: blur(14px);
+}
+
+.music-vinyl-wrap {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    display: grid;
+    place-items: center;
+}
+
+.music-vinyl {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    position: relative;
+    background:
+        radial-gradient(
+            circle at center,
+            #2D36C4 0 12%,
+            #080b1d 13% 25%,
+            #111 26% 34%,
+            #050505 35% 100%
+        );
+    box-shadow:
+        0 0 22px rgba(45, 54, 196, .26);
+    animation:
+        vinylSpin
+        3.8s
+        linear
+        infinite;
+    animation-play-state: paused;
+}
+
+.music-vinyl.playing {
+    animation-play-state: running;
+}
+
+.music-vinyl::before,
+.music-vinyl::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.05);
+}
+
+.music-vinyl::after {
+    inset: 16px;
+    border-color: rgba(255,255,255,.035);
+}
+
+@keyframes vinylSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.music-info {
+    min-width: 0;
+}
+
+.music-kicker {
+    color: #5368FF;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.music-title {
+    margin-top: 6px;
+    color: #f4f6ff;
+    font-size: 15px;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-artist {
+    margin-top: 3px;
+    color: #8d94bb;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 11px;
+}
+
+.music-btn {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(83, 104, 255, .28);
+    background: rgba(45, 54, 196, .08);
+    color: #e8ebff;
+    cursor: pointer;
+    font-size: 13px;
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.music-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(45, 54, 196, .22);
+    border-color: rgba(104, 121, 255, .66);
+    box-shadow: 0 0 18px rgba(45, 54, 196, .14);
+}
+
+.music-btn.primary {
+    width: 40px;
+    height: 40px;
+}
+
+.music-progress-wrap {
+    margin-top: 10px;
+}
+
+.music-progress {
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.music-progress-bar {
+    width: 0%;
+    height: 100%;
+    background:
+        linear-gradient(
+            90deg,
+            #2D36C4,
+            #5368FF
+        );
+}
+
+.music-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    color: #5f678b;
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.music-player.compact {
+    width: 290px;
+}
+
+@media (max-width: 700px) {
+    .music-player {
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        width: calc(100vw - 24px);
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 11px;
+        padding: 11px;
+    }
+
+    .music-vinyl-wrap {
+        width: 62px;
+        height: 62px;
+    }
+
+    .music-vinyl {
+        width: 58px;
+        height: 58px;
+    }
+
+    .music-title {
+        font-size: 14px;
+    }
+
+    .music-artist {
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   INTRO CREDIT
+========================================================= */
+
+.made-by-static {
+    position: fixed;
+    left: 50%;
+    bottom: 26px;
+    z-index: 1900;
+    transform: translateX(-50%);
+    color: rgba(156, 166, 205, .72);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation:
+        madeByReveal
+        1.2s
+        ease
+        .75s
+        forwards;
+    pointer-events: none;
+}
+
+.made-by-static span {
+    color: #5368FF;
+}
+
+@keyframes madeByReveal {
+    from {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+}
+
+@media (max-width: 700px) {
+    .made-by-static {
+        bottom: 18px;
+        font-size: 8px;
+        letter-spacing: 4px;
+    }
+}
+
 </style>
 
 </head>
 
 
+
 <body>
+
+<div class="made-by-static">
+    MADE BY <span>STATIC</span>
+</div>
+
 
 
 <div
@@ -7019,7 +7294,539 @@ body.screen-shake {
 </div>
 
 
+
+<!-- MUSIC PLAYER -->
+<div
+    class="music-player"
+    id="musicPlayer"
+>
+    <div class="music-vinyl-wrap">
+        <div
+            class="music-vinyl"
+            id="musicVinyl"
+        ></div>
+    </div>
+
+    <div class="music-info">
+
+        <div class="music-kicker">
+            NO MERCY // RADIO
+        </div>
+
+        <div
+            class="music-title"
+            id="musicTitle"
+        >
+            Hypnotize
+        </div>
+
+        <div
+            class="music-artist"
+            id="musicArtist"
+        >
+            The Notorious B.I.G.
+        </div>
+
+        <div class="music-controls">
+
+            <button
+                class="music-btn"
+                id="musicPrev"
+                type="button"
+                aria-label="Vorheriger Song"
+            >
+                ◀
+            </button>
+
+            <button
+                class="music-btn primary"
+                id="musicToggle"
+                type="button"
+                aria-label="Play oder Pause"
+            >
+                ▶
+            </button>
+
+            <button
+                class="music-btn"
+                id="musicNext"
+                type="button"
+                aria-label="Nächster Song"
+            >
+                ▶▶
+            </button>
+
+            <button
+                class="music-btn"
+                id="musicMute"
+                type="button"
+                aria-label="Stumm"
+            >
+                🔊
+            </button>
+
+        </div>
+
+        <div class="music-progress-wrap">
+            <div
+                class="music-progress"
+                id="musicProgress"
+            >
+                <div
+                    class="music-progress-bar"
+                    id="musicProgressBar"
+                ></div>
+            </div>
+
+            <div class="music-meta">
+                <span id="musicCurrentTime">0:00</span>
+                <span id="musicDuration">0:00</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <script>
+
+
+
+
+/* =========================================================
+   MUSIC PLAYER
+========================================================= */
+
+const playlist = [
+    {
+        title: "Hypnotize",
+        artist: "The Notorious B.I.G.",
+        src: "./song-1.mp3"
+    },
+    {
+        title: "No More Questions",
+        artist: "Eazy-E",
+        src: "./song-2.mp3"
+    },
+    {
+        title: "Do For Love",
+        artist: "2Pac",
+        src: "./song-3.mp3"
+    },
+    {
+        title: "The Next Episode",
+        artist: "Dr. Dre, Snoop Dogg",
+        src: "./song-4.mp3"
+    },
+    {
+        title: "Superman",
+        artist: "Eminem",
+        src: "./song-5.mp3"
+    },
+    {
+        title: "Many Men",
+        artist: "50 Cent",
+        src: "./song-6.mp3"
+    },
+    {
+        title: "Ms. Jackson",
+        artist: "Outkast",
+        src: "./song-7.mp3"
+    },
+    {
+        title: "Ambitionz Az a Ridah",
+        artist: "2Pac",
+        src: "./song-8.mp3"
+    }
+];
+
+
+const musicAudio =
+    new Audio();
+
+musicAudio.preload =
+    "metadata";
+
+musicAudio.volume =
+    0.32;
+
+
+let currentTrack =
+    0;
+
+let musicStarted =
+    false;
+
+
+const musicTitle =
+    document.getElementById(
+        "musicTitle"
+    );
+
+const musicArtist =
+    document.getElementById(
+        "musicArtist"
+    );
+
+const musicToggle =
+    document.getElementById(
+        "musicToggle"
+    );
+
+const musicPrev =
+    document.getElementById(
+        "musicPrev"
+    );
+
+const musicNext =
+    document.getElementById(
+        "musicNext"
+    );
+
+const musicMute =
+    document.getElementById(
+        "musicMute"
+    );
+
+const musicVinyl =
+    document.getElementById(
+        "musicVinyl"
+    );
+
+const musicProgress =
+    document.getElementById(
+        "musicProgress"
+    );
+
+const musicProgressBar =
+    document.getElementById(
+        "musicProgressBar"
+    );
+
+const musicCurrentTime =
+    document.getElementById(
+        "musicCurrentTime"
+    );
+
+const musicDuration =
+    document.getElementById(
+        "musicDuration"
+    );
+
+
+function formatTime(
+    seconds
+) {
+
+    if (
+        !Number.isFinite(seconds)
+    ) {
+        return "0:00";
+    }
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+    const remaining =
+        Math.floor(
+            seconds % 60
+        );
+
+    return (
+        minutes +
+        ":" +
+        String(remaining).padStart(
+            2,
+            "0"
+        )
+    );
+
+}
+
+
+function loadTrack(
+    index,
+    autoplay = false
+) {
+
+    currentTrack =
+        (
+            index +
+            playlist.length
+        ) %
+        playlist.length;
+
+
+    const track =
+        playlist[currentTrack];
+
+
+    musicAudio.src =
+        track.src;
+
+    musicTitle.textContent =
+        track.title;
+
+    musicArtist.textContent =
+        track.artist;
+
+    musicProgressBar.style.width =
+        "0%";
+
+    musicCurrentTime.textContent =
+        "0:00";
+
+    musicDuration.textContent =
+        "0:00";
+
+
+    if (autoplay) {
+
+        musicAudio.play()
+            .then(
+                () => {
+
+                    musicStarted =
+                        true;
+
+                    updateMusicState();
+
+                }
+            )
+            .catch(
+                () => {}
+            );
+
+    } else {
+
+        updateMusicState();
+
+    }
+
+}
+
+
+function updateMusicState() {
+
+    const playing =
+        !musicAudio.paused;
+
+
+    musicToggle.textContent =
+        playing
+            ? "❚❚"
+            : "▶";
+
+
+    musicVinyl.classList.toggle(
+        "playing",
+        playing
+    );
+
+
+    musicMute.textContent =
+        musicAudio.muted
+            ? "🔇"
+            : "🔊";
+
+}
+
+
+function toggleMusic() {
+
+    if (
+        musicAudio.paused
+    ) {
+
+        musicAudio.play()
+            .then(
+                () => {
+
+                    musicStarted =
+                        true;
+
+                    updateMusicState();
+
+                }
+            )
+            .catch(
+                () => {}
+            );
+
+    } else {
+
+        musicAudio.pause();
+
+        updateMusicState();
+
+    }
+
+}
+
+
+function nextTrack() {
+
+    loadTrack(
+        currentTrack + 1,
+        true
+    );
+
+}
+
+
+function prevTrack() {
+
+    loadTrack(
+        currentTrack - 1,
+        true
+    );
+
+}
+
+
+musicToggle.addEventListener(
+    "click",
+    toggleMusic
+);
+
+
+musicNext.addEventListener(
+    "click",
+    nextTrack
+);
+
+
+musicPrev.addEventListener(
+    "click",
+    prevTrack
+);
+
+
+musicMute.addEventListener(
+    "click",
+    () => {
+
+        musicAudio.muted =
+            !musicAudio.muted;
+
+        updateMusicState();
+
+    }
+);
+
+
+musicAudio.addEventListener(
+    "loadedmetadata",
+    () => {
+
+        musicDuration.textContent =
+            formatTime(
+                musicAudio.duration
+            );
+
+    }
+);
+
+
+musicAudio.addEventListener(
+    "timeupdate",
+    () => {
+
+        const progress =
+            musicAudio.duration
+                ? (
+                    musicAudio.currentTime /
+                    musicAudio.duration
+                ) * 100
+                : 0;
+
+
+        musicProgressBar.style.width =
+            progress + "%";
+
+
+        musicCurrentTime.textContent =
+            formatTime(
+                musicAudio.currentTime
+            );
+
+    }
+);
+
+
+musicAudio.addEventListener(
+    "ended",
+    nextTrack
+);
+
+
+musicProgress.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !musicAudio.duration
+        ) {
+            return;
+        }
+
+
+        const rect =
+            musicProgress.getBoundingClientRect();
+
+
+        const ratio =
+            (
+                event.clientX -
+                rect.left
+            ) /
+            rect.width;
+
+
+        musicAudio.currentTime =
+            ratio *
+            musicAudio.duration;
+
+    }
+);
+
+
+loadTrack(
+    0,
+    false
+);
+
+
+/*
+   Startet beim ersten Klick auf den Amethysten.
+   Das umgeht Browser-Autoplay-Sperren zuverlässig.
+*/
+
+function startMusicFromIntro() {
+
+    if (musicStarted) {
+        return;
+    }
+
+    musicStarted =
+        true;
+
+    musicAudio.play()
+        .then(
+            updateMusicState
+        )
+        .catch(
+            () => {
+
+                musicStarted =
+                    false;
+
+            }
+        );
+
+}
 
 
 const page =
@@ -7302,6 +8109,39 @@ let lastAmethystHover =
 
 let lastFragmentHover =
     0;
+
+
+function duckMusic(
+    duration = 550
+) {
+
+    if (
+        musicAudio.paused ||
+        musicAudio.muted
+    ) {
+        return;
+    }
+
+    const originalVolume =
+        musicAudio.volume;
+
+    musicAudio.volume =
+        Math.min(
+            originalVolume,
+            0.11
+        );
+
+    setTimeout(
+        () => {
+
+            musicAudio.volume =
+                originalVolume;
+
+        },
+        duration
+    );
+
+}
 
 
 function playSound(
@@ -7920,6 +8760,8 @@ amethystButton.addEventListener(
         ) {
             return;
         }
+
+        startMusicFromIntro();
 
         /* Sound minimal verzögert, damit er exakt zum sichtbaren Break passt */
         setTimeout(
@@ -8599,6 +9441,8 @@ fragments.forEach(
                     return;
                 }
 
+
+                duckMusic(480);
 
                 playSound(
                     "fragmentClick"
