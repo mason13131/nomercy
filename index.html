@@ -7921,8 +7921,14 @@ amethystButton.addEventListener(
             return;
         }
 
-        playSound(
-            "amethystBreak"
+        /* Sound minimal verzögert, damit er exakt zum sichtbaren Break passt */
+        setTimeout(
+            () => {
+                playSound(
+                    "amethystBreak"
+                );
+            },
+            180
         );
 
         breakAmethyst();
