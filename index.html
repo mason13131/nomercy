@@ -4576,6 +4576,857 @@ body.screen-shake {
     .vehicle-family-number { font-size: 38px; }
 }
 
+
+/* =========================================================
+   FULL RESPONSIVE / MOBILE OPTIMIZATION
+   Desktop design remains unchanged above 900px.
+========================================================= */
+
+@media (max-width: 900px) {
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        overscroll-behavior-y: none;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    /* ---------- MAIN / AMETHYST SCREEN ---------- */
+
+    .page {
+        width: 100%;
+        height: 100svh;
+        min-height: 100svh;
+        overflow: hidden;
+    }
+
+    .logo {
+        top: max(20px, env(safe-area-inset-top));
+        left: 20px;
+        max-width: 58vw;
+        font-size: 14px;
+        letter-spacing: 4px;
+        line-height: 1.25;
+    }
+
+    .established {
+        top: max(23px, env(safe-area-inset-top));
+        right: 18px;
+        max-width: 34vw;
+        text-align: right;
+        font-size: 7px;
+        letter-spacing: 3px;
+        line-height: 1.5;
+    }
+
+    .intro {
+        width: 100%;
+        padding: 0 18px;
+    }
+
+    .intro-title {
+        font-size: 9px;
+        letter-spacing: 6px;
+        text-align: center;
+    }
+
+    .amethyst-wrapper {
+        width: min(330px, 72vw);
+    }
+
+    .ground-light {
+        width: min(230px, 58vw);
+    }
+
+    .click-text {
+        margin-top: 28px;
+        font-size: 9px;
+        letter-spacing: 5px;
+        text-align: center;
+    }
+
+    /* ---------- FRAGMENT MENU ---------- */
+
+    .fragment {
+        --size: 118px;
+    }
+
+    .fragment-story {
+        --left: 26%;
+        --top: 20%;
+        --size: 125px;
+    }
+
+    .fragment-members {
+        --left: 72%;
+        --top: 19%;
+        --size: 122px;
+    }
+
+    .fragment-discord {
+        --left: 27%;
+        --top: 35%;
+        --size: 118px;
+    }
+
+    .fragment-ranks {
+        --left: 72%;
+        --top: 35%;
+        --size: 118px;
+    }
+
+    .fragment-color {
+        --left: 26%;
+        --top: 50%;
+        --size: 118px;
+    }
+
+    .fragment-outfit {
+        --left: 72%;
+        --top: 50%;
+        --size: 118px;
+    }
+
+    .fragment-hood {
+        --left: 27%;
+        --top: 65%;
+        --size: 118px;
+    }
+
+    .fragment-background {
+        --left: 72%;
+        --top: 65%;
+        --size: 118px;
+    }
+
+    .fragment-values {
+        --left: 27%;
+        --top: 80%;
+        --size: 128px;
+    }
+
+    .fragment-gallery {
+        --left: 71%;
+        --top: 80%;
+        --size: 124px;
+    }
+
+    /* Reduce movement so fragments stay inside phone screens. */
+    .fragment {
+        --move-x: 5px;
+        --move-y: 5px;
+    }
+
+    .reset-button {
+        right: 16px;
+        bottom: max(14px, env(safe-area-inset-bottom));
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    /* ---------- GENERIC CONTENT SCREEN ---------- */
+
+    .content-screen {
+        padding: 0;
+        align-items: stretch;
+        justify-content: stretch;
+        overflow: hidden;
+    }
+
+    .content-box {
+        width: 100%;
+        min-height: 100svh;
+        height: 100svh;
+        padding:
+            calc(78px + env(safe-area-inset-top))
+            24px
+            calc(34px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .content-title {
+        font-size: clamp(38px, 13vw, 64px);
+        letter-spacing: -2px;
+        word-break: break-word;
+    }
+
+    .content-text {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .back-button {
+        min-height: 46px;
+        margin-top: 32px;
+    }
+
+    /* ---------- SHARED FULLSCREEN SUBPAGES ---------- */
+
+    .story-page,
+    .ranks-page,
+    .values-page,
+    .background-page,
+    .discord-page,
+    .color-page {
+        height: 100svh;
+    }
+
+    .story-scroll,
+    .ranks-scroll,
+    .values-scroll,
+    .background-scroll,
+    .discord-scroll,
+    .color-scroll {
+        height: 100svh;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+    }
+
+    .story-topbar,
+    .ranks-topbar,
+    .values-topbar,
+    .background-topbar,
+    .discord-topbar,
+    .color-topbar {
+        padding:
+            calc(14px + env(safe-area-inset-top))
+            16px
+            14px;
+        gap: 12px;
+    }
+
+    .story-brand,
+    .ranks-brand,
+    .values-brand,
+    .background-brand,
+    .discord-brand,
+    .color-brand {
+        max-width: 57vw;
+        font-size: 8px;
+        line-height: 1.45;
+        letter-spacing: 3px;
+    }
+
+    .story-back,
+    .ranks-back,
+    .values-back,
+    .background-back,
+    .discord-back,
+    .color-back {
+        flex: 0 0 auto;
+        min-height: 42px;
+        padding: 10px 12px;
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    /* ---------- STORY ---------- */
+
+    .story-hero {
+        min-height: 82svh;
+        padding: 72px 20px 105px;
+    }
+
+    .story-heading {
+        font-size: clamp(64px, 22vw, 105px);
+        letter-spacing: -4px;
+    }
+
+    .story-kicker {
+        font-size: 9px;
+        letter-spacing: 5px;
+    }
+
+    .story-intro {
+        margin-top: 26px;
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .story-founders {
+        margin-top: 24px;
+        font-size: 9px;
+        line-height: 1.7;
+        letter-spacing: 2px;
+    }
+
+    .story-scroll-hint {
+        bottom: 28px;
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .story-timeline {
+        width: 100%;
+        padding: 30px 0 90px;
+    }
+
+    .story-line {
+        left: 25px;
+        top: 30px;
+        bottom: 80px;
+    }
+
+    .story-step,
+    .story-step.left,
+    .story-step.right {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 34px 20px 48px 56px;
+        text-align: left;
+        transform: translateX(24px);
+    }
+
+    .story-step.left .story-dot,
+    .story-step.right .story-dot {
+        left: 17px;
+        right: auto;
+        top: 40px;
+    }
+
+    .story-step h2 {
+        font-size: clamp(27px, 9vw, 38px);
+        letter-spacing: -1px;
+    }
+
+    .story-step p {
+        margin-top: 17px;
+        font-size: 14px;
+        line-height: 1.72;
+    }
+
+    .story-number {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .story-quote {
+        width: calc(100% - 32px);
+        margin: 0 auto 70px;
+        padding: 45px 20px;
+    }
+
+    .story-quote p {
+        font-size: clamp(22px, 7.5vw, 32px);
+    }
+
+    /* ---------- RANKS ---------- */
+
+    .ranks-hero {
+        min-height: 58svh;
+        padding: 64px 20px 55px;
+    }
+
+    .ranks-heading {
+        font-size: clamp(64px, 22vw, 104px);
+        letter-spacing: -4px;
+    }
+
+    .ranks-intro {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .ranks-hierarchy {
+        width: 100%;
+        padding: 10px 16px 90px;
+    }
+
+    .ranks-spine {
+        left: 39px;
+    }
+
+    .rank-card,
+    .rank-card.top-rank {
+        width: 100%;
+        min-height: 96px;
+        margin-bottom: 18px;
+        padding: 18px 16px;
+        grid-template-columns: 54px minmax(0, 1fr);
+        gap: 13px;
+    }
+
+    .rank-card::before {
+        left: 22px;
+    }
+
+    .rank-number,
+    .rank-card.top-rank .rank-number {
+        width: 48px;
+        height: 48px;
+    }
+
+    .rank-number span,
+    .rank-card.top-rank .rank-number span {
+        font-size: 15px;
+    }
+
+    .rank-tier {
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+
+    .rank-name,
+    .rank-card.top-rank .rank-name {
+        font-size: clamp(23px, 8vw, 32px);
+        word-break: break-word;
+    }
+
+    .ranks-footer {
+        width: calc(100% - 32px);
+        margin-bottom: 65px;
+        padding: 42px 20px;
+    }
+
+    /* ---------- VALUES ---------- */
+
+    .values-hero {
+        min-height: 62svh;
+        padding: 66px 20px 65px;
+    }
+
+    .values-heading {
+        font-size: clamp(49px, 16vw, 84px);
+        letter-spacing: -3px;
+    }
+
+    .values-intro {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .values-section {
+        width: 100%;
+        padding: 30px 16px 75px;
+    }
+
+    .values-section-title {
+        margin-bottom: 30px;
+    }
+
+    .values-section-title h2 {
+        font-size: clamp(32px, 10vw, 48px);
+        letter-spacing: -2px;
+    }
+
+    .values-core,
+    .goals-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .value-card,
+    .goal-card {
+        min-height: auto;
+        padding: 25px 22px;
+    }
+
+    .value-card h3,
+    .goal-card h3 {
+        font-size: clamp(27px, 9vw, 38px);
+    }
+
+    .value-card p,
+    .goal-card p {
+        font-size: 14px;
+        line-height: 1.72;
+    }
+
+    .values-symbol,
+    .values-final {
+        width: calc(100% - 32px);
+        margin-bottom: 70px;
+        padding: 45px 20px;
+    }
+
+    /* ---------- BACKGROUND ---------- */
+
+    .background-hero {
+        min-height: 66svh;
+        padding: 70px 20px 70px;
+    }
+
+    .background-heading {
+        font-size: clamp(48px, 16vw, 82px);
+        letter-spacing: -3px;
+    }
+
+    .background-subline {
+        font-size: 17px;
+        letter-spacing: 2px;
+    }
+
+    .background-intro {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .background-crystal {
+        width: 230px;
+        height: 305px;
+    }
+
+    .background-section {
+        width: 100%;
+        padding: 25px 16px 75px;
+    }
+
+    .background-chapter {
+        min-height: auto;
+        margin-bottom: 20px;
+        padding: 32px 24px;
+    }
+
+    .background-chapter:nth-child(even) .background-copy {
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .background-chapter h2 {
+        font-size: clamp(31px, 10vw, 44px);
+        letter-spacing: -2px;
+    }
+
+    .background-chapter p {
+        font-size: 14px;
+        line-height: 1.72;
+    }
+
+    .background-mark {
+        font-size: 92px;
+        opacity: .65;
+    }
+
+    .background-statement {
+        width: calc(100% - 32px);
+        margin-bottom: 70px;
+        padding: 48px 20px;
+    }
+
+    /* ---------- DISCORD ---------- */
+
+    .discord-hero {
+        min-height: calc(100svh - 70px);
+        padding:
+            70px
+            16px
+            calc(45px + env(safe-area-inset-bottom));
+    }
+
+    .discord-orbit {
+        width: 92vw;
+    }
+
+    .discord-card {
+        width: 100%;
+        padding: 48px 22px 38px;
+    }
+
+    .discord-gem {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 26px;
+    }
+
+    .discord-title {
+        font-size: clamp(52px, 18vw, 90px);
+        letter-spacing: -3px;
+    }
+
+    .discord-copy {
+        font-size: 14px;
+        line-height: 1.72;
+    }
+
+    .discord-invite {
+        font-size: 9px;
+    }
+
+    .discord-join {
+        width: 100%;
+        min-width: 0;
+        min-height: 50px;
+    }
+
+    /* ---------- FRAKTIONSFARBE ---------- */
+
+    .color-hero {
+        min-height: auto;
+        padding: 68px 18px 80px;
+    }
+
+    .color-hero-inner {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .color-heading {
+        font-size: clamp(54px, 18vw, 92px);
+        letter-spacing: -4px;
+    }
+
+    .color-kicker {
+        font-size: 9px;
+        letter-spacing: 5px;
+    }
+
+    .color-intro {
+        margin: 24px auto 0;
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .color-tagline {
+        font-size: 9px;
+        line-height: 1.6;
+        letter-spacing: 2px;
+    }
+
+    .color-visual {
+        min-height: 290px;
+    }
+
+    .color-swatch-main {
+        width: min(230px, 64vw);
+    }
+
+    .color-code-badge {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: -18px;
+        display: inline-block;
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    .color-section {
+        width: 100%;
+        padding: 35px 16px 80px;
+    }
+
+    .color-section-head {
+        margin-bottom: 30px;
+    }
+
+    .color-section-head h2 {
+        font-size: clamp(32px, 11vw, 52px);
+        letter-spacing: -2px;
+    }
+
+    .color-identity-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .color-flag-card,
+    .color-copy-card {
+        min-height: auto;
+    }
+
+    .color-flag-card {
+        min-height: 340px;
+        padding: 24px;
+    }
+
+    .color-flag-card img,
+    .no-mercy-bandana {
+        width: min(92%, 330px);
+        max-width: 330px;
+        max-height: 290px;
+    }
+
+    .color-copy-card {
+        padding: 30px 24px;
+    }
+
+    .color-copy-card h3 {
+        font-size: clamp(28px, 9vw, 39px);
+        letter-spacing: -2px;
+        overflow-wrap: anywhere;
+    }
+
+    .color-copy-card p {
+        font-size: 14px;
+        line-height: 1.72;
+    }
+
+    .color-tones {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .color-tone {
+        min-height: 165px;
+        padding: 22px;
+    }
+
+    /* Vehicle gallery */
+    .vehicle-intro {
+        margin: -8px auto 30px;
+        font-size: 14px;
+        line-height: 1.72;
+    }
+
+    .vehicle-showcase {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .vehicle-family-head {
+        padding: 22px 20px 18px;
+        align-items: center;
+    }
+
+    .vehicle-family h3 {
+        font-size: clamp(27px, 9vw, 38px);
+    }
+
+    .vehicle-family-number {
+        font-size: 36px;
+    }
+
+    .vehicle-gallery {
+        padding: 12px;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .vehicle-shot {
+        min-height: 135px;
+    }
+
+    .vehicle-shot.main {
+        min-height: 235px;
+    }
+
+    .vehicle-shot-tag {
+        left: 10px;
+        bottom: 9px;
+        font-size: 7px;
+        letter-spacing: 2px;
+    }
+
+    .vehicle-family-copy {
+        padding: 2px 20px 24px;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .vehicle-signature,
+    .color-statement {
+        width: calc(100% - 32px);
+        margin-bottom: 70px;
+        padding: 44px 20px;
+    }
+
+    .color-statement p {
+        font-size: clamp(27px, 9vw, 39px);
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .fragment {
+        --size: 105px;
+    }
+
+    .fragment-story,
+    .fragment-values {
+        --size: 112px;
+    }
+
+    .fragment-gallery {
+        --size: 110px;
+    }
+
+    .story-brand,
+    .ranks-brand,
+    .values-brand,
+    .background-brand,
+    .discord-brand,
+    .color-brand {
+        letter-spacing: 2px;
+    }
+
+    .vehicle-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .vehicle-shot,
+    .vehicle-shot.main {
+        grid-column: auto;
+        min-height: 205px;
+    }
+
+    .color-flag-label {
+        left: 15px;
+        bottom: 14px;
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+}
+
+
+/* Landscape phones */
+@media (max-height: 540px) and (orientation: landscape) {
+
+    .logo {
+        top: 12px;
+    }
+
+    .established {
+        top: 14px;
+    }
+
+    .amethyst-wrapper {
+        width: min(220px, 35vw);
+    }
+
+    .click-text {
+        margin-top: 12px;
+    }
+
+    .fragment {
+        --size: 82px;
+    }
+
+    .fragment-story { --left: 12%; --top: 32%; }
+    .fragment-members { --left: 30%; --top: 27%; }
+    .fragment-discord { --left: 49%; --top: 25%; }
+    .fragment-ranks { --left: 68%; --top: 27%; }
+    .fragment-color { --left: 87%; --top: 32%; }
+    .fragment-outfit { --left: 16%; --top: 72%; }
+    .fragment-hood { --left: 34%; --top: 76%; }
+    .fragment-background { --left: 53%; --top: 77%; }
+    .fragment-values { --left: 71%; --top: 75%; --size: 88px; }
+    .fragment-gallery { --left: 88%; --top: 70%; --size: 86px; }
+
+    .story-hero,
+    .ranks-hero,
+    .values-hero,
+    .background-hero {
+        min-height: 100svh;
+    }
+}
+
 </style>
 
 </head>
