@@ -5761,6 +5761,80 @@ body.screen-shake {
     }
 }
 
+
+/* Phone navigation: reserve room for the radio and allow all ten links to scroll. */
+@media (max-width: 900px), (max-height: 540px) and (pointer: coarse) {
+    :root { --mobile-radio-space: calc(180px + env(safe-area-inset-bottom, 0px)); }
+    .page { height: 100dvh; min-height: 100svh; }
+    .intro { top: max(180px, calc((100% - var(--mobile-radio-space)) / 2)); }
+    .fragment-menu {
+        top: max(64px, env(safe-area-inset-top, 0px));
+        bottom: var(--mobile-radio-space);
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: start;
+        justify-items: center;
+        gap: 12px;
+        padding: 18px 16px 30px;
+    }
+    .fragment-menu .fragment {
+        position: relative;
+        left: auto !important;
+        top: auto !important;
+        width: min(130px, 100%);
+        min-height: 112px;
+        transform: none !important;
+        animation: none !important;
+        will-change: auto;
+        touch-action: manipulation;
+    }
+    .fragment-menu .fragment-float { animation: none; }
+    .fragment-menu .fragment.fragment-selected { opacity: 0; }
+    .reset-button {
+        bottom: calc(var(--mobile-radio-space) - 34px);
+        min-height: 44px;
+        padding: 8px 12px;
+    }
+    .content-screen { height: 100dvh; }
+    .content-box {
+        height: 100%; min-height: 0;
+        padding-bottom: calc(var(--mobile-radio-space) + 24px);
+    }
+    .story-page, .ranks-page, .values-page, .background-page, .discord-page, .color-page,
+    .story-scroll, .ranks-scroll, .values-scroll, .background-scroll, .discord-scroll, .color-scroll {
+        height: 100%; min-height: 0;
+    }
+    .story-scroll, .ranks-scroll, .values-scroll, .background-scroll, .discord-scroll, .color-scroll {
+        padding-bottom: var(--mobile-radio-space);
+        scroll-padding-bottom: var(--mobile-radio-space);
+    }
+    .content-screen h1, .content-screen h2, .content-screen h3 { overflow-wrap: anywhere; }
+    .music-player {
+        left: 12px; right: 12px;
+        bottom: max(8px, env(safe-area-inset-bottom, 0px));
+        width: auto;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 10px 12px;
+    }
+    .music-vinyl-wrap, .music-kicker, .music-progress-wrap, .music-volume-row { display: none; }
+    .music-title { margin-top: 0; }
+    .music-controls { margin-top: 8px; justify-content: space-between; }
+    .music-btn, .music-btn.primary { width: 44px; height: 44px; }
+    .made-by-static { bottom: calc(var(--mobile-radio-space) - 22px); white-space: nowrap; }
+    .story-back, .ranks-back, .values-back, .background-back, .discord-back, .color-back {
+        min-height: 44px;
+    }
+}
+@media (max-height: 540px) and (pointer: coarse) {
+    .intro { top: 42%; }
+    .amethyst-wrapper { width: min(160px, 28vw); }
+    .intro-title, .click-text { margin: 8px 0; }
+    .fragment-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 </style>
 
 </head>
