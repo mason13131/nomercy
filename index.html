@@ -9933,6 +9933,60 @@ resetButton.addEventListener(
 </script>
 
 
+
+<script>
+(() => {
+    const logo = document.querySelector('.logo');
+    const established = document.querySelector('.established');
+    if (!logo || !established) return;
+
+    let step = 0;
+    let deadline = 0;
+    let message = null;
+    const reset = () => { step = 0; deadline = 0; };
+
+    function reveal() {
+        if (!message) {
+            message = document.createElement('dialog');
+            message.setAttribute('aria-label', 'Geheime Botschaft');
+            message.style.cssText = 'margin:auto;padding:40px 28px;max-width:calc(100vw - 32px);border:1px solid #46baff;border-radius:18px;background:radial-gradient(circle at top,#102e54,#030914 75%);color:#d7efff;text-align:center;box-shadow:0 0 80px #168fff55;font-family:Arial,Helvetica,sans-serif;';
+            const text = document.createElement('p');
+            text.textContent = 'raphii ist der beste';
+            text.style.cssText = 'font-size:clamp(24px,6vw,42px);font-weight:800;line-height:1.3;text-shadow:0 0 24px #46baff88;';
+            const close = document.createElement('button');
+            close.type = 'button';
+            close.textContent = 'Schließen';
+            close.style.cssText = 'margin-top:28px;padding:10px 20px;border:1px solid #46baff;border-radius:8px;background:#071427;color:#d7efff;cursor:pointer;font:inherit;';
+            close.addEventListener('click', () => message.close());
+            message.append(text, close);
+            document.body.appendChild(message);
+        }
+        if (!message.open) message.showModal();
+    }
+
+    // Seven logo taps, then three EST. taps. Each stage allows four seconds.
+    document.addEventListener('click', event => {
+        if (!(event.target instanceof Element) || (message && message.open)) return;
+        const now = performance.now();
+        if (now > deadline) reset();
+        const onLogo = logo.contains(event.target);
+        const onEstablished = established.contains(event.target);
+        if (step < 7 && onLogo) {
+            if (step === 0) deadline = now + 4000;
+            step += 1;
+            if (step === 7) deadline = now + 4000;
+        } else if (step >= 7 && onEstablished) {
+            step += 1;
+            if (step === 10) { reset(); reveal(); }
+        } else {
+            reset();
+        }
+    });
+    window.addEventListener('blur', reset);
+    document.addEventListener('visibilitychange', reset);
+})();
+</script>
+
 </body>
 
 </html>
