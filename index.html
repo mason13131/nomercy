@@ -5835,6 +5835,42 @@ body.screen-shake {
     .fragment-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+
+/* Crystal light, tactile controls and layered section entrances. */
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 2px solid #8bdcff; outline-offset: 5px; }
+.amethyst-wrapper.ready::before {
+    content: ""; position: absolute; inset: 4%; border-radius: 50%;
+    border: 1px solid rgba(110, 205, 255, .24); pointer-events: none;
+    box-shadow: 0 0 32px rgba(50, 135, 255, .12), inset 0 0 24px rgba(50, 135, 255, .08);
+    animation: crystalOrbit 7s ease-in-out infinite;
+}
+@keyframes crystalOrbit { 0%,100% { transform: rotate(-20deg) scale(.9, .65); opacity: .3; } 50% { transform: rotate(20deg) scale(1.07, .8); opacity: .8; } }
+@keyframes flashBang { 0% { opacity: 0; } 20% { opacity: .5; } 100% { opacity: 0; } }
+@keyframes shockwaveAnimation { from { transform: translate(-50%, -50%) scale(1); opacity: .8; } to { transform: translate(-50%, -50%) scale(15); opacity: 0; } }
+body.screen-shake { animation: none; }
+.fragment img { transition: transform .4s cubic-bezier(.2,.8,.2,1), filter .4s ease; }
+.fragment:active img { transform: scale(.94); }
+.music-btn, .back-button, .story-back, .ranks-back, .values-back, .background-back, .discord-back, .color-back, .discord-join { border-radius: 8px; transition: transform .2s ease, box-shadow .3s ease, background .3s ease; }
+.music-btn:active, .back-button:active, .discord-join:active { transform: scale(.94); }
+.vehicle-shot { overflow: hidden; }
+.vehicle-shot img { transition: transform .7s cubic-bezier(.2,.8,.2,1), filter .7s ease; }
+@media (hover: hover) {
+    .vehicle-shot:hover img { transform: scale(1.045); filter: brightness(1.08); }
+    .rank-card.revealed:hover, .value-card.revealed:hover, .goal-card.revealed:hover { transform: translateY(-5px); }
+    .fragment:hover img { filter: brightness(1.15) drop-shadow(0 0 22px rgba(88,190,255,.7)); }
+}
+.content-screen.active .story-hero, .content-screen.active .ranks-hero,
+.content-screen.active .values-hero, .content-screen.active .background-hero,
+.content-screen.active .color-hero { animation: sectionArrive .8s cubic-bezier(.16,.85,.25,1) both; }
+@keyframes sectionArrive { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 900px) {
+    .fragment-menu .fragment.show .fragment-float { animation: sectionArrive .55s cubic-bezier(.16,.85,.25,1) both; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    .flash, .shockwave, .debris { display: none !important; }
+}
+
 </style>
 
 </head>
@@ -8283,217 +8319,82 @@ let contentIsOpen =
    SOUND SYSTEM
 ========================================================= */
 
-const soundFiles = {
-    amethystHover:
-        "./amethyst-hover.mp3",
-
-    amethystBreak:
-        "./amethyst-break.mp3",
-
-    fragmentHover:
-        "./fragment-hover.mp3",
-
-    fragmentClick:
-        "./fragment-click.mp3"
-};
-
-
-const sounds = {};
-
-
-Object.entries(
-    soundFiles
-).forEach(
-    ([name, src]) => {
-
-        const audio =
-            new Audio(src);
-
-        audio.preload =
-            "auto";
-
-        sounds[name] =
-            audio;
-
-    }
-);
-
-
-/*
-   Individuelle Lautstärken.
-   Kannst du später einfach hier anpassen.
-*/
-
-sounds.amethystHover.volume =
-    0.18;
-
-sounds.amethystBreak.volume =
-    0.48;
-
-sounds.fragmentHover.volume =
-    0.14;
-
-sounds.fragmentClick.volume =
-    0.34;
-
-
-let lastAmethystHover =
-    0;
-
-let lastFragmentHover =
-    0;
-
-
-function duckMusic(
-    duration = 550
-) {
-
-    if (
-        musicAudio.paused ||
-        musicAudio.muted
-    ) {
-        return;
-    }
-
-    const originalVolume =
-        musicAudio.volume;
-
-    musicAudio.volume =
-        Math.min(
-            originalVolume,
-            0.11
-        );
-
-    setTimeout(
-        () => {
-
-            musicAudio.volume =
-                originalVolume;
-
-        },
-        duration
-    );
-
-}
-
-
-function playSound(
-    name,
-    {
-        restart = true,
-        cooldown = 0
-    } = {}
-) {
-
-    const audio =
-        sounds[name];
-
-    if (!audio) {
-        return;
-    }
-
-
-    const now =
-        performance.now();
-
-
-    if (
-        name === "amethystHover"
-    ) {
-
-        if (
-            now - lastAmethystHover <
-            cooldown
-        ) {
-            return;
-        }
-
-        lastAmethystHover =
-            now;
-
-    }
-
-
-    if (
-        name === "fragmentHover"
-    ) {
-
-        if (
-            now - lastFragmentHover <
-            cooldown
-        ) {
-            return;
-        }
-
-        lastFragmentHover =
-            now;
-
-    }
-
-
-    if (restart) {
-
-        audio.pause();
-
-        audio.currentTime =
-            0;
-
-    }
-
-
-    const playPromise =
-        audio.play();
-
-
-    if (
-        playPromise &&
-        typeof playPromise.catch ===
-        "function"
-    ) {
-
-        playPromise.catch(
-            () => {}
-        );
-
-    }
-
-}
-
-
-/*
-   Browser dürfen Audio teilweise erst nach
-   der ersten Nutzerinteraktion vollständig laden.
-*/
-
+/* Procedural crystal tones: short envelopes prevent clicks and overlapping hover noise. */
+let sfxContext = null;
+let sfxMaster = null;
+const sfxLastPlayed = new Map();
 function unlockSounds() {
-
-    Object.values(
-        sounds
-    ).forEach(
-        audio => {
-
-            audio.load();
-
-        }
-    );
-
-
-    window.removeEventListener(
-        "pointerdown",
-        unlockSounds
-    );
-
-}
-
-
-window.addEventListener(
-    "pointerdown",
-    unlockSounds,
-    {
-        once: true
+    const Context = window.AudioContext || window.webkitAudioContext;
+    if (!Context) return;
+    if (!sfxContext) {
+        sfxContext = new Context();
+        sfxMaster = sfxContext.createGain();
+        sfxMaster.gain.value = musicAudio.muted ? 0 : 0.7;
+        const limiter = sfxContext.createDynamicsCompressor();
+        limiter.threshold.value = -18;
+        limiter.knee.value = 18;
+        limiter.ratio.value = 4;
+        limiter.attack.value = 0.006;
+        limiter.release.value = 0.18;
+        sfxMaster.connect(limiter);
+        limiter.connect(sfxContext.destination);
     }
-);
-
+    if (sfxContext.state === 'suspended') sfxContext.resume().catch(() => {});
+}
+window.addEventListener('pointerdown', unlockSounds, { passive: true });
+window.addEventListener('keydown', unlockSounds);
+musicAudio.addEventListener('volumechange', () => {
+    if (sfxMaster) sfxMaster.gain.setTargetAtTime(musicAudio.muted ? 0 : 0.7, sfxContext.currentTime, 0.025);
+});
+let duckFrame = 0;
+function duckMusic(duration = 550) {
+    if (musicAudio.paused || musicAudio.muted) return;
+    cancelAnimationFrame(duckFrame);
+    const began = performance.now();
+    const startVolume = musicAudio.volume;
+    function tick(now) {
+        const elapsed = now - began;
+        const target = Number(musicVolume.value) / 100;
+        const low = target * 0.48;
+        const attack = Math.min(1, elapsed / 90);
+        const release = Math.min(1, Math.max(0, (elapsed - duration) / 420));
+        musicAudio.volume = Math.max(0, Math.min(1,
+            elapsed < 90 ? startVolume + (low - startVolume) * attack : low + (target - low) * (release * release * (3 - 2 * release))));
+        if (release < 1) duckFrame = requestAnimationFrame(tick);
+    }
+    duckFrame = requestAnimationFrame(tick);
+}
+function playSound(name, { cooldown = 0 } = {}) {
+    if (!sfxContext || sfxContext.state !== 'running' || musicAudio.muted) return;
+    const now = performance.now();
+    const hover = name.endsWith('Hover');
+    const key = hover ? 'hover' : name;
+    if (now - (sfxLastPlayed.get(key) ?? -Infinity) < Math.max(cooldown, hover ? 220 : 100)) return;
+    sfxLastPlayed.set(key, now);
+    const presets = {
+        amethystHover: [[660, 740, 0.32, 0.055], [990, 1100, 0.4, 0.025]],
+        fragmentHover: [[880, 1046, 0.14, 0.045]],
+        fragmentClick: [[520, 780, 0.22, 0.09], [1040, 1560, 0.32, 0.035]],
+        amethystBreak: [[160, 55, 0.65, 0.16], [784, 392, 0.65, 0.08], [1175, 588, 0.8, 0.04]],
+        back: [[660, 440, 0.23, 0.055]]
+    };
+    (presets[name] || presets.fragmentClick).forEach(([from, to, duration, volume], index) => {
+        const oscillator = sfxContext.createOscillator();
+        const envelope = sfxContext.createGain();
+        const time = sfxContext.currentTime + index * 0.018;
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(from, time);
+        oscillator.frequency.exponentialRampToValueAtTime(to, time + duration);
+        envelope.gain.setValueAtTime(0, time);
+        envelope.gain.linearRampToValueAtTime(volume, time + 0.014);
+        envelope.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+        oscillator.connect(envelope);
+        envelope.connect(sfxMaster);
+        oscillator.start(time);
+        oscillator.stop(time + duration + 0.025);
+        oscillator.onended = () => { oscillator.disconnect(); envelope.disconnect(); };
+    });
+}
 
 /* =========================================================
    CONTENT
@@ -8850,6 +8751,8 @@ function breakAmethyst() {
         () => {
 
 
+            playSound("amethystBreak");
+            duckMusic(650);
             createDebrisExplosion();
 
 
@@ -8996,16 +8899,6 @@ amethystButton.addEventListener(
 
         startMusicFromIntro();
 
-        /* Sound minimal verzögert, damit er exakt zum sichtbaren Break passt */
-        setTimeout(
-            () => {
-                playSound(
-                    "amethystBreak"
-                );
-            },
-            180
-        );
-
         breakAmethyst();
 
     }
@@ -9034,11 +8927,7 @@ amethystButton.addEventListener(
             }
 
 
-            playSound(
-                "amethystBreak"
-            );
-
-
+            startMusicFromIntro();
             breakAmethyst();
 
 
@@ -9056,8 +8945,7 @@ amethystButton.addEventListener(
 function createDebrisExplosion() {
 
 
-    const amount =
-        75;
+    const amount = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : (window.matchMedia("(pointer: coarse)").matches ? 24 : 48);
 
 
     for (
@@ -9869,6 +9757,7 @@ function closeContent() {
     }
 
     contentIsOpen = false;
+    playSound("back");
 
     contentScreen.classList.remove(
         "active"
