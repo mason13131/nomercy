@@ -5883,237 +5883,465 @@ body.screen-shake { animation: none; }
 
 
 
-/* =========================================================
-   MEMBERS PAGE
-========================================================= */
+<!-- MEMBERS PAGE -->
+<section class="members-page" id="membersPage">
 
-.content-screen.members-mode {
-    padding: 0;
-    align-items: stretch;
-    justify-content: stretch;
-    overflow: hidden;
-}
+    <div class="members-scroll" id="membersScroll">
 
-.content-screen.members-mode .content-box,
-.content-screen.members-mode .story-page,
-.content-screen.members-mode .ranks-page,
-.content-screen.members-mode .values-page,
-.content-screen.members-mode .background-page,
-.content-screen.members-mode .discord-page,
-.content-screen.members-mode .color-page,
-.content-screen.members-mode .hood-page {
-    display: none;
-}
+        <div class="members-topbar">
+            <div class="members-brand">
+                NO MERCY // MITGLIEDER
+            </div>
 
-.members-page {
-    display: none;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 50% 15%, rgba(0,126,255,.17), transparent 34%),
-        linear-gradient(180deg, #02050a 0%, #030914 48%, #010307 100%);
-}
+            <button
+                class="members-back"
+                id="membersBackButton"
+                type="button"
+            >
+                ← ZURÜCK
+            </button>
+        </div>
 
-.content-screen.members-mode .members-page {
-    display: block;
-}
 
-.members-scroll {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: #159cff #030812;
-}
+        <header class="members-hero">
 
-.members-scroll::-webkit-scrollbar { width: 7px; }
-.members-scroll::-webkit-scrollbar-track { background: #030812; }
-.members-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #62caff, #087eea);
-    border-radius: 10px;
-}
+            <div class="members-kicker">
+                THE FAMILY
+            </div>
 
-.members-topbar {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 42px;
-    background: linear-gradient(180deg, rgba(1,4,10,.96), rgba(1,4,10,.72), transparent);
-    backdrop-filter: blur(8px);
-}
+            <h1 class="members-heading">
+                MITGLIEDER
+            </h1>
 
-.members-brand {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 7px;
-    color: #7fd1ff;
-}
+            <p class="members-intro">
+                Die Menschen hinter No Mercy. Jeder Name steht
+                für einen eigenen Charakter, doch gemeinsam
+                bilden wir eine Familie.
+            </p>
 
-.members-back {
-    border: 1px solid rgba(42,160,255,.42);
-    background: rgba(4,14,28,.58);
-    color: #cdeeff;
-    padding: 12px 18px;
-    cursor: pointer;
-    font-size: 9px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    transition: .3s ease;
-}
+            <div class="members-count">
+                18 MEMBERS // CURRENT ROSTER
+            </div>
 
-.members-back:hover {
-    transform: translateY(-2px);
-    background: rgba(12,112,220,.25);
-    border-color: #42b7ff;
-    box-shadow: 0 0 28px rgba(20,150,255,.18);
-}
+        </header>
 
-.members-hero {
-    width: min(1080px, 92vw);
-    margin: 0 auto;
-    padding: 88px 0 44px;
-    text-align: center;
-}
 
-.members-kicker {
-    color: #279fff;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-}
+        <div class="members-grid">
 
-.members-heading {
-    margin-top: 16px;
-    font-size: clamp(64px, 10vw, 140px);
-    line-height: .86;
-    letter-spacing: -6px;
-    color: #f5fbff;
-    text-transform: uppercase;
-}
 
-.members-intro {
-    max-width: 720px;
-    margin: 28px auto 0;
-    color: #8fa5b8;
-    font-size: 15px;
-    line-height: 1.85;
-}
+            <!-- 01 -->
+            <article class="member-card og-member">
 
-.members-count {
-    margin-top: 20px;
-    color: #4aaeff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-}
+                <div class="member-number">
+                    01 // MEMBER
+                </div>
 
-.members-grid {
-    width: min(1120px, 92vw);
-    margin: 0 auto;
-    padding: 24px 0 130px;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-}
+                <div class="member-role">
+                    OG
+                </div>
 
-.member-card {
-    position: relative;
-    min-height: 150px;
-    padding: 24px;
-    border: 1px solid rgba(48,160,255,.18);
-    background: linear-gradient(145deg, rgba(7,15,28,.90), rgba(3,8,17,.90));
-    box-shadow: 0 0 38px rgba(0,105,230,.05);
-    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-    overflow: hidden;
-}
+                <div class="member-name">
+                    Raphii Cem
+                </div>
 
-.member-card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, #6acfff, #087eea);
-    opacity: .75;
-}
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
 
-.member-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(71,181,255,.48);
-    box-shadow: 0 14px 50px rgba(0,105,230,.12);
-}
+                <div class="member-discord">
+                    vriinqz
+                </div>
 
-.member-number {
-    color: #227fcb;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 4px;
-}
+            </article>
 
-.member-name {
-    margin-top: 18px;
-    color: #f5fbff;
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-}
 
-.member-discord-label {
-    margin-top: 14px;
-    color: #536d83;
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
+            <!-- 02 -->
+            <article class="member-card og-member">
 
-.member-discord {
-    margin-top: 5px;
-    color: #82d2ff;
-    font-size: 13px;
-    overflow-wrap: anywhere;
-}
+                <div class="member-number">
+                    02 // MEMBER
+                </div>
 
-.member-card.og-member {
-    border-color: rgba(79,190,255,.42);
-    background:
-        radial-gradient(circle at 85% 15%, rgba(31,151,255,.15), transparent 35%),
-        linear-gradient(145deg, rgba(7,20,38,.96), rgba(3,8,17,.93));
-}
+                <div class="member-role">
+                    OG
+                </div>
 
-.member-role {
-    position: absolute;
-    right: 18px;
-    top: 17px;
-    color: #8bdcff;
-    font-size: 8px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
+                <div class="member-name">
+                    Mason Varela
+                </div>
 
-@media (max-width: 900px) {
-    .members-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
 
-@media (max-width: 620px) {
-    .members-topbar { padding: 18px; }
-    .members-brand { font-size: 9px; letter-spacing: 4px; }
-    .members-hero { padding-top: 70px; }
-    .members-grid { grid-template-columns: 1fr; gap: 14px; }
-    .member-card { min-height: 135px; }
-}
+                <div class="member-discord">
+                    21_nxsty_
+                </div>
 
+            </article>
+
+
+            <!-- 03 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    03 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Bella Rose Varela
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    5037212
+                </div>
+
+            </article>
+
+
+            <!-- 04 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    04 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Piri Vamp
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    piri_gin132
+                </div>
+
+            </article>
+
+
+            <!-- 05 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    05 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Shark Killas
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    ilovefusse_
+                </div>
+
+            </article>
+
+
+            <!-- 06 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    06 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Detlef Mingo
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    colin35
+                </div>
+
+            </article>
+
+
+            <!-- 07 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    07 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Dolata Serjo
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    dolata_73
+                </div>
+
+            </article>
+
+
+            <!-- 08 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    08 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Prince Carter
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    neverbrokeagain038
+                </div>
+
+            </article>
+
+
+            <!-- 09 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    09 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Vivian Ragucci
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    vivi_sonnenschein
+                </div>
+
+            </article>
+
+
+            <!-- 10 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    10 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Mirel Cruz
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    cchapoo7
+                </div>
+
+            </article>
+
+
+            <!-- 11 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    11 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    David Ovechkin
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    daw0s
+                </div>
+
+            </article>
+
+
+            <!-- 12 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    12 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Elian Wilson
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    gianluu23
+                </div>
+
+            </article>
+
+
+            <!-- 13 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    13 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Joey Remo
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    schoeneberger62
+                </div>
+
+            </article>
+
+
+            <!-- 14 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    14 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Juno Kross
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    lixxel.9
+                </div>
+
+            </article>
+
+
+            <!-- 15 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    15 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Mello Blackwood
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    qmello
+                </div>
+
+            </article>
+
+
+            <!-- 16 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    16 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Steve Jopps
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    thomas428861
+                </div>
+
+            </article>
+
+
+            <!-- 17 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    17 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Veysel Milano
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    qxylz.
+                </div>
+
+            </article>
+
+
+            <!-- 18 -->
+            <article class="member-card">
+
+                <div class="member-number">
+                    18 // MEMBER
+                </div>
+
+                <div class="member-name">
+                    Tyson
+                </div>
+
+                <div class="member-role">
+                    GANGHUND
+                </div>
+
+                <div class="member-discord-label">
+                    DISCORD
+                </div>
+
+                <div class="member-discord">
+                    tyson_rp
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
 
 /* =========================================================
    HOOD PAGE
