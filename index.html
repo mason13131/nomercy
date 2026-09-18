@@ -1150,7 +1150,6 @@ body.screen-shake {
 }
 
 
-}
 
 
 /* =========================================================
@@ -1551,7 +1550,6 @@ body.screen-shake {
     }
 
    
-    }
 
     .content-box {
         min-height:
@@ -4711,7 +4709,6 @@ body.screen-shake {
     }
 
    
-    }
 
     /* Reduce movement so fragments stay inside phone screens. */
     .fragment {
@@ -5345,7 +5342,6 @@ body.screen-shake {
     }
 
    
-    }
 
     .story-brand,
     .ranks-brand,
@@ -6108,6 +6104,35 @@ body.screen-shake { animation: none; }
     .hood-location { letter-spacing: 2px; }
     .hood-gallery { grid-template-columns: 1fr; padding-bottom: 80px; }
     .hood-image-card, .hood-image-card img { min-height: 280px; }
+}
+
+
+/* OUTFIT */
+.content-screen.outfit-mode { padding: 0; align-items: stretch; justify-content: stretch; overflow: hidden; }
+.content-screen.outfit-mode > :not(.outfit-page) { display: none; }
+.outfit-page { display: none; width: 100%; height: 100%; min-height: 0; background: radial-gradient(circle at 50% 15%,rgba(0,126,255,.16),transparent 35%),linear-gradient(180deg,#02050a,#030914 48%,#010307); }
+.content-screen.outfit-mode .outfit-page { display: block; }
+.outfit-scroll { height: 100%; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; }
+.outfit-topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 42px; background: rgba(1,4,10,.92); backdrop-filter: blur(8px); }
+.outfit-brand { color: #7fd1ff; font-size: 11px; font-weight: 800; letter-spacing: 5px; }
+.outfit-back { flex-shrink: 0; min-height: 44px; border: 1px solid rgba(42,160,255,.42); background: rgba(4,14,28,.58); color: #cdeeff; padding: 12px 18px; cursor: pointer; font-size: 10px; letter-spacing: 3px; }
+.outfit-back:hover, .outfit-back:focus-visible { background: #103657; outline: 2px solid #7fd1ff; outline-offset: 3px; }
+.outfit-hero { width: min(1120px,92%); margin: auto; padding: 90px 0 60px; text-align: center; }
+.outfit-kicker { color: #279fff; font-size: 11px; font-weight: 800; letter-spacing: 6px; }
+.outfit-heading { margin-top: 18px; color: #f5fbff; font-size: clamp(56px,10vw,140px); line-height: 1; letter-spacing: -4px; text-shadow: 0 0 28px rgba(75,185,255,.16); }
+.outfit-intro { max-width: 720px; margin: 30px auto 0; color: #8fa5b8; font-size: 16px; line-height: 1.9; }
+.outfit-showcase { width: min(1000px,90%); margin: auto; padding-bottom: calc(160px + env(safe-area-inset-bottom)); }
+.outfit-card { margin: 0; overflow: hidden; border: 1px solid rgba(52,165,255,.25); background: #02050a; box-shadow: 0 0 60px rgba(0,105,230,.12); }
+.outfit-card img { display: block; width: 100%; min-height: 320px; max-height: 760px; object-fit: contain; background: #02050a; }
+.outfit-image-label { padding: 20px; color: #bfe8ff; font-size: 10px; font-weight: 800; letter-spacing: 3px; line-height: 1.8; border-top: 1px solid rgba(52,165,255,.25); }
+@media (max-width: 600px) {
+ .outfit-topbar { padding: 16px; }
+ .outfit-brand { font-size: 9px; letter-spacing: 2px; line-height: 1.7; }
+ .outfit-back { padding: 12px; letter-spacing: 2px; }
+ .outfit-hero { padding: 60px 0 40px; }
+ .outfit-heading { letter-spacing: -2px; }
+ .outfit-kicker { letter-spacing: 3px; }
+ .outfit-intro { font-size: 14px; }
 }
 
 </style>
@@ -7808,7 +7833,28 @@ body.screen-shake { animation: none; }
         </div>
     </section>
 
-    <!-- HOOD PAGE -->
+    <!-- OUTFIT PAGE -->
+<section class="outfit-page" id="outfitPage" aria-labelledby="outfitHeading">
+    <div class="outfit-scroll" id="outfitScroll">
+        <div class="outfit-topbar">
+            <div class="outfit-brand">NO MERCY // OUTFIT</div>
+            <button class="outfit-back" id="outfitBackButton" type="button">← ZURÜCK</button>
+        </div>
+        <header class="outfit-hero">
+            <div class="outfit-kicker">OFFICIAL APPEARANCE</div>
+            <h1 class="outfit-heading" id="outfitHeading">OUTFIT</h1>
+            <p class="outfit-intro">Das offizielle Auftreten von No Mercy. Unser Outfit steht für unsere gemeinsame Identität und sorgt dafür, dass wir als Einheit auftreten.</p>
+        </header>
+        <div class="outfit-showcase">
+            <figure class="outfit-card">
+                <img src="Screenshot 2026-09-17 224124.png" alt="Das offizielle Outfit von No Mercy">
+                <figcaption class="outfit-image-label">NO MERCY // OFFICIAL OUTFIT</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- HOOD PAGE -->
     <section class="hood-page" id="hoodPage">
         <div class="hood-scroll" id="hoodScroll">
             <div class="hood-topbar">
@@ -8712,6 +8758,11 @@ const membersBackButton =
     );
 
 
+const outfitScroll = document.getElementById("outfitScroll");
+const outfitBackButton = document.getElementById("outfitBackButton");
+let contentTransitioning = false;
+let openContentTimer;
+
 const hoodPage =
     document.getElementById(
         "hoodPage"
@@ -8957,10 +9008,6 @@ const sections = {
         text:
             "Hier kommen eure Werte, Prinzipien und langfristigen Ziele hin."
     },
-
-    
-      
-    }
 
 };
 
@@ -9998,7 +10045,7 @@ fragments.forEach(
             "click",
             () => {
 
-                if (contentIsOpen) {
+                if (contentIsOpen || contentTransitioning) {
                     return;
                 }
 
@@ -10044,127 +10091,19 @@ fragments.forEach(
                     "discord-mode",
                     "color-mode",
                     "hood-mode",
-                    "members-mode"
+                    "members-mode",
+                "outfit-mode"
                 );
 
 
-                if (
-                    sectionName === "story"
-                ) {
-
-                    contentScreen.classList.add(
-                        "story-mode"
-                    );
-
-                    storyScroll.scrollTop =
-                        0;
-
-                    setTimeout(
-                        prepareStoryAnimations,
-                        50
-                    );
-
-                } else if (
-                    sectionName === "members"
-                ) {
-
-                    contentScreen.classList.add(
-                        "members-mode"
-                    );
-
-                    membersScroll.scrollTop =
-                        0;
-
-                } else if (
-                    sectionName === "ranks"
-                ) {
-
-                    contentScreen.classList.add(
-                        "ranks-mode"
-                    );
-
-                    ranksScroll.scrollTop =
-                        0;
-
-                    setTimeout(
-                        prepareRanksAnimations,
-                        50
-                    );
-
-                } else if (
-                    sectionName === "values"
-                ) {
-
-                    contentScreen.classList.add(
-                        "values-mode"
-                    );
-
-                    valuesScroll.scrollTop =
-                        0;
-
-                    setTimeout(
-                        prepareValuesAnimations,
-                        50
-                    );
-
-                } else if (
-                    sectionName === "background"
-                ) {
-
-                    contentScreen.classList.add(
-                        "background-mode"
-                    );
-
-                    backgroundScroll.scrollTop =
-                        0;
-
-                    setTimeout(
-                        prepareBackgroundAnimations,
-                        50
-                    );
-
-                } else if (
-                    sectionName === "discord"
-                ) {
-
-                    contentScreen.classList.add(
-                        "discord-mode"
-                    );
-
-                    discordScroll.scrollTop =
-                        0;
-
-                    prepareDiscordAnimation();
-
-                } else if (
-                    sectionName === "color"
-                ) {
-
-                    contentScreen.classList.add(
-                        "color-mode"
-                    );
-
-                    colorScroll.scrollTop =
-                        0;
-
-                    setTimeout(
-                        prepareColorAnimations,
-                        50
-                    );
-
-                } else if (
-                    sectionName === "hood"
-                ) {
-
-                    contentScreen.classList.add(
-                        "hood-mode"
-                    );
-
-                    hoodScroll.scrollTop =
-                        0;
-
-                }
-
+                contentScreen.classList.add(`${sectionName}-mode`);
+                document.getElementById(`${sectionName}Scroll`).scrollTop = 0;
+                const prepare = {
+                    story: prepareStoryAnimations, ranks: prepareRanksAnimations,
+                    values: prepareValuesAnimations, background: prepareBackgroundAnimations,
+                    discord: prepareDiscordAnimation, color: prepareColorAnimations
+                }[sectionName];
+                if (prepare) setTimeout(prepare, 50);
 
                 const selectedFloat =
                     fragment.querySelector(
@@ -10202,9 +10141,9 @@ fragments.forEach(
                     "fragment-selected"
                 );
 
-                setTimeout(
+                openContentTimer = setTimeout(
                     () => {
-
+                        if (!contentIsOpen) return;
                         contentScreen.classList.add(
                             "active"
                         );
@@ -10231,6 +10170,9 @@ function closeContent() {
     }
 
     contentIsOpen = false;
+    contentTransitioning = true;
+    clearTimeout(openContentTimer);
+    setTimeout(() => { contentTransitioning = false; }, 1260);
     playSound("back");
 
     contentScreen.classList.remove(
@@ -10248,7 +10190,8 @@ function closeContent() {
                 "discord-mode",
                 "color-mode",
                 "hood-mode",
-                "members-mode"
+                "members-mode",
+                "outfit-mode"
             );
 
         },
@@ -10334,6 +10277,8 @@ backButton.addEventListener(
     closeContent
 );
 
+
+outfitBackButton.addEventListener("click", closeContent);
 
 hoodBackButton.addEventListener(
     "click",
