@@ -6135,6 +6135,49 @@ body.screen-shake { animation: none; }
  .outfit-intro { font-size: 14px; }
 }
 
+
+/* Separate special roles, outside the numbered hierarchy. */
+.rank-specials { width: min(900px, 90%); margin: 0 auto 80px; }
+.rank-specials h2 { margin-bottom: 24px; text-align: center; color: #7fd1ff; font-size: 13px; letter-spacing: 5px; }
+.rank-specials-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.rank-special { min-width: 0; padding: 30px; border: 1px solid rgba(48,160,255,.25); background: linear-gradient(145deg,rgba(7,15,28,.88),rgba(3,8,17,.88)); }
+.rank-special .rank-name { font-size: clamp(22px,3vw,34px); overflow-wrap: anywhere; }
+/* Deliberately scattered positions, with clear space for the radio. */
+.fragment-story { --left: 13%; --top: 24%; --rotation: -12deg; }
+.fragment-members { --left: 39%; --top: 16%; --rotation: 8deg; }
+.fragment-discord { --left: 64%; --top: 29%; --rotation: -7deg; }
+.fragment-ranks { --left: 86%; --top: 18%; --rotation: 12deg; }
+.fragment-color { --left: 26%; --top: 48%; --rotation: 9deg; }
+.fragment-outfit { --left: 51%; --top: 57%; --rotation: -10deg; }
+.fragment-hood { --left: 82%; --top: 51%; --rotation: 6deg; }
+.fragment-background { --left: 13%; --top: 77%; --rotation: -8deg; }
+.fragment-values { --left: 42%; --top: 84%; --rotation: 10deg; }
+@media (min-width: 901px) and (max-width: 1200px) {
+ .fragment { --size: 150px; }
+}
+@media (max-width: 900px), (max-height: 540px) and (pointer: coarse) {
+ .fragment-menu { display: block; padding: 0; }
+ .fragment-menu::before { content: ""; display: block; height: 870px; pointer-events: none; }
+ .fragment-menu .fragment {
+   position: absolute; left: var(--left) !important; top: var(--scatter-y) !important;
+   width: clamp(96px,27vw,130px); min-height: 90px;
+   transform: translate(-50%,-50%) rotate(var(--rotation)) !important;
+ }
+ .fragment-story { --left: 25%; --scatter-y: 70px; }
+ .fragment-members { --left: 74%; --scatter-y: 146px; }
+ .fragment-discord { --left: 29%; --scatter-y: 249px; }
+ .fragment-ranks { --left: 76%; --scatter-y: 325px; }
+ .fragment-color { --left: 22%; --scatter-y: 427px; }
+ .fragment-outfit { --left: 69%; --scatter-y: 504px; }
+ .fragment-hood { --left: 28%; --scatter-y: 605px; }
+ .fragment-background { --left: 75%; --scatter-y: 695px; }
+ .fragment-values { --left: 36%; --scatter-y: 800px; }
+}
+@media (max-width: 600px) {
+ .rank-specials-grid { grid-template-columns: 1fr; }
+ .rank-special { padding: 24px; }
+}
+
 </style>
 
 </head>
@@ -6733,7 +6776,7 @@ body.screen-shake { animation: none; }
                 </h1>
 
                 <p class="ranks-intro">
-                    Dreizehn Stufen. Eine Familie. Jeder Rang steht für
+                    Neun Stufen. Eine Familie. Jeder Rang steht für
                     mehr Verantwortung, mehr Vertrauen und einen festen
                     Platz innerhalb von No Mercy.
                 </p>
@@ -6741,117 +6784,24 @@ body.screen-shake { animation: none; }
             </header>
 
 
-            <div class="ranks-hierarchy">
-
-                <div class="ranks-spine"></div>
-
-                <article class="rank-card top-rank">
-                    <div class="rank-number"><span>12</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">TOP LEADERSHIP</div>
-                        <div class="rank-name">OG</div>
-                        <div class="rank-holders">Raphii Cem &amp; Mason Varela</div>
-                    </div>
-                </article>
-
-                <article class="rank-card command-rank">
-                    <div class="rank-number"><span>11</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">LEADERSHIP</div>
-                        <div class="rank-name">Lil OG</div>
-                    </div>
-                </article>
-
-                <article class="rank-card command-rank">
-                    <div class="rank-number"><span>10</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">COMMAND</div>
-                        <div class="rank-name">Consigliere</div>
-                    </div>
-                </article>
-
-                <article class="rank-card command-rank">
-                    <div class="rank-number"><span>9</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">COMMAND</div>
-                        <div class="rank-name">Captain</div>
-                    </div>
-                </article>
-
-                <article class="rank-card command-rank">
-                    <div class="rank-number"><span>8</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">COMMAND</div>
-                        <div class="rank-name">Lieutenant</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>7</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">CORE</div>
-                        <div class="rank-name">Hitman</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>6</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">CORE</div>
-                        <div class="rank-name">Enforcer</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>5</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">CORE</div>
-                        <div class="rank-name">Soldier</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>4</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">CORE</div>
-                        <div class="rank-name">Muscle</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>3</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">STREET</div>
-                        <div class="rank-name">Shot Caller</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>2</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">STREET</div>
-                        <div class="rank-name">Runner</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>1</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">STREET</div>
-                        <div class="rank-name">Homie</div>
-                    </div>
-                </article>
-
-                <article class="rank-card ">
-                    <div class="rank-number"><span>0</span></div>
-                    <div class="rank-meta">
-                        <div class="rank-tier">ENTRY</div>
-                        <div class="rank-name">Hangaround</div>
-                    </div>
-                </article>
-
-            </div>
-
+<div class="ranks-hierarchy"><div class="ranks-spine"></div>
+<article class="rank-card top-rank"><div class="rank-number"><span>9</span></div><div class="rank-meta"><div class="rank-tier">TOP LEADERSHIP</div><div class="rank-name">OG</div><div class="rank-holders">Raphii Cem &amp; Mason Varela</div></div></article>
+<article class="rank-card command-rank"><div class="rank-number"><span>8</span></div><div class="rank-meta"><div class="rank-tier">LEADERSHIP</div><div class="rank-name">Second OG</div></div></article>
+<article class="rank-card command-rank"><div class="rank-number"><span>7</span></div><div class="rank-meta"><div class="rank-tier">COMMAND</div><div class="rank-name">Streetboss</div></div></article>
+<article class="rank-card command-rank"><div class="rank-number"><span>6</span></div><div class="rank-meta"><div class="rank-tier">COMMAND</div><div class="rank-name">Captain</div></div></article>
+<article class="rank-card"><div class="rank-number"><span>5</span></div><div class="rank-meta"><div class="rank-tier">CORE</div><div class="rank-name">Hitman</div></div></article>
+<article class="rank-card"><div class="rank-number"><span>4</span></div><div class="rank-meta"><div class="rank-tier">CORE</div><div class="rank-name">Shot Caller</div></div></article>
+<article class="rank-card"><div class="rank-number"><span>3</span></div><div class="rank-meta"><div class="rank-tier">CORE</div><div class="rank-name">Soldier</div></div></article>
+<article class="rank-card"><div class="rank-number"><span>2</span></div><div class="rank-meta"><div class="rank-tier">STREET</div><div class="rank-name">Homie</div></div></article>
+<article class="rank-card"><div class="rank-number"><span>1</span></div><div class="rank-meta"><div class="rank-tier">STREET</div><div class="rank-name">Runner</div></div></article>
+</div>
+<section class="rank-specials" aria-labelledby="specialRanksHeading">
+    <h2 id="specialRanksHeading">SONDERROLLEN</h2>
+    <div class="rank-specials-grid">
+        <article class="rank-special"><div class="rank-tier">SONDERROLLE</div><div class="rank-name">Leaderschaft</div></article>
+        <article class="rank-special"><div class="rank-tier">SONDERROLLE</div><div class="rank-name">Gang Hund</div></article>
+    </div>
+</section>
 
             <div class="ranks-footer">
 
@@ -7847,7 +7797,7 @@ body.screen-shake { animation: none; }
         </header>
         <div class="outfit-showcase">
             <figure class="outfit-card">
-                <img src="outfit-1.png" alt="Das offizielle Outfit von No Mercy">
+                <img src="Screenshot 2026-09-17 224124.png" alt="Das offizielle Outfit von No Mercy">
                 <figcaption class="outfit-image-label">NO MERCY // OFFICIAL OUTFIT</figcaption>
             </figure>
         </div>
